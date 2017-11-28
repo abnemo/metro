@@ -1,0 +1,51 @@
+<ul class="m-datatable__pager-nav">
+  <li>
+    <a [class.disabled]="p.getCurrent() === 1" (click)="p.setCurrent(1)"
+       class="m-datatable__pager-link m-datatable__pager-link--first m-datatable__pager-link--disabled">
+      <i class="la la-angle-double-left"></i>
+    </a>
+  </li>
+
+  <li>
+    <a [class.disabled]="p.getCurrent() === 1" (click)="p.previous()"
+       class="m-datatable__pager-link m-datatable__pager-link--prev m-datatable__pager-link--disabled">
+      <i class="la la-angle-left"></i>
+    </a>
+  </li>
+
+  <li style="" *ngFor="let page of p.pages">
+    <a (click)="p.setCurrent(page.value)"
+       [ngClass]="p.getCurrent() === page.value ? ' m-datatable__pager-link--active' : ''"
+       class="m-datatable__pager-link m-datatable__pager-link-number">
+      {{page.value}}
+    </a>
+  </li>
+  <li>
+    <a class="m-datatable__pager-link m-datatable__pager-link--next" [class.disabled]="p.getCurrent() === p.pages.length"
+       (click)="p.next()">
+      <i class="la la-angle-right"></i>
+    </a>
+  </li>
+
+  <li>
+    <a class="m-datatable__pager-link m-datatable__pager-link--last" [class.disabled]="p.getCurrent() === p.pages.length"
+       (click)="p.setCurrent(p.pages.length)">
+      <i class="la la-angle-double-right"></i>
+    </a>
+  </li>
+</ul>
+
+<div class="m-datatable__pager-info">
+  <span class="m-datatable__pager-detail" *ngIf="filteredItems">
+    {{'general.displaying' | translate}}
+    {{filteredItems.length === 0 ? ' ' : p.getCurrent() * config.itemsPerPage - config.itemsPerPage + 1 + ' - ' }}
+    {{ config.itemsPerPage && p.getCurrent() * config.itemsPerPage > filteredItems.length
+        ? filteredItems.length
+        : p.getCurrent() * config.itemsPerPage
+    }}
+    {{ !config.itemsPerPage ? filteredItems.length : '' }}
+    {{'general.from' | translate}}
+    {{ filteredItems.length !== items.length ? filteredItems.length : items.length }}
+    {{ currentFilter || searchString ? ('general.filteredRecords' | translate) : ('general.records' | translate) }}
+  </span>
+</div>

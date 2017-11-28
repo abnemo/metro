@@ -1,0 +1,29 @@
+<td class="text-left"><a [routerLink]="['/categories/edit', category.id]">{{category.title}}</a></td>
+
+<td>
+  <span *ngIf="category.description; else noDescriptionTemplate"
+        [innerHtml]="sanitizer.bypassSecurityTrustHtml(category.description)"></span>
+</td>
+
+<td *ngIf="category.assignedCategoryType; else noAssignedCategoryTypeTemplate">
+  {{category.assignedCategoryType.title}}
+</td>
+
+<td><span *ngIf="assignedItems">{{assignedItems}}</span></td>
+
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="categories" [object]="category"></detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
+             [showText]="false" type="categories" [object]="category"></edit-link>
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="categories" [object]="category"></remove-link>
+</td>
+
+<ng-template #noAssignedCategoryTypeTemplate>
+  <td>{{'general.categories.edit.noAssignedCategoryType' | translate}}</td>
+</ng-template>
+
+<ng-template #noDescriptionTemplate>
+  <td>{{'general.categories.edit.noDescription' | translate}}</td>
+</ng-template>

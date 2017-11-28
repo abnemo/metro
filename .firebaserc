@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "sfw-backend-dev",
+    "production": "sfw-backend-prod"
+  }
+}

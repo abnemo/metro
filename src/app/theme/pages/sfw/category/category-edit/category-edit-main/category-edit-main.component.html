@@ -1,0 +1,98 @@
+<div class="m-portlet__body" [formGroup]="form">
+  <ul class="nav nav-pills" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" data-toggle="tab" href="#m_tabs_5_1">
+        {{'general.categories.edit.mainTitle' | translate}}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_2">
+        {{'general.categories.edit.assignedObjectsTitle' | translate}}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">
+        {{'general.tables.colTitles.creation' | translate }}
+      </a>
+    </li>
+    <!--<li class="nav-item" *ngIf="category.id">
+      <a class="nav-link" data-toggle="tab" href="#m_tabs_5_4">
+        {{'general.tables.colTitles.publication' | translate }}
+      </a>
+    </li>-->
+  </ul>
+  <div class="tab-content" *ngIf="categoryTypes; else loadingTemplate">
+    <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
+
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="form-body">
+            <div class="form-group form-md-line-input">
+              <label>{{'general.categories.list.colTitles.name' | translate}}</label>
+              <input class="form-control" formControlName="title"
+                     placeholder="{{'general.categories.edit.namePlaceholder' | translate}}">
+            </div>
+            <div class="form-group">
+              <label>{{'general.categories.list.colTitles.type' | translate}}</label>
+              <select class="form-control" formControlName="assignedCategoryType">
+                <option value="" disabled>{{'general.categories.edit.categoryDefaultPlaceholder' | translate }}
+                </option>
+                <option *ngFor="let categoryType of categoryTypes | orderBy: 'title'" [value]="categoryType.id">
+                  {{categoryType.title}}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6">
+          <div class="form-group form-md-line-input">
+            <label>{{'general.categories.edit.descriptionPlaceHolder' | translate}}</label>
+            <textarea class="form-control" formControlName="description"
+                      [placeholder]="'general.categories.edit.descriptionPlaceHolder' | translate">
+              </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
+      <category-assign-objects
+        *ngIf="categoryTypes"
+        [form]="form"
+        [seasons]="seasonService.getSeasons() | async"
+        [categoryTypes]="categoryTypes">
+      </category-assign-objects>
+    </div>
+    <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
+      <div class="row">
+        <div class="col-xl-12">
+          <h3>{{'general.tables.colTitles.creation' | translate }}</h3>
+          <creation-form
+            [form]="form"
+            [users]="userService.getUsers() | async">
+          </creation-form>
+        </div>
+      </div>
+    </div>
+    <!--<div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
+      <div class="row">
+        <div class="col-xl-12">
+          <h3>{{'general.tables.colTitles.publication' | translate }}</h3>
+          <p>{{'general.publication.noPublicationNeeded' | translate}}</p>
+        </div>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+<div class="m-portlet__foot text-right">
+  <button type="submit" [disabled]="!form.valid" class="btn btn-success">
+    {{'general.categories.edit.saveCategory' | translate}}
+  </button>
+  <button class="btn btn-danger" (click)="cancel.emit()">
+    {{'general.cancel' | translate}}
+  </button>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

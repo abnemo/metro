@@ -1,0 +1,5 @@
+#grayScale {
+  background-image: url('../../../../../assets/sfw/background.jpg');
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}

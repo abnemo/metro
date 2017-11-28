@@ -1,0 +1,27 @@
+<h3>{{ 'general.members.details.mainTitle' | translate}}</h3>
+<table class="table table-responsive table-hover table-bordered table-striped">
+  <tr>
+    <td>{{ 'general.members.details.salutation' | translate}}</td>
+    <td>{{member.mainData.gender === 'male' ? 'Herr' : 'Frau' }}</td>
+  </tr>
+  <tr>
+    <td>{{ 'general.members.details.title' | translate}}</td>
+    <td>{{member.mainData.title}}</td>
+  </tr>
+  <tr>
+    <td>{{ 'general.members.details.firstAndLastName' | translate}}</td>
+    <td>{{member.mainData.firstName}} {{member.mainData.lastName}}</td>
+  </tr>
+  <tr>
+    <td>{{ 'general.members.details.birthday' | translate}}</td>
+    <td>{{member.mainData.birthday | date : 'dd.MM.y'}}</td>
+  </tr>
+  <tr>
+    <td>{{ 'general.members.details.age' | translate}}</td>
+    <td>{{ calculateAge() }} {{ 'general.members.details.years' | translate }}</td>
+  </tr>
+  <tr>
+    <td>{{ 'general.members.details.zodiac' | translate}}</td>
+    <td>{{ 'general.members.details.zodiacList.' + getZodiac() | translate }}</td>
+  </tr>
+</table>

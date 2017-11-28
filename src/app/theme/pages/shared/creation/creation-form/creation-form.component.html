@@ -1,0 +1,34 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xl-12" formGroupName="creation">
+
+    <div class="form-body">
+      <div class="form-md-line-input">
+        <label>{{'general.creation.creationDate' | translate}}</label><br/>
+        <div class="text-center">
+          <div class="input-group date" id="m_datetimepicker_3">
+            <input class="form-control m-input" formControlName="at" required/>
+            <span class="input-group-addon"><i class="fa fa-calendar-o"></i></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{'general.creation.author' | translate}}</label>
+        <select class="form-control" title="{{'general.creation.author' | translate}}"
+                formControlName="from" *ngIf="users; else loadingTemplate">
+          <option value="" disabled>{{'general.creation.author' | translate}}</option>
+          <option value="system">{{'general.creation.viaScript' | translate}}</option>
+          <option *ngFor="let user of users| orderBy: ['firstName', 'lastName', 'email']"
+                  [value]="user.id">
+            {{user.firstName && user.lastName ? user.firstName + ' ' + user.lastName : user.email}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  Lade ... !
+</ng-template>

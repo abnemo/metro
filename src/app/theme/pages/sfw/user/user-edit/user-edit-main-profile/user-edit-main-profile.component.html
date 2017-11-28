@@ -1,0 +1,131 @@
+<form class="m-form m-form--fit m-form--label-align-right" [formGroup]="form" (submit)="saveUser()">
+  <div class="m-portlet m-portlet--full-height m-portlet--tabs">
+    <div class="m-portlet__head">
+      <div class="m-portlet__head-tools">
+        <ul class="nav nav-tabs m-tabs m-tabs-line   m-tabs-line--left m-tabs-line--primary" role="tablist">
+          <li class="nav-item m-tabs__item">
+            <a class="nav-link m-tabs__link active" data-toggle="tab" href="#m_user_profile_tab_1" role="tab">
+              <i class="flaticon-share m--hide"></i>
+              {{'general.users.edit.mainTitle' | translate}}
+            </a>
+          </li>
+          <!--<li class="nav-item m-tabs__item">
+            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_2" role="tab">
+              {{'general.tables.colTitles.creation' | translate }}
+              {{'general.and' | translate }}
+              {{'general.tables.colTitles.publication' | translate }}
+            </a>
+          </li>-->
+          <li class="nav-item m-tabs__item">
+            <a class="nav-link m-tabs__link" data-toggle="tab" href="#m_user_profile_tab_3" role="tab">
+              {{'general.users.edit.memberTitle' | translate}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="m_user_profile_tab_1">
+        <div class="m-portlet__body">
+
+          <div class="form-group m-form__group row">
+            <div class="col-10 ml-auto">
+              <h3 class="m-form__section">{{'general.users.edit.personal.mainTitle' | translate}}</h3>
+            </div>
+          </div>
+
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">{{'general.users.edit.personal.firstName' | translate}}</label>
+            <div class="col-3"><input class="form-control m-input" formControlName="firstName"></div>
+            <label class="col-2 col-form-label">{{'general.users.edit.personal.lastName' | translate}}</label>
+            <div class="col-3"><input class="form-control m-input" formControlName="lastName"></div>
+          </div>
+
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">{{'general.users.edit.personal.email' | translate}}</label>
+            <div class="col-4"><input class="form-control m-input" formControlName="email"></div>
+            <div class="col-4 col-form-label" [ngClass]="user.emailVerified ? 'text-success' : 'text-warning'">
+              {{
+              user.emailVerified
+              ? ('general.users.edit.emailIsVerified' | translate)
+              : ('general.users.edit.emailNotVerified' | translate)
+              }}
+            </div>
+          </div>
+
+          <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+
+          <!-- ToDo: Rollen laden und verknüpfte Rolle selektieren -->
+          <div class="form-group m-form__group row">
+            <label class="col-2 col-form-label">{{'general.users.edit.assignedRole' | translate}}</label>
+            <div class="col-3">
+              <select class="form-control m-input" formControlName="assignedRole">
+                <option value="" disabled [selected]="!user.assignedRole">
+                  {{'general.users.edit.roles.noAssignedRole' | translate}}
+                </option>
+                <option *ngFor="let role of roles" [value]="role">
+                  {{'general.users.edit.roles.' + role | translate}}
+                </option>
+              </select>
+            </div>
+            <label class="col-2 col-form-label">{{'general.users.edit.assignedMember' | translate}}</label>
+            <div class="col-3">
+              <select class="form-control m-input" name="assignedMember" formControlName="assignedMember">
+                <option [value]="member.id"
+                  *ngFor="let member of (memberService.getMembers() | async | orderBy: ['mainData.lastName', 'mainData.firstName', 'mainData.birthday'])">
+                  {{member.mainData.lastName}} {{member.mainData.firstName}}
+                  {{ moment(member.mainData.birthday).format('L') }}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="m-form__seperator m-form__seperator--dashed m-form__seperator--space-2x"></div>
+
+          <div formGroupName="social">
+            <div class="form-group m-form__group row">
+              <div class="col-10 ml-auto">
+                <h3 class="m-form__section">{{'general.users.edit.personal.socialTitle' | translate}}</h3>
+              </div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Facebook</label>
+              <div class="col-8"><input class="form-control m-input" formControlName="facebook"></div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Instagram</label>
+              <div class="col-8"><input class="form-control m-input" formControlName="instagram"></div>
+            </div>
+            <div class="form-group m-form__group row">
+              <label class="col-2 col-form-label">Twitter</label>
+              <div class="col-8"><input class="form-control m-input" formControlName="twitter"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="m-portlet__foot m-portlet__foot--fit">
+      <div class="m-form__actions">
+        <div class="row">
+          <div class="col-2"></div>
+          <div class="col-7">
+            <button class="btn btn-accent m-btn m-btn--air m-btn--custom">
+              {{'general.users.edit.saveUser' | translate}}
+            </button>
+            <button (click)="cancel()" type="button" class="btn btn-secondary m-btn m-btn--air m-btn--custom">
+              {{'general.cancel' | translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</form>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

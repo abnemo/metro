@@ -1,0 +1,9 @@
+<span class="form-group form-md-line-input" *ngIf="editing">
+  <input #inlineEditControl [required]="required" (blur)="onBlur($event)" class="form-control" style="color: #000"
+         [name]="value" [(ngModel)]="value" [type]="type" [placeholder]="label" (keydown)="keyDownFunction($event)"/>
+</span>
+
+<span *ngIf="!editing" (click)="edit(value)" (focus)="edit(value);">
+  <i class="fa fa-edit"></i> {{value ? value : label}}
+</span>
+

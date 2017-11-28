@@ -1,0 +1,44 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text"><i class="fa fa-birthday-cake"></i> {{'general.birthdays' | translate}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+
+    <div class="m-section m-section--last">
+      <div class="m-section__content">
+
+        <div class="m-demo" *ngIf="!showLoadingIndicator; else loadingTemplate">
+          <div class="m-list-search" *ngIf="members.length > 0; else noBirthdaysTemplate">
+            <div class="m-list-search__results">
+
+              <a class="m-list-search__result-item" *ngFor="let member of members | slice:start:limit"
+                 [style.font-weight]="moment(member.mainData.birthday).format('DD.MM') === currentDay ? 'bold' : ''">
+                  <span class="m-list-search__result-item-pic">
+                    <img class="m--img-rounded" title="{{member.mainData.lastName}} {{member.mainData.firstName}}"
+                         [src]="memberService.getProfileImage(member.profileImageUrl, member.mainData.gender)">
+                  </span>
+                <span class="m-list-search__result-item-text">
+                  {{member.mainData.firstName}} {{member.mainData.lastName}}
+                  <span class="pull-right">{{ moment(member.mainData.birthday).format('DD.MM.YYYY')}}</span>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noBirthdaysTemplate>
+  <p style="padding: 10px">{{'general.members.list.noResult' | translate}}</p>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

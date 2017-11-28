@@ -1,0 +1,129 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xl-12">
+    <div class="m-portlet">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">
+              <i class="fa fa-user-circle"></i> {{ 'general.members.profile.title' | translate }}
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="m-portlet__body" formGroupName="profile">
+
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="m-portlet">
+              <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                  <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                      <i class="fa fa-info-circle"></i> {{ 'general.members.profile.soccerData' | translate}}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="m-portlet__body" formGroupName="playerInfo">
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.size' | translate}}</label>
+                  <input class="form-control" formControlName="size"
+                         placeholder="{{ 'general.members.profile.size' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.position' | translate}}</label>
+                  <input class="form-control" formControlName="position"
+                         placeholder="{{ 'general.members.profile.position' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.shoeSize' | translate}}</label>
+                  <input class="form-control" formControlName="shoeSize"
+                         placeholder="{{ 'general.members.profile.shoeSize' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.chooseStrongFoot' | translate}}</label>
+                  <select class="form-control" formControlName="strongFoot"
+                          title="{{ 'general.members.profile.chooseStrongFoot' | translate}}">
+                    <option value="" disabled>{{ 'general.members.profile.chooseStrongFoot' | translate}}</option>
+                    <option value="right">{{ 'general.members.profile.rightFoot' | translate}}</option>
+                    <option value="left">{{ 'general.members.profile.leftFoot' | translate}}</option>
+                    <option value="both">{{ 'general.members.profile.bothFeet' | translate}}</option>
+                    <option value="none">{{ 'general.members.profile.noFoot' | translate}}</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.prevClubs' | translate}}</label>
+                  <textarea class="form-control" formControlName="prevClubs"
+                            placeholder="{{ 'general.members.profile.prevClubs' | translate}}"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.prevVictories' | translate}}</label>
+                  <textarea class="form-control" formControlName="victories"
+                            placeholder="{{ 'general.members.profile.prevVictories' | translate}}"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.prevLosses' | translate}}</label>
+                  <textarea class="form-control" formControlName="losses"
+                            placeholder="{{ 'general.members.profile.prevLosses' | translate}}"></textarea>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6">
+            <div class="m-portlet">
+              <div class="m-portlet__head">
+                <div class="m-portlet__head-caption">
+                  <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">
+                      <i class="fa fa-heart"></i> {{ 'general.members.profile.favorites' | translate}}
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="m-portlet__body" formGroupName="favorites">
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.favDrink' | translate}}</label>
+                  <input class="form-control" formControlName="favDrink"
+                         placeholder="{{ 'general.members.profile.favDrink' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.favFood' | translate}}</label>
+                  <input class="form-control" formControlName="favFood"
+                         placeholder="{{ 'general.members.profile.favFood' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.favClub' | translate}}</label>
+                  <input class="form-control" formControlName="favClub"
+                         placeholder="{{ 'general.members.profile.favClub' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.favPlayer' | translate}}</label>
+                  <input class="form-control" formControlName="favPlayer"
+                         placeholder="{{ 'general.members.profile.favPlayer' | translate}}">
+                </div>
+
+                <div class="form-group">
+                  <label>{{ 'general.members.profile.favTrainer' | translate}}</label>
+                  <input class="form-control" formControlName="favTrainer"
+                         placeholder="{{ 'general.members.profile.favTrainer' | translate}}">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

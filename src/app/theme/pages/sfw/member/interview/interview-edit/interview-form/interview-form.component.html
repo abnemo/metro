@@ -1,0 +1,34 @@
+<form novalidate (submit)="saveInterview()" [formGroup]="interviewGroup">
+
+  <div class="form-group" *ngIf="commentsFromOtherMember">
+    <label>{{ 'general.members.interview.chooseMember' | translate}}</label>
+    <select class="form-control" formControlName="commentator">
+      <option value="">{{ 'general.members.interview.chooseMember' | translate}}</option>
+      <option *ngFor="let member of members" [value]="member.id">
+        {{member.lastName}} {{member.firstName}}
+        {{member.birthday | date : 'd.M.y'}}
+      </option>
+    </select>
+  </div>
+
+  <div class="form-group" *ngIf="!commentsFromOtherMember">
+    <label>{{ 'general.members.interview.question' | translate}}</label>
+    <input class="form-control" formControlName="question">
+  </div>
+
+  <div class="form-group">
+    <label>{{ 'general.members.interview.answer' | translate}}</label>
+    <textarea class="form-control" formControlName="answer"></textarea>
+  </div>
+
+  <div class="text-right">
+    <button class="btn btn-success btn-raised" [disabled]="interviewGroup.invalid"
+            title="{{ 'general.members.interview.saveQuestion' | translate}}">
+      {{ 'general.members.interview.saveQuestion' | translate}}
+    </button>
+
+    <a class="btn btn-raised btn-warning pull-right" [routerLink]="['/pages/members/interview', member.id]">
+      {{ 'general.cancel' | translate}}
+    </a>
+  </div>
+</form>

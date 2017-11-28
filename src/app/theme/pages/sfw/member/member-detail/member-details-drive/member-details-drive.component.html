@@ -1,0 +1,132 @@
+<h3>{{ 'general.members.details.memberStatusTitle' | translate}}</h3>
+<div class="row">
+
+  <div class="col-xl-6">
+    <h5>{{ 'general.members.list.club' | translate}}</h5>
+    <table class="table table-bordered table-hovered table-striped" *ngIf="member.clubData; else noClubDataTemplate">
+      <tr>
+        <td>{{ 'general.members.list.memberStatus' | translate}}</td>
+        <td>
+            <span *ngIf="member.clubData.status; else noMemberTemplate">
+              {{(memberStateService.getMemberStates() | filterBy: ['value'] : member.clubData.status)[0].title }}
+            </span>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.clubJoined' | translate}}</td>
+        <td>{{ member.clubData.joined ? (member.clubData.joined | date : 'dd.MM.y') : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.clubLeft' | translate}}</td>
+        <td>{{ member.clubData.left ? (member.clubData.left | date : 'dd.MM.y') : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.clubPayment' | translate}}</td>
+        <td>{{ member.clubData.payment ? member.clubData.payment : ('general.members.details.notSet' | translate)}}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xl-6">
+    <h5>{{ 'general.members.details.oldMen' | translate}}</h5>
+    <table class="table table-bordered table-hovered table-striped" *ngIf="member.ahData; else noAhDataTemplate">
+      <tr>
+        <td>{{ 'general.members.list.memberStatus' | translate}}</td>
+        <td>
+            <span *ngIf="member.ahData.status; else noAHMemberTemplate">
+              {{(memberStateService.getAHStates() | filterBy: ['value'] : member.ahData.status)[0].title }}
+            </span>
+        </td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.ahJoined' | translate}}</td>
+        <td>{{ member.ahData.joined ? (member.ahData.joined | date : 'dd.MM.y') : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.ahLeft' | translate}}</td>
+        <td>{{ member.ahData.left ? (member.ahData.left | date : 'dd.MM.y') : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.ahPayment' | translate}}</td>
+        <td>{{ member.ahData.payment ? member.ahData.payment : ('general.members.details.notSet' | translate)}}</td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<h3>{{ 'general.members.edit.driveTitle' | translate}}</h3>
+<div class="row">
+  <div class="col-xl-6">
+    <h5>{{ 'general.members.details.contactTitle' | translate}}</h5>
+    <table class="table table-bordered table-hovered table-striped" *ngIf="member.contact; else noContactTemplate">
+      <tr>
+        <td>{{ 'general.members.list.phoneHome' | translate}}</td>
+        <td>{{member.contact.phoneHome ? member.contact.phoneHome : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.phoneMobile' | translate}}</td>
+        <td>{{member.contact.phoneMobile ? member.contact.phoneMobile: '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.email' | translate}}</td>
+        <td>{{member.contact.email ? member.contact.email: '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.street' | translate}} {{ 'general.members.list.houseNumber' | translate}}</td>
+        <td>
+          {{member.address.streetName ? member.address.streetName : '-'}}
+          {{member.address.houseNumber !== 0 ? member.address.houseNumber :''}}
+        </td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.zip' | translate}} {{ 'general.members.list.city' | translate}}</td>
+        <td>
+          {{member.address.zip ? member.address.zip : '-'}}
+          {{member.address.city ? member.address.city : '-' }}
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xl-6">
+    <h5>{{ 'general.members.details.otherTitle' | translate}}</h5>
+    <table class="table table-bordered table-hovered table-striped">
+      <tr>
+        <td>{{ 'general.members.list.functions' | translate}}</td>
+        <td>{{ member.clubData.positionsInClub ? member.clubData.positionsInClub : '-'}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.comment' | translate}}</td>
+        <td>{{ member.otherData.info ? member.otherData.info : '-'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #noMemberTemplate>
+  {{ (memberStateService.getMemberStates() | filterBy: ['value'] : 0)[0].title | translate }}
+</ng-template>
+
+<ng-template #noAHMemberTemplate>
+  {{ (memberStateService.getAHStates() | filterBy: ['value'] : 0)[0].title | translate }}
+</ng-template>
+
+<ng-template #noContactTemplate>
+  <div class="alert alert-warning" role="alert">
+    {{ 'general.members.details.noContactData' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #noClubDataTemplate>
+  <div class="alert alert-warning" role="alert">
+    {{ 'general.members.details.noClubData' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #noAhDataTemplate>
+  <div class="alert alert-warning" role="alert">
+    {{ (memberStateService.getAHStates() | filterBy: ['value'] : 0)[0].title | translate }}
+  </div>
+</ng-template>

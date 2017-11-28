@@ -1,0 +1,51 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.permissions.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+
+    <div class="col-xl-8">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.permissions.title' | translate}}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-portlet__body">
+          <p>{{'general.permissions.text' | translate}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.permissions.title' | translate}}</h3>
+            </div>
+          </div>
+        </div>
+
+        <div class="m-portlet__body">
+          {{authService.authState.toPromise() | async | json}}
+          {{authService.authState | async | json}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-xl-12">
+
+    <div class="alert alert-warning text-left" role="alert"
+         *ngIf="(member.interview | filterBy: ['assignedMember']: member.id | filterBy: ['isCommentFromOther'] : commentsFromOtherMember)?.length === 0">
+      {{ 'general.members.interview.noAnswers' | translate}}
+    </div>
+
+  </div>
+
+  <div class="col-xl-12"
+       *ngFor="let interview of member.interview | filterBy: ['assignedMember']: member.id | filterBy: ['isCommentFromOther'] : commentsFromOtherMember">
+
+    <div class="m-portlet">
+      <div class="m-portlet__head">
+        <div class="m-portlet__head-caption">
+          <div class="m-portlet__head-title">
+            <h3 class="m-portlet__head-text">{{interview.question}}</h3>
+          </div>
+        </div>
+        <div class="m-portlet__head-tools">
+          <ul class="m-portlet__nav">
+            <li class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push" data-dropdown-toggle="hover" aria-expanded="true">
+              <a class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                <i class="la la-ellipsis-v"></i>
+              </a>
+              <div class="m-dropdown__wrapper">
+                <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                <div class="m-dropdown__inner">
+                  <div class="m-dropdown__body">
+                    <div class="m-dropdown__content">
+                      <ul class="m-nav">
+                        <li class="m-nav__item">
+                          <a class="m-nav__link">
+                            <i class="m-nav__link-icon fa fa-pencil"></i>
+                            <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
+                          </a>
+                        </li>
+                        <li class="m-nav__item">
+                          <a class="m-nav__link">
+                            <i class="m-nav__link-icon fa fa-remove"></i>
+                            <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="m-portlet__body">
+        <p>{{interview.answer}}</p>
+      </div>
+    </div>
+  </div>
+
+</div>

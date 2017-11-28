@@ -1,0 +1,287 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{ 'general.menu.member.detail' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/members']">
+            <span class="m-nav__link-text">{{'general.menu.member.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{ 'general.detail' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-9">
+
+      <div class="m-portlet" *ngIf="member; else loadingTemplate">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{member.mainData.firstName}} {{member.mainData.lastName}}</h3>
+            </div>
+          </div>
+          <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+              <li
+                class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                data-dropdown-toggle="hover" aria-expanded="true">
+                <a
+                  class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                  <i class="la la-ellipsis-v"></i>
+                </a>
+                <div class="m-dropdown__wrapper">
+                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                  <div class="m-dropdown__inner">
+                    <div class="m-dropdown__body">
+                      <div class="m-dropdown__content">
+                        <ul class="m-nav">
+                          <li class="m-nav__section m-nav__section--first">
+                            <span
+                              class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="m-nav__link" [routerLink]="['/members/edit', member.id]">
+                              <i class="m-nav__link-icon fa fa-pencil"></i>
+                              <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="m-nav__link" (click)="removeMember()">
+                              <i class="m-nav__link-icon fa fa-remove"></i>
+                              <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__separator m-nav__separator--fit"></li>
+                          <li class="m-nav__item">
+                            <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                               [routerLink]="['/members']">{{'general.menu.member.list' | translate}}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <ul class="nav nav-pills" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#m_tabs_5_1">
+                {{ 'general.members.details.mainTitle' | translate}}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#m_tabs_5_2">
+                {{ 'general.members.edit.dfbTitle' | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">
+                {{ 'general.members.profile.title' | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#m_tabs_5_4">
+                {{ 'general.members.interview.title' | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#m_tabs_5_5">
+                {{ 'general.members.profile.statistics.title' | translate }}
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#m_tabs_5_6">
+                {{ 'general.members.profile.media.title' | translate }}
+              </a>
+            </li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
+              <div class="row">
+                <div class="col-xl-4">
+                  <member-details-main [member]="member"></member-details-main>
+                </div>
+                <div class="col-xl-8">
+                  <member-details-drive [member]="member"></member-details-drive>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
+              <member-details-dfb [member]="member"></member-details-dfb>
+            </div>
+
+            <div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
+              <div class="row">
+                <div class="col-xl-12">Steckbrief</div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
+              <div class="row">
+                <div class="col-xl-12">Interview</div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="m_tabs_5_5" role="tabpanel">
+              <div class="row">
+                <div class="col-xl-12">Spielerstatistiken</div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="m_tabs_5_6" role="tabpanel">
+              <div class="row">
+                <div class="col-xl-12">Fotos und Videos</div>
+              </div>
+            </div>
+
+            <!--<div class="col-md-3">
+              Mitglied in den Mannschaften
+            </div>
+
+
+            <div class="col-md-6">
+
+              <div class="row" *ngIf="profile; else noProfileTemplate">
+                <div class="col-md-6">
+
+                  {{ 'general.members.profile.soccerData' | translate}}
+                  <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-sm table-striped">
+                      <tr>
+                        <td>{{ 'general.members.profile.howBig' | translate}}</td>
+                        <td>{{profile.size ? profile.size : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.position' | translate}}</td>
+                        <td>{{profile.position ? profile.position : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.shoeSize' | translate}}</td>
+                        <td>{{profile.shoeSize ? profile.shoeSize : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.strongFoot' | translate}}</td>
+                        <td>{{ profile.strongFoot ? ('general.members.profile.' + profile.strongFoot + 'Foot' | translate) :
+                          '-'}}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.prevClubs' | translate}}</td>
+                        <td>{{profile.prevClubs ? profile.prevClubs : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.prevVictories' | translate}}</td>
+                        <td>{{profile.prevVictories ? profile.prevVictories : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.prevLosses' | translate}}</td>
+                        <td>{{profile.prevLosses ? profile.prevLosses : '-'}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+
+                  {{ 'general.members.profile.favorites' | translate}}
+                  <div class="table-responsive">
+                    <table class="table table-hover table-bordered table-sm table-striped">
+                      <tr>
+                        <td>{{ 'general.members.profile.favDrink' | translate}}</td>
+                        <td>{{profile.favDrink ? profile.favDrink : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.favFood' | translate}}</td>
+                        <td>{{profile.favFood ? profile.favFood : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.favClub' | translate}}</td>
+                        <td>{{profile.favClub ? profile.favClub : '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.favPlayer' | translate}}</td>
+                        <td>{{ profile.favPlayer ? profile.favPlayer: '-'}}</td>
+                      </tr>
+                      <tr>
+                        <td>{{ 'general.members.profile.favTrainer' | translate}}</td>
+                        <td>{{profile.favTrainer ? profile.favTrainer : '-'}}</td>
+                      </tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  {{ 'general.members.profile.statistics.title' | translate}}
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              {{ 'general.members.interview.title' | translate}}
+              <interview-list [member]="member" [showLink]="false" (deleteInterview)="interviewService.removeInterview($event)">
+              </interview-list>
+
+              {{ 'general.members.interview.whatOthersSay' | translate}}
+              <interview-list [member]="member"
+                              [showLink]="false"
+                              [commentsFromOtherMember]="true"
+                              (deleteInterview)="interviewService.removeInterview($event)">
+              </interview-list>
+            </div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{ 'general.members.details.photoTitle' | translate}}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <img class="img-fluid" [src]="member.profileImageUrl" *ngIf="member.profileImageUrl; else noImageTemplate" />
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noProfileTemplate>
+  {{ 'general.members.profile.profile' | translate}}
+  <div class="alert alert-warning" role="alert">
+    {{ 'general.members.details.noProfileYet' | translate}}
+  </div>
+</ng-template>
+
+<ng-template #noImageTemplate>
+  <div class="alert alert-primary">
+    <strong>{{ 'general.info' | translate }}</strong> {{ 'general.members.edit.noProfileImage' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

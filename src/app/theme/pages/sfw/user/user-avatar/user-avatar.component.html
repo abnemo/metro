@@ -1,0 +1,5 @@
+<a *ngIf="user | async" [routerLink]="['/pages/users/detail/' + (user | async)?.id]">
+  <!--<img alt="{{ (user | async)?.displayName ? (user | async)?.displayName : (user | async)?.email}}"
+       class="img-circle img-thumbnail" style="width: 5%" [src]="(user | async)?.photoURL || 'avatars/avatar10.jpg'"><br/>-->
+  {{(user | async)?.firstName}} {{(user | async)?.lastName}}
+</a>

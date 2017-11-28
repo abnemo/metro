@@ -1,0 +1,94 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{ 'general.menu.category.edit' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/categories']">
+            <span class="m-nav__link-text">{{'general.menu.category.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{ 'general.edit' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<form class="form-horizontal" novalidate (ngSubmit)="saveCategory()" [formGroup]="form">
+  <div class="m-content">
+    <div class="row">
+
+      <div class="col-xl-12">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">
+                  {{ 'general.menu.category.edit' | translate}}
+                </h3>
+              </div>
+            </div>
+            <div class="m-portlet__head-tools">
+              <ul class="m-portlet__nav">
+                <li
+                  class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                  data-dropdown-toggle="hover" aria-expanded="true">
+                  <a
+                    class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                    <i class="la la-ellipsis-v"></i>
+                  </a>
+                  <div class="m-dropdown__wrapper">
+                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                    <div class="m-dropdown__inner">
+                      <div class="m-dropdown__body">
+                        <div class="m-dropdown__content">
+                          <ul class="m-nav">
+                            <li class="m-nav__section m-nav__section--first">
+                              <span
+                                class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
+                            </li>
+                            <li class="m-nav__item" *ngIf="category.id">
+                              <a class="m-nav__link" [routerLink]="['/categories/details', category.id]">
+                                <i class="m-nav__link-icon fa fa-info"></i>
+                                <span class="m-nav__link-text">{{'general.detail' | translate }}</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__item" *ngIf="category.id">
+                              <a class="m-nav__link" (click)="removeCategory(category)">
+                                <i class="m-nav__link-icon fa fa-remove"></i>
+                                <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__separator m-nav__separator--fit"></li>
+                            <li class="m-nav__item">
+                              <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                 [routerLink]="['/categories/list']">{{'general.menu.category.list' | translate}}
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <category-edit-main
+            [form]="form"
+            [category]="category"
+            [categoryTypes]="categoryTypeService.getCategoryTypes() | async"
+            (cancel)="cancel()"
+            (removeCategory)="removeCategory($event)">
+          </category-edit-main>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

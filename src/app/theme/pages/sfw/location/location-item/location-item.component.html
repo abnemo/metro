@@ -1,0 +1,26 @@
+<td class="text-left">
+  <a [routerLink]="['../detail', location.id]" title="{{location.title}}">{{location.title}}</a>
+</td>
+
+<td *ngIf="location.assignedCategory; else noAssignedCategoryTemplate">
+  {{location.assignedCategory.title}}
+</td>
+
+<td>
+  {{location.address.streetName}} {{ location.address.houseNumber !== 0 ? location.address.houseNumber : ''}}<br />
+  {{location.address.zip}} {{location.address.city}} {{location.address.county}}
+</td>
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="locations" [object]="location"></detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
+             [showText]="false" type="locations" [object]="location"></edit-link>
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="locations" [object]="location"></remove-link>
+  <media-link [cssClass]="'btn btn-circle btn-icon-only btn-success btn-raised'" [showIcon]="true"
+              [showText]="false" type="locations" [object]="location"></media-link>
+</td>
+
+<ng-template #noAssignedCategoryTemplate>
+  <td>{{'general.locations.edit.noAssignedCategory' | translate}}</td>
+</ng-template>

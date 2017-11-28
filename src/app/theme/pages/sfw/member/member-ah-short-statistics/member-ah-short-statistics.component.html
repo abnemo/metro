@@ -1,0 +1,24 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.members.list.AHStatisticsTitle' | translate}} {{club.title}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body" *ngIf="club && members; else loadingTemplate">
+    <table class="table table-hover table-bordered table-sm table-striped">
+      <tr *ngFor="let i of memberStates">
+        <td class="text-left">{{'general.members.edit.ahStates.' + i | translate}}</td>
+        <td>{{(members
+          | filterBy: ['clubData.assignedClub'] : club.id
+          | filterBy: ['ahData.status'] : i)?.length}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

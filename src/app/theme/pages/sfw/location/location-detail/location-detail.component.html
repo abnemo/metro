@@ -1,0 +1,184 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.location.detail' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/locations']">
+            <span class="m-nav__link-text">{{'general.menu.location.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/locations/detail', location.id]">
+            <span class="m-nav__link-text">{{location.title}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item"><span class="m-nav__link-text">{{'general.detail' | translate}}</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="m-content">
+
+  <div class="row">
+    <div class="col-xl-4">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.locations.edit.mainTitle' | translate}}</h3>
+            </div>
+          </div>
+
+          <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+              <li
+                class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                data-dropdown-toggle="hover" aria-expanded="true">
+                <a
+                  class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                  <i class="la la-ellipsis-v"></i>
+                </a>
+                <div class="m-dropdown__wrapper">
+                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                  <div class="m-dropdown__inner">
+                    <div class="m-dropdown__body">
+                      <div class="m-dropdown__content">
+                        <ul class="m-nav">
+                          <li class="m-nav__section m-nav__section--first">
+                            <span
+                              class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="m-nav__link" [routerLink]="['/locations/edit', location.id]">
+                              <i class="m-nav__link-icon fa fa-pencil"></i>
+                              <span class="m-nav__link-text">{{'general.edit' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="m-nav__link" [routerLink]="['/locations/media', location.id]">
+                              <i class="m-nav__link-icon fa fa-upload"></i>
+                              <span class="m-nav__link-text">{{'general.assignedMedia' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="m-nav__link" (click)="removeLocation(location)">
+                              <i class="m-nav__link-icon fa fa-remove"></i>
+                              <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                            </a>
+                          </li>
+                          <li class="m-nav__separator m-nav__separator--fit"></li>
+                          <li class="m-nav__item">
+                            <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                               [routerLink]="['/locations']">
+                              {{'general.menu.location.list' | translate}}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <location-detail-main
+            [location]="location"
+            [categories]="categoryService.getCategories() | async"
+          ></location-detail-main>
+        </div>
+      </div>
+
+      <location-detail-contact
+        [members]="memberService.getMembers() | async"
+        [location]="location">
+      </location-detail-contact>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">
+                {{ (articles | filterBy: ['assignedLocation'] : location.id)?.length}}
+                {{'general.locations.detail.assignedArticlesTitle' | translate }}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <div *ngIf="!articles; else articleListTemplate">
+            <app-loading-indicator></app-loading-indicator>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.locations.edit.photoTitle' | translate}}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <img class="img-fluid" [src]="location.imageUrl" *ngIf="location.imageUrl; else noImageTemplate" />
+        </div>
+      </div>
+
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.locations.detail.mapTitle' | translate }}</h3>
+            </div>
+          </div>
+        </div>
+        <div class="m-portlet__body">
+          <location-detail-map [location]="location"></location-detail-map>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-12">
+      <location-detail-media [location]="location"></location-detail-media>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noArticlesTemplate>
+  <div class="alert alert-primary">
+    <strong>{{ 'general.info' | translate }}</strong> {{ 'general.locations.detail.noAssignedArticles' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #noImageTemplate>
+  <div class="alert alert-primary">
+    <strong>{{ 'general.info' | translate }}</strong> {{ 'general.locations.edit.noLogo' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #articleListTemplate>
+  <ul class="list-group"
+      *ngIf="(articles | filterBy: ['assignedLocation'] : location.id)?.length > 0; else noArticlesTemplate">
+    <li class="list-group-item"
+        *ngFor="let article of (articles | filterBy: ['assignedLocation'] : location.id) | orderBy: ['-articleDate']">
+      <a [routerLink]="['/articles/detail', article.id]">
+        {{article.title}} {{article.articleDate | date: 'dd.MM.yy'}}
+      </a>
+    </li>
+  </ul>
+</ng-template>

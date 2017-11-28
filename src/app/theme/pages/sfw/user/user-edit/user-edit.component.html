@@ -1,0 +1,137 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.user.edit' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/users']">
+            <span class="m-nav__link-text">{{'general.menu.user.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item" *ngIf="user">
+          <a class="m-nav__link" [routerLink]="['/users/detail', user.id]">
+            <span class="m-nav__link-text">{{user.firstName}} {{user.lastName}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.edit' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-3 col-lg-4">
+      <div class="m-portlet m-portlet--full-height">
+        <div class="m-portlet__body">
+          <div class="m-card-profile">
+            <div class="m-card-profile__title m--hide">{{'general.menu.user.edit' | translate}}</div>
+            <div class="m-card-profile__pic">
+              <div class="m-card-profile__pic-wrapper">
+                <img *ngIf="user.photoURL; else noPhotoTemplate" [src]="user.photoURL" alt=""/>
+              </div>
+            </div>
+            <div class="m-card-profile__details">
+							<span class="m-card-profile__name">{{user.firstName}} {{user.lastName}}</span>
+              <a [href]="'mailto:' + user.email" class="m-card-profile__email m-link">{{user.email}}</a>
+            </div>
+
+            <div class="text-center m--margin-top-15">
+              <user-online-status [onlineStatus]="user.onlineStatus"></user-online-status>
+            </div>
+
+          </div>
+          <ul class="m-nav m-nav--hover-bg m-portlet-fit--sides">
+            <li class="m-nav__separator m-nav__separator--fit"></li>
+            <li class="m-nav__section m--hide">
+							<span class="m-nav__section-text">Section</span>
+            </li>
+            <li class="m-nav__item">
+              <a [routerLink]="['./profile']" class="m-nav__link">
+                <i class="m-nav__link-icon flaticon-profile-1"></i>
+                <span class="m-nav__link-title">
+									<span class="m-nav__link-wrap">
+										<span class="m-nav__link-text">{{'general.users.edit.profile' | translate}}</span>
+									</span>
+								</span>
+              </a>
+            </li>
+            <li class="m-nav__item">
+              <a [routerLink]="['./articles']" class="m-nav__link">
+                <i class="m-nav__link-icon fa fa-align-left"></i>
+                <span class="m-nav__link-text">{{'general.users.edit.createdArticles' | translate}}</span>
+              </a>
+            </li>
+            <li class="m-nav__item">
+              <a [routerLink]="['./todos']" class="m-nav__link">
+                <i class="m-nav__link-icon fa fa-tasks"></i>
+                <span class="m-nav__link-text">{{'general.users.edit.todo' | translate}}</span>
+              </a>
+            </li>
+            <li class="m-nav__item">
+              <a [routerLink]="['./uploads']" class="m-nav__link">
+                <i class="m-nav__link-icon fa fa-upload"></i>
+                <span class="m-nav__link-text">{{'general.users.edit.uploads' | translate}}</span>
+              </a>
+            </li>
+          </ul>
+
+          <div class="m-portlet__body-separator"></div>
+          <div class="m-widget1 m-widget1--paddingless">
+            <div class="m-widget1__item">
+              <div class="row m-row--no-padding align-items-center">
+                <div class="col">
+                  <h3 class="m-widget1__title">{{'general.users.edit.createdArticlesCount' | translate}}</h3>
+                  <!--<span class="m-widget1__desc">Awerage Weekly Profit</span>-->
+                </div>
+                <div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand"><!-- ToDo -->
+                    {{articleService.getArticles() | async | filterBy: ['creation.from'] : user.id }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="m-widget1__item">
+              <div class="row m-row--no-padding align-items-center">
+                <div class="col">
+                  <h3 class="m-widget1__title">{{'general.users.edit.uploadsCount' | translate}}</h3>
+                  <!--<span class="m-widget1__desc">{{'general.users.edit.uploadsCount' | translate}}</span>-->
+                </div>
+                <div class="col m--align-right"><!-- ToDo -->
+									<span class="m-widget1__number m--font-danger">+1,800</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-9 col-lg-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #noLogoTemplate>
+  <div class="alert alert-warning">
+    <strong>{{ 'general.warning' | translate }}</strong> {{'general.users.edit.noImage' | translate}}
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>
+
+<ng-template #noPhotoTemplate>
+  <img src="./assets/sfw/placeholder/avatar_male.jpg">
+  <!--<img *ngIf="user.gender === 'female'" src="./assets/sfw/placeholder/avatar_female.jpg">-->
+</ng-template>

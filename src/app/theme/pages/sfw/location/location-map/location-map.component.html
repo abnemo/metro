@@ -1,0 +1,160 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.location.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/locations']">
+            <span class="m-nav__link-text">{{'general.menu.location.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.menu.location.map' | translate | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+
+    <div class="col-xl-9">
+      <div class="m-portlet">
+        <div class="m-portlet__head">
+          <div class="m-portlet__head-caption">
+            <div class="m-portlet__head-title">
+              <h3 class="m-portlet__head-text">{{'general.menu.location.map' | translate}}</h3>
+            </div>
+          </div>
+
+          <div class="m-portlet__head-tools">
+            <ul class="m-portlet__nav">
+              <li
+                class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                data-dropdown-toggle="hover" aria-expanded="true">
+                <a
+                  class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                  <i class="la la-ellipsis-v"></i>
+                </a>
+                <div class="m-dropdown__wrapper">
+                  <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                  <div class="m-dropdown__inner">
+                    <div class="m-dropdown__body">
+                      <div class="m-dropdown__content">
+                        <ul class="m-nav">
+                          <li class="m-nav__section m-nav__section--first">
+                            <span
+                              class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
+                          </li>
+                          <li class="m-nav__item">
+                            <a class="btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                               (click)="resetMarkers()">
+                              {{'general.locations.map.resetMarkers' | translate}}
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="m-portlet__body">
+          <div class="embed-responsive embed-responsive-16by9">
+            <div id="map_canvas" class="embed-responsive-item">
+              <agm-map
+                [latitude]="lat"
+                [longitude]="lng"
+                [zoom]="zoom"
+                [disableDefaultUI]="true"
+                [zoomControl]="true">
+
+                <agm-marker
+                  *ngFor="let m of markers; let i = index"
+                  [latitude]="m.lat"
+                  [longitude]="m.lng"
+                  [label]="m.label">
+                </agm-marker>
+              </agm-map>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3">
+
+      <!-- Filter -->
+      <div class="m-portlet">
+        <div class="m-portlet__body">
+          <div class="m-form__group m-form__group--inline">
+            <div class="m-form__label">
+              <label class="m-label m-label--single">{{ 'general.locations.list.filterTitle' | translate}}:</label>
+            </div>
+            <div class="m-form__control">
+              <div
+                class="btn-group bootstrap-select form-control m-bootstrap-select m-bootstrap-select--solid">
+                <button type="button" class="btn dropdown-toggle bs-placeholder btn-default" role="button"
+                        data-toggle="dropdown" title="{{'general.locations.list.filterTitle' | translate}}">
+              <span class="filter-option pull-left">
+                {{ !filterType  ? ('general.locations.list.allLocations' | translate)
+                : ('general.only' | translate) + ' ' + filterTitle}}
+              </span>
+                  <span class="bs-caret"><span class="caret"></span></span>
+                </button>
+                <div class="dropdown-menu open" role="combobox">
+                  <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                    <li data-original-index="0" [ngClass]="{'selected': filterKey === ''}">
+                      <a tabindex="0" class="" role="option" (click)="setFilter('', null)">
+                        <span class="text">{{'general.locations.list.allLocations' | translate}}</span>
+                        <span [ngClass]="{'glyphicon glyphicon-ok check-mark': filterType === '' }"></span>
+                      </a>
+                    </li>
+                    <!--<li *ngFor="let category of
+                      (
+                        (categoryService.getCategories() | async) | filterBy: ['assignedCategoryType'] :
+                        (
+                          (categoryTypeService.getCategoryTypes() | async) | filterBy: ['link'] : 'locations')[0].id)
+                            | orderBy: 'title'"
+                        [ngClass]="{'selected': filterKey === category.id }">
+                      <a tabindex="0" role="option" (click)="setFilter('assignedCategory', category)">
+                        <span class="text">{{ 'general.only' | translate}}&bdquo;{{category.title}}&rdquo;</span>
+                        <span
+                          [ngClass]="{'glyphicon glyphicon-ok check-mark': filterKey === category.id }"></span>
+                      </a>
+                    </li>-->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="m-form__group m-form__group--inline m--margin-top-15">
+            <a class="btn btn-danger m-btn m-btn--pill m-btn--wide btn-sm" *ngIf="markers.length > 0"
+               (click)="resetMarkers()">
+              {{'general.locations.map.resetMarkers' | translate}}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item clearfix" (click)="toggleLocationMarker(location)" style="cursor: hand"
+            *ngFor="let location of locationService.getLocations() | async
+            | filterBy: ['assignedCategory'] : filterKey
+            | orderBy: ['title']">{{location.title}}
+          <span class="pull-right">
+            <i class="fa fa-check" *ngIf="selectedLocations.indexOf(location.id) > -1"></i>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

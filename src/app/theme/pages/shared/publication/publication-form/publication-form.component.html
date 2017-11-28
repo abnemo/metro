@@ -1,0 +1,35 @@
+<div class="form-body">
+
+  <div class="alert alert-warning" *ngIf="item.publication.status === '1'">
+    <strong>{{ 'general.warning' | translate}}!</strong> {{'general.publication.alreadyPublished' | translate}}
+  </div>
+
+  <div class="form-group form-md-line-input">
+    <label>{{'general.publication.publicationDateLabel' | translate}}</label>
+    <select class="form-control" name="publication-date" [disabled]="item.publication.status === '1'"
+            (change)="onPublicationChange($event.target.value)" [(ngModel)]="item.publication.status">
+      <option value="" disabled>{{'general.publication.chooseDate' | translate}}</option>
+      <option value="0">{{'general.publication.saveAsDraft' | translate}}</option>
+      <option value="1">{{'general.publication.publishNow' | translate}}</option>
+      <option value="2">{{'general.publication.selectDate' | translate}}</option>
+    </select>
+  </div>
+
+  <div class="form-group form-md-line-input" *ngIf="item.publication.status === '2'">
+    <label>{{'general.publication.setPublicationDate' | translate}}</label>
+    <input [(ngModel)]="item.publication.at" class="form-control"/>
+  </div>
+
+  <div class="form-group form-md-line-input" *ngIf="item.publication.at > '0'">
+    <label>{{'general.publication.publication' | translate}} {{'general.publication.from' | translate}}</label>
+    <select class="form-control" name="publisher" [(ngModel)]="item.publication.from"
+            [disabled]="item.publication.status === '1'"
+            title="{{'general.publication.publication' | translate}} {{'general.publication.from' | translate}}">
+      <option value="" disabled>{{'general.publication.choosePublisher' | translate}}</option>
+      <option *ngFor="let user of userService.getUsers() | async | orderBy: ['firstName', 'lastName', 'email']"
+              [value]="user.id">
+        {{user.firstName && user.lastName ? user.firstName + ' ' + user.lastName : user.email}}
+      </option>
+    </select>
+  </div>
+</div>

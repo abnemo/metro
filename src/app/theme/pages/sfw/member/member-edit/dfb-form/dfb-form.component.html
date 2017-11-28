@@ -1,0 +1,97 @@
+<div class="row" [formGroup]="form">
+  <div class="col-xl-12" formGroupName="dfbData">
+
+    <div class="row">
+      <div class="col-xl-6">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{ 'general.members.list.dfb' | translate}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <div class="form-body">
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.passNumber' | translate}}</label>
+                <input class="form-control" formControlName="passNumber"
+                       placeholder="{{ 'general.members.list.passNumber' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.passPrint' | translate}}</label>
+                <input class="form-control" formControlName="passPrint"
+                       placeholder="{{ 'general.members.list.passPrint' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.edit.allowedToPlayOfficialMatches' | translate}}</label>
+                <input class="form-control" formControlName="eligibleForOfficialMatches"
+                       placeholder="{{ 'general.members.edit.allowedToPlayOfficialMatches' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.edit.allowedToPlayFriendlyMatches' | translate}}</label>
+                <input class="form-control" formControlName="eligibleForFriendlyMatches"
+                       placeholder="{{ 'general.members.edit.allowedToPlayFriendlyMatchest' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.ageGroup' | translate}}</label>
+                <input class="form-control" formControlName="ageGroup"
+                       placeholder="{{ 'general.members.list.ageGroup' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.allowedToPlay' | translate}}</label>
+                <input class="form-control" formControlName="allowedToPlay"
+                       placeholder="{{ 'general.members.list.allowedToPlay' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.playerStatus' | translate}}</label>
+                <input class="form-control" formControlName="playerStatus"
+                       placeholder="{{ 'general.members.list.playerStatus' | translate}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-xl-6">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{ 'general.members.edit.guestPlayerData' | translate}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <div class="form-body" formGroupName="guestPlayer">
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.matchType' | translate}}</label>
+                <input class="form-control" formControlName="type"
+                       placeholder="{{ 'general.members.list.matchType' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.details.guestPlayerSeason' | translate}}</label>
+                <input class="form-control" formControlName="season"
+                       placeholder="{{ 'general.members.details.guestPlayerSeason' | translate}}"/>
+              </div>
+
+              <div class="form-group form-md-line-input">
+                <label>{{ 'general.members.list.guestPlayer' | translate}}</label>
+                <input class="form-control" formControlName="guestRight"
+                       placeholder="{{ 'general.members.list.guestPlayer' | translate}}"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

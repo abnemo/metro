@@ -1,0 +1,45 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.article.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/articles']">
+            <span class="m-nav__link-text">{{'general.menu.article.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-8">
+      <!--<article-list
+        [filter]="filter | async"
+        [articles]="articleService.items"
+        [categories]="categoryService.items | async"
+        (remove)="articleService.removeArticle($event)"
+        (update)="articleService.updateArticle($event.article.id, $event.article)">
+      </article-list>-->
+    </div>
+    <div class="col-xl-4">
+      <tasks type="article"></tasks>
+      <ul class="list-group">
+        <li class="list-group-item">Liste der Spiele ohne Ergebnis</li>
+        <li class="list-group-item">Artikel: Letzte Artikel</li>
+        <li class="list-group-item">Neue Fotos</li>
+        <li class="list-group-item">Gerade angemeldete Benutzer</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

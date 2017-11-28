@@ -1,0 +1,29 @@
+<div class="m-section" *ngFor="let type of taskService.getTaskTypes()| filterBy: ['title'] : type| orderBy : 'title'">
+  <h3 class="m-section__heading">{{ 'general.menu.' + type.title + '.main' | translate }}</h3>
+  <div class="m-section__content">
+    <div class="m-demo">
+      <div class="m-demo__preview">
+        <div class="m-list-timeline">
+          <div class="m-list-timeline__items">
+
+            <p *ngIf="!(taskService.getTasks() | async)?.length">{{'general.tasks.list.loadingData' | translate}}</p>
+
+            <p *ngIf="(taskService.getTasks() | async | filterBy: ['type'] : type.title)?.length === 0">
+              {{'general.tasks.list.noItemsFound' | translate}}
+            </p>
+
+            <div class="m-list-timeline__item" *ngFor="let task of taskService.getTasks() | async
+                  | filterBy: ['type'] : type.title |orderBy:'title'">
+              <span class="m-list-timeline__badge m-list-timeline__badge--{{task.priority}}"></span>
+              <span class="m-list-timeline__text">
+                <span style="font-weight: bold" class="m--font-brand"> {{task.title}}</span>
+                <p *ngIf="task.description">{{task.description}}</p>
+                <a href (click)="completeTask(task)">{{'general.tasks.list.done' | translate}}?</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

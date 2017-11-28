@@ -1,0 +1,29 @@
+<table class="table table-responsive table-striped table-bordered table-hover table-sm"
+       *ngIf="location.assignedContacts && location.assignedContacts.length > 0; else noContactsTemplate">
+  <tr *ngFor="let contact of location.assignedContacts; let i = index">
+    <td>
+      <a [routerLink]="['/members/detail', contact.assignedMember]" *ngIf="contact.isMember">
+        {{ (members | filterBy: ['id'] : contact.assignedMember)[0].lastName}}
+        {{ (members | filterBy: ['id'] : contact.assignedMember)[0].firstName}}
+      </a>
+      <span *ngIf="!contact.isMember">
+        {{contact.lastName}} {{contact.firstName}}<br/>
+        <a *ngIf="contact.contact.email" [href]="'mailto:' + contact.contact.email">{{contact.contact.email}} ,</a>
+        {{contact.contact.phoneMobile}}
+      </span>
+    </td>
+    <td>{{contact.description}}</td>
+    <td>
+      <button class="btn btn-danger" (click)="removeContact(i)"
+              title="{{ 'general.locations.edit.contact.deleteContact' | translate}}">
+        <i class="fa fa-remove"></i>
+      </button>
+    </td>
+  </tr>
+</table>
+
+<ng-template #noContactsTemplate>
+  <div class="alert alert-info">
+    <strong>{{ 'general.info' | translate}}</strong> {{ 'general.locations.edit.contact.noContacts' | translate}}
+  </div>
+</ng-template>

@@ -1,0 +1,174 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{ 'general.menu.member.edit' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['../']">
+            <span class="m-nav__link-text">{{'general.menu.member.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{ 'general.edit' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <form class="form-horizontal" novalidate (ngSubmit)="updateMember()" [formGroup]="form">
+    <div class="row">
+      <div class="col-xl-9">
+
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">TEST</h3>
+              </div>
+            </div>
+            <div class="m-portlet__head-tools">
+              <ul class="m-portlet__nav">
+                <li
+                  class="m-portlet__nav-item m-dropdown m-dropdown--inline m-dropdown--arrow m-dropdown--align-right m-dropdown--align-push"
+                  data-dropdown-toggle="hover" aria-expanded="true">
+                  <a
+                    class="m-portlet__nav-link btn btn-secondary  m-btn m-btn--hover-brand m-btn--icon m-btn--icon-only m-btn--pill m-dropdown__toggle">
+                    <i class="la la-ellipsis-v"></i>
+                  </a>
+                  <div class="m-dropdown__wrapper">
+                    <span class="m-dropdown__arrow m-dropdown__arrow--right m-dropdown__arrow--adjust"></span>
+                    <div class="m-dropdown__inner">
+                      <div class="m-dropdown__body">
+                        <div class="m-dropdown__content">
+                          <ul class="m-nav">
+                            <li class="m-nav__section m-nav__section--first">
+                            <span
+                              class="m-nav__section-text">{{'general.tables.colTitles.quickActions' | translate}}</span>
+                            </li>
+                            <li class="m-nav__item">
+                              <a class="m-nav__link" [routerLink]="['details', member.id]">
+                                <i class="m-nav__link-icon fa fa-pencil"></i>
+                                <span class="m-nav__link-text">{{'general.detail' | translate }}</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__item">
+                              <a class="m-nav__link" (click)="removeMember()">
+                                <i class="m-nav__link-icon fa fa-remove"></i>
+                                <span class="m-nav__link-text">{{'general.delete' | translate }}</span>
+                              </a>
+                            </li>
+                            <li class="m-nav__separator m-nav__separator--fit"></li>
+                            <li class="m-nav__item">
+                              <a class="btn btn-outline-danger m-btn m-btn--pill m-btn--wide btn-sm"
+                                 [routerLink]="['/members']">{{'general.menu.member.list' | translate}}
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <ul class="nav nav-pills" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#m_tabs_5_1">
+                  {{'general.members.edit.mainTitle' | translate}}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#m_tabs_5_2">
+                  {{ 'general.members.edit.dfbTitle' | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#m_tabs_5_3">
+                  {{ 'general.members.profile.title' | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#m_tabs_5_4">
+                  {{ 'general.members.interview.title' | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#m_tabs_5_5">
+                  {{ 'general.members.profile.statistics.title' | translate }}
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#m_tabs_5_6">
+                  {{ 'general.members.profile.media.title' | translate }}
+                </a>
+              </li>
+            </ul>
+
+           <div class="tab-content">
+              <div class="tab-pane active" id="m_tabs_5_1" role="tabpanel">
+                <main-form [form]="form" [clubs]="clubs"></main-form>
+              </div>
+              <div class="tab-pane" id="m_tabs_5_2" role="tabpanel">
+                <dfb-form [form]="form"></dfb-form>
+              </div>
+              <!--<div class="tab-pane" id="m_tabs_5_3" role="tabpanel">
+                <profile-form [form]="form"></profile-form>
+              </div>
+              <div class="tab-pane" id="m_tabs_5_4" role="tabpanel">
+                <interview [member]="member" [members]="members" (updateMember)="updateMember()"></interview>
+              </div>
+              <div class="tab-pane" id="m_tabs_5_5" role="tabpanel">
+                <div class="row">
+                  <div class="col-xl-12">Statistiken - ToDo</div>
+                </div>
+              </div>
+              <div class="tab-pane" id="m_tabs_5_6" role="tabpanel">
+                <div class="row">
+                  <div class="col-xl-12">Fotos & Videos des Spielers - ToDo</div>
+                </div>
+              </div>-->
+            </div>
+          </div>
+
+          <div class="m-portlet__foot text-right">
+            <button type="submit" [disabled]="!form.valid" class="btn btn-success">
+              {{'general.members.edit.saveMember' | translate}}
+            </button>
+            <button class="btn btn-danger" (click)="cancel()">{{'general.cancel' | translate}}</button>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xl-3">
+        <div class="m-portlet">
+          <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+              <div class="m-portlet__head-title">
+                <h3 class="m-portlet__head-text">{{ 'general.members.details.photoTitle' | translate}}</h3>
+              </div>
+            </div>
+          </div>
+          <div class="m-portlet__body">
+            <img [src]="member.profileImageUrl" *ngIf="member.profileImageUrl; else noImageTemplate"
+                 class="img img-thumbnail img-fluid"/>
+            <media-uploader [uploaderOptions]="uploaderOptions"
+                            (uploadCompleted)="uploadCompleted($event)">
+            </media-uploader>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #noImageTemplate>
+  <p>{{ 'general.members.details.noProfileImage' | translate}}</p>
+</ng-template>

@@ -1,0 +1,21 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.menu.task.main' | translate}}</h3>
+      </div>
+    </div>
+    <div class="m-portlet__head-tools">
+      <button *ngIf="showForm" class="btn btn-primary" (click)="toggleForm()">
+        <i class="fa fa-table"></i> {{ 'general.tasks.table' | translate }}
+      </button>
+      <button *ngIf="!showForm" class="btn btn-warning" (click)="toggleForm()">
+        <i class="fa fa-plus"></i> {{ 'general.tasks.form' | translate }}
+      </button>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+    <task-list *ngIf="!showForm" [type]="type"></task-list>
+    <task-form *ngIf="showForm" (toggleForm)="toggleForm()" [type]="type"></task-form>
+  </div>
+</div>

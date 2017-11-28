@@ -1,0 +1,39 @@
+<td class="text-left">
+  <a [routerLink]="['/pages/teams/edit', team.id]">{{team.title}}<br />{{team.subTitle}}</a>
+</td>
+<td>
+  <a *ngIf="clubs && team.assignedClub" [routerLink]="['/clubs/detail', team.assignedClub]">
+    {{ (clubs | filterBy: ['id']: team.assignedClub)[0].title}}
+  </a>
+</td>
+<td>
+  <span *ngIf="seasons && team.assignedSeason">{{ (seasons | filterBy: ['id']: team.assignedSeason)[0].title}}</span>
+</td>
+<td>{{ team.assignedPlayers ? team.assignedPlayers.length : '0' }}</td>
+<td translate>{{ (team.photoURL ? 'general.yes' : 'general.no')}}</td>
+<!--<td>
+  <span *ngFor="let categoryKey of  club-management.assignedArticleCategories; let isLast=last">
+      <a [routerLink]="['/pages/categories/detail', categoryKey]" *ngIf="articleCategories">
+        {{ (articleCategories | filterBy: ['id'] : categoryKey)[0].title}}
+      </a>{{isLast ? ' ' : ', '}}
+  </span>
+</td>
+<td>
+  <span *ngFor="let categoryKey of  club-management.assignedTeamCategories; let isLast=last">
+      <a [routerLink]="['/pages/categories/detail', categoryKey]" *ngIf="teamCategories">
+        {{ (teamCategories | filterBy: ['id'] : categoryKey)[0].title}}
+      </a>{{isLast ? ' ' : ', '}}
+  </span>
+</td>-->
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="teams" [object]="team"></detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
+             [showText]="false" type="teams" [object]="team"></edit-link>
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="teams" [object]="team"></remove-link>
+  <!--<publication-link [cssClass]="'btn btn-circle btn-icon-only btn-primary btn-raised'" [showIcon]="true"
+                    [showText]="false" type="teams" [object]="club-management"></publication-link>-->
+  <media-link [cssClass]="'btn btn-circle btn-icon-only btn-success btn-raised'" [showIcon]="true"
+              [showText]="false" type="teams" [object]="team"></media-link>
+</td>

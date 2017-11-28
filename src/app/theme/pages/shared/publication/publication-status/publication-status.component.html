@@ -1,0 +1,6 @@
+<span *ngIf="publication">
+  {{publication.at | date :'d.M.y H:i'}}
+</span>
+<span *ngIf="!publication">
+  not published
+</span>

@@ -1,0 +1,47 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.clubs.edit.management.positions' | translate }}</h3>
+      </div>
+    </div>
+    <div class="m-portlet__head-tools">
+      <ul class="m-portlet__nav">
+        <li class="m-portlet__nav-item">
+          <button [disabled]="!showForm" title="{{ 'general.clubs.positions.table' | translate }}" type="button"
+                  class="btn btn-primary" (click)="toggleForm()"><i class="fa fa-table"></i></button>
+        </li>
+        <li class="m-portlet__nav-item">
+          <button [disabled]="showForm" title="{{ 'general.clubs.positions.form' | translate }}" type="button"
+                  class="btn btn-brand" (click)="toggleForm()"><i class="fa fa-plus"></i></button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 15px">
+        <p *ngIf="!showForm; else formTemplate">Liste</p>
+        <!--<time-line-list
+          *ngIf="!showForm; else formTemplate"
+          [timeLineEvents]="timeLineEvents | orderBy: ['date']"
+          [showTable]="showTable"
+          [showActionLinks]="true"
+          (deleteTimeLineEvent)="removeTimeLineEvent.emit($event)">
+        </time-line-list>-->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #formTemplate>
+  <position-form
+    [item]="item"
+    [itemType]="itemType"
+    [members]="memberService.get"
+    [showMembersFromList]="showMembersFromList"
+    [showPositionsFromList]="showPositionsFromList"
+    (toggleForm)="toggleForm()">
+  </position-form>
+</ng-template>

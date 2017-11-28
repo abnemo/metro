@@ -1,0 +1,42 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { ILocationContact } from '../../interfaces/location-contact.interface';
+import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
+
+@Injectable()
+export class LocationContactService {
+
+  private collection: AngularFirestoreCollection<ILocationContact>;
+  public items: Observable<ILocationContact[]>;
+
+  private path = `location-contacts`;
+
+  constructor(public afs: AngularFirestore) {
+
+    this.collection = afs.collection<ILocationContact>(this.path);
+    this.items = this.collection.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as ILocationContact;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
+  }
+
+  createLocationContact(locationContact: ILocationContact) {
+    return this.collection.add(locationContact);
+  }
+
+  removeLocationContact(locationContact: ILocationContact): Promise<any> {
+    return this.collection.doc(locationContact.id).delete();
+  }
+
+  updateLocationContact(locationContactId: string, locationContact: ILocationContact): Promise<any> {
+    return this.collection.doc(locationContactId).update(locationContact);
+  }
+
+  getLocationContactById(locationContactId: string): Observable<any> {
+    return this.collection.doc(locationContactId).snapshotChanges();
+  }
+
+}

@@ -1,0 +1,22 @@
+<div *ngIf="assignedItems; else loadingTemplate">
+  <span *ngIf="!showList; else listTemplate">{{assignedItems.length}}</span>
+</div>
+
+<ng-template #listTemplate>
+  <ul *ngIf="assignedItems.length > 0; else noAssignedItemsTemplate">
+    <li *ngFor="let item of assignedItems">
+      <a [routerLink]="['/' + categoryType + '/detail', item.id]">
+        {{item.title}}
+        <span *ngIf="categoryType === 'teams'">{{item.subTitle}}</span>
+      </a>
+    </li>
+  </ul>
+</ng-template>
+
+<ng-template #noAssignedItemsTemplate>
+  Keine Verknüpfungen gefunden.
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

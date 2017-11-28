@@ -1,0 +1,40 @@
+<div *ngIf="clubs && members; else loadingTemplate">
+  <div *ngFor="let club of clubs | filterBy: ['showMemberStatistics'] : true" class="row">
+
+    <div class="col-md-12">
+      <h1>{{club.title}} - {{'general.members.list.statisticsTitleDetailed' | translate}}</h1>
+    </div>
+
+    <div *ngFor="let i of memberStates" class="col-md-2">
+      {{'general.members.edit.states.' + i | translate}}
+           ({{(members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['clubData.status'] : i).length}})
+
+        <div *ngIf="(members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['clubData.status'] : i).length === 0">
+          -
+        </div>
+
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let member of (members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['clubData.status'] : i)">
+            <a class="small" [routerLink]="['/pages/members/detail', member.id]">{{member.lastName}}
+              {{member.firstName}}</a>
+          </li>
+        </ul>
+    </div>
+
+    <div class="col-md-12">
+      <h1>{{club.title}} - {{'general.members.list.statisticsTitleDetailedAH' | translate}}</h1>
+      <member-ah-statistics [members]="members" [club]="club"></member-ah-statistics>
+    </div>
+
+  </div>
+
+</div>
+
+<ng-template #loadingTemplate>Lade
+</ng-template>

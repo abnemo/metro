@@ -1,0 +1,49 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.category.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/categories']">
+            <span class="m-nav__link-text">{{'general.menu.category.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-8">
+      <category-list
+        [categories]="categoryService.getCategories() | async"
+        [categoryTypes]="categoryTypeService.getCategoryTypes() | async"
+        [locations]="locationService.getLocations() | async"
+        [teams]="teamService.getTeams() | async"
+        [articles]="articleService.getArticles() | async"
+        (remove)="categoryService.removeCategory($event)"
+        (update)="categoryService.updateCategory($event.category.id, $event.category)">
+      </category-list>
+    </div>
+
+    <div class="col-xl-4">
+      <categories-by-category-type
+        [categories]="categoryService.getCategories() | async"
+        [categoryTypes]="categoryTypeService.getCategoryTypes() | async">
+      </categories-by-category-type>
+      <tasks type="category"></tasks>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

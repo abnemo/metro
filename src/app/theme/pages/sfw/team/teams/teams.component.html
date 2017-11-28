@@ -1,0 +1,44 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.team.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/teams']">
+            <span class="m-nav__link-text">{{'general.menu.team.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-xl-8">
+      <team-list
+        [teams]="teamService.getTeams() | async"
+        [clubs]="clubService.getClubs() | async"
+        [seasons]="seasonService.getSeasons() | async"
+        [categories]="categoryService.getCategories() | async"
+        [categoryTypes]="categoryTypeService.getCategoryTypes() | async | filterBy: ['link'] : 'team'"
+        (remove)="teamService.removeTeam($event.team)"
+        (update)="teamService.updateTeam($event.team.id, $event.team)">
+      </team-list>
+    </div>
+    <div class="col-xl-4">
+      <tasks type="team"></tasks>
+      <h3>{{ 'general.teams.list.latestMatchPreviews' | translate }}</h3>
+      <app-loading-indicator></app-loading-indicator>
+
+      <h3>{{ 'general.teams.list.teamOfTheMonth' | translate }}</h3>
+      <app-loading-indicator></app-loading-indicator>
+    </div>
+  </div>
+</div>

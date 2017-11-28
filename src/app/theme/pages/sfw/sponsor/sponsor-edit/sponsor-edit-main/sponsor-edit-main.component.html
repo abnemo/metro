@@ -1,0 +1,87 @@
+<div class="m-portlet__body">
+  <div class="row" *ngIf="categoryTypes && categories; else loadingTemplate" [formGroup]="form">
+
+    <div class="col-xl-6">
+      <div class="form-body">
+
+        <div class="form-group form-md-line-input">
+          <label>{{'general.sponsors.edit.title' | translate}}</label>
+          <input class="form-control" formControlName="title"
+                 placeholder="{{'general.sponsors.edit.title' | translate}}">
+        </div>
+
+        <div class="form-group form-md-line-input">
+          <label>{{'general.sponsors.edit.link' | translate}}</label>
+          <input class="form-control" formControlName="externalLink"
+                 placeholder="{{'general.sponsors.edit.link' | translate}}">
+        </div>
+
+        <div class="form-group">
+          <label>{{'general.sponsors.edit.description' | translate}}</label>
+          <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>{{'general.sponsors.edit.category' | translate}}</label>
+          <select class="form-control" formControlName="assignedCategories" multiple size="5">
+            <option *ngFor="let category of categories | filterBy: ['assignedCategoryType']: categoryTypes[0].id"
+                    [value]="category.id">
+              {{category.title}}
+            </option>
+          </select>
+        </div>
+
+        <h5 class="m--margin-top-25">{{'general.sponsors.edit.internalInfoTitle' | translate}}</h5>
+
+        <div class="row">
+          <div class="col-xl-6">
+            <div class="form-group form-md-line-input">
+              <label>{{'general.sponsors.edit.startDate' | translate}}</label><br/>
+              <input class="form-control" #dp="bsDatepicker" bsDatepicker formControlName="startDate">
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="form-group form-md-line-input">
+              <label>{{'general.sponsors.edit.endDate' | translate}}</label><br/>
+              <input class="form-control" #dp="bsDatepicker" bsDatepicker formControlName="endDate">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>{{'general.sponsors.edit.info' | translate}}</label>
+          <textarea class="form-control" formControlName="internalInfo"></textarea>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-xl-6">
+      <h5>{{'general.sponsors.edit.imageUrl' | translate}}</h5>
+      <img [src]="sponsor.imageUrl" class="img-fluid img-thumbnail" *ngIf="sponsor.imageUrl; else noLogoTemplate"/>
+      <media-uploader
+        *ngIf="showUploader"
+        [objectId]="sponsor.id ? sponsor.id : ''"
+        [objectType]="objectType"
+        [uploaderOptions]="uploaderOptions"
+        (uploadCompleted)="uploadCompleted($event)">
+      </media-uploader>
+      <div class="text-center m--margin-top-15">
+        <button class="btn btn-primary" (click)="toggleUploader()" *ngIf="!showUploader">
+          {{'general.sponsors.edit.uploadLogo' | translate}}
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #noLogoTemplate>
+  <div class="alert alert-warning">
+    <strong>{{ 'general.warning' | translate }}!</strong> {{ 'general.sponsors.edit.noImage' | translate }}
+  </div>
+</ng-template>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

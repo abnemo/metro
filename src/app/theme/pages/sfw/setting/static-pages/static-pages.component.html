@@ -1,0 +1,65 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.setting.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/settings']">
+            <span class="m-nav__link-text">{{'general.menu.setting.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row m-demo">
+    <div class="col-xl-3 m-demo__preview">
+      <perfect-scrollbar style="max-height: 400px;" [config]="config">
+        {{application | json}}
+        <pre>{{applicationService.getStaticPages(application) | async | json}}</pre>
+
+        <!--<div class="alert alert-info" *ngIf="application.staticPages.length === 0">
+          {{'general.settings.staticPages.noStaticPagesFound' | translate}}
+        </div>
+
+        <ul class="m-nav"
+            *ngFor="let section of applicationService.getStaticPages(application) | async | groupBy: ['sectionTitle'] | keys; let first = first">
+          <li class="m-nav__section" [ngClass]="first ? 'm-nav__section--first' : ''">
+            <span class="m-nav__section-text">{{section}}</span>
+          </li>
+          <li *ngFor="let staticPage of application.staticPages | filterBy: ['sectionTitle'] : section"
+              class="m-nav__item">
+            <a class="m-nav__link"
+               [routerLink]="['/settings/pages/' + staticPage.id + '/edit/application', application.id]">
+              <i class="m-nav__link-icon fa fa-hand-o-right"
+                 [ngClass]="selectedStaticPage === staticPage ? 'text-warning' : ''"></i>
+              <span class="m-nav__item-text">{{staticPage.title}}</span>
+            </a>
+          </li>
+        </ul>-->
+        <a [routerLink]="['/settings/pages/create']"
+                class="btn btn-brand pull-right m--margin-top-25">
+          {{'general.settings.staticPages.createStaticPage' | translate}}
+        </a>
+      </perfect-scrollbar>
+    </div>
+    <div class="col-xl-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!--
+<ng-template #noPageSelectedTemplate>
+  <div class="alert alert-info">
+    <p>{{'general.settings.staticPages.chooseStaticPage' | translate}}</p>
+  </div>
+</ng-template>-->

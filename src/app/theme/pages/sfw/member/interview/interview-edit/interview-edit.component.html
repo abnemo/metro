@@ -1,0 +1,28 @@
+<div class="row">
+
+  <div class="col-md-6">
+    {{ 'general.members.interview.newQuestionTo' | translate}} {{member.mainData.firstName}}
+    <interview-form [member]="member"></interview-form>
+
+    <interview-list [member]="member"
+                    [showLink]="false">
+    </interview-list>
+    <!-- (deleteInterview)="interviewService.removeInterview($event)"-->
+  </div>
+
+
+  <div class="col-md-6">
+    {{ 'general.members.interview.interviewPartner' | translate}}
+    <member-card [member]="member"></member-card>
+
+    {{ 'general.members.interview.whatOthersSay' | translate}}>
+    <interview-form [member]="member" [commentsFromOtherMember]="true"></interview-form>
+
+    <interview-list [member]="member"
+                    [showLink]="false"
+                    [commentsFromOtherMember]="true">
+    </interview-list>
+    <!-- (deleteInterview)="interviewService.removeInterview($event)" -->
+  </div>
+
+</div>

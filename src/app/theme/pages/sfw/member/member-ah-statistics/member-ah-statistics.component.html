@@ -1,0 +1,23 @@
+<div class="row">
+  <div *ngFor="let i of ahMemberStates" class="col-md-2">
+    {{'general.members.edit.ahStates.' + i | translate}}
+           ({{(members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['ahData.status'] : i).length}})
+
+      <div *ngIf="(members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['ahData.status'] : i).length === 0">
+        -
+      </div>
+
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let member of (members | orderBy: ['lastName', 'firstName', 'birthday'] |
+              filterBy: ['clubData.assignedClub'] : club.id |
+              filterBy: ['ahData.status'] : i)">
+          <a class="small" [routerLink]="['/pages/members/detail', member.id]">{{member.lastName}}
+            {{member.firstName}}</a>
+        </li>
+      </ul>
+  </div>
+</div>

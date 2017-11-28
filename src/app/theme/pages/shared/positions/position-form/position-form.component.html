@@ -1,0 +1,69 @@
+<form [formGroup]="managementGroup">
+  <div class="row">
+
+    <div class="col-xl-12">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.edit.management.member' | translate}}</label>
+
+        <select formControlName="assignedMember" title="{{ 'general.clubs.edit.management.member' | translate}}"
+                class="form-control" *ngIf="showMembersFromList">
+          <option value="" selected disabled>{{ 'general.clubs.edit.management.member' | translate}}</option>
+          <option *ngFor="let member of members" [value]="member.id">
+            {{member.lastName}} {{member.firstName}} {{ member.birthday | date: 'dd.MM.yy'}}
+          </option>
+        </select>
+
+        <input formControlName="assignedMember" class="form-control" *ngIf="!showMembersFromList"
+               placeholder="{{ 'general.clubs.edit.positions.firstNameAndLastName' | translate}}">
+
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.edit.management.position' | translate}}</label>
+
+        <select class="form-control" name="position" formControlName="position" *ngIf="showPositionsFromList"
+                title="{{ 'general.clubs.edit.management.choosePosition' | translate}}" required>
+          <option value="" selected disabled>{{ 'general.clubs.edit.management.choosePosition' | translate}}
+          </option>
+          <option *ngFor="let position of clubManagementService.getClubManagements() | async
+                | filterBy: ['assignedClub'] : item.id | orderBy: 'title'" [value]="position.id">
+            {{position.title}}
+          </option>
+        </select>
+
+        <input formControlName="position" class="form-control" *ngIf="!showPositionsFromList"
+               placeholder="{{ 'general.clubs.edit.management.position' | translate}}">
+
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.edit.presidentsList.startDate' | translate}}</label>
+        <input type="date" class="form-control" formControlName="startDate"
+               placeholder="{{ 'general.clubs.edit.presidentsList.startDate' | translate}}">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="control-label">{{ 'general.clubs.edit.presidentsList.endDate' | translate}}</label>
+        <input type="date" class="form-control" formControlName="endDate"
+               placeholder="{{ 'general.clubs.edit.presidentsList.endDate' | translate}}">
+      </div>
+    </div>
+
+    <div class="col-xl-12 text-right">
+      <button class="btn btn-success" [disabled]="!managementGroup.valid"
+              title="{{ 'general.clubs.edit.management.saveManagement' | translate}}">
+        <i class="fa fa-save"></i>
+      </button>
+      <button type="button" class="btn btn-warning" (click)="cancel()" title="{{ 'general.cancel' | translate}}">
+        <i class="fa fa-cancel"></i> {{ 'general.cancel' | translate}}
+      </button>
+    </div>
+
+  </div>
+
+</form>

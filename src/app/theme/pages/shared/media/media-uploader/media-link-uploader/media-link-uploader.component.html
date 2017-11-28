@@ -1,0 +1,29 @@
+<span style="font-weight: bold">{{'general.uploader.uploadViaLinkTitle' | translate}}</span><br/>
+<form novalidate (submit)="saveMediaItemFromLink()" [formGroup]="linkUploadGroup">
+
+  <div class="form-group">
+    <input type="url" class="form-control" formControlName="fileLink"
+           placeholder="{{'general.uploader.fileInput' | translate}}"/>
+  </div>
+  <div class="form-group">
+    <input class="form-control" formControlName="fileTitle"
+           placeholder="{{'general.uploader.fileTitle' | translate}}"/>
+  </div>
+  <div class="form-group">
+    <input class="form-control" formControlName="fileCredits"
+           placeholder="{{'general.uploader.fileCredits' | translate}}"/>
+  </div>
+  <div class="form-group">
+    <select class="form-control" [formControlName]="'fileType'"
+            title="{{'general.uploader.fileType' | translate}}">
+      <option value="">{{'general.uploader.chooseFileType' | translate}}</option>
+      <option value="image">{{'general.uploader.image' | translate}}</option>
+      <option value="">{{'general.uploader.other' | translate}}</option>
+    </select>
+  </div>
+
+  <button class="btn btn-success" [disabled]="!linkUploadGroup.valid">
+    {{'general.uploader.saveFromFileLink' | translate}}
+  </button>
+
+</form>

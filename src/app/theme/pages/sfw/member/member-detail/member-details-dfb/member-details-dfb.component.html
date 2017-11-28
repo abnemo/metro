@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-xl-6">
+    <table class="table table-bordered table-hovered table-striped">
+      <tr>
+        <td>{{ 'general.members.list.club' | translate}}</td>
+        <td>
+          <span *ngIf="clubs && member.clubData.assignedClub">
+            {{(clubs | filterBy: ['id'] : member.clubData.assignedClub)[0].title}}
+          </span>
+        </td>
+      </tr>
+      <tr *ngIf="member.dfbData; else noDFBTemplate">
+        <td>{{ 'general.members.list.passNumber' | translate}}</td>
+        <td>{{member.dfbData.passNumber}}</td>
+      </tr>
+      <tr *ngIf="member.dfbData">
+        <td>{{ 'general.members.list.passPrint' | translate}}</td>
+        <td>{{ member.dfbData.passDate ? (member.clubData.passDate | date : 'dd.MM.y') :
+          ('general.members.details.notSet'
+          | translate)}}
+        </td>
+      </tr>
+      <tr *ngIf="member.dfbData">
+        <td>{{ 'general.members.list.allowedToPlay' | translate}}</td>
+        <td>
+          <abbr *ngIf="member.dfbData.eligibleForOfficialMatches"
+                title="{{'general.members.details.officialMatches' | translate}}">O:
+            {{member.dfbData.eligibleForOfficialMatches | date : 'dd.MM.y'}}</abbr><br/>
+          <abbr *ngIf="member.dfbData.eligibleForFriendlyMatches"
+                title="{{'general.members.details.friendlyMatches' | translate}}">F:
+            {{member.dfbData.eligibleForFriendlyMatches | date : 'dd.MM.y'}}</abbr>
+        </td>
+      </tr>
+      <tr *ngIf="member.dfbData">
+        <td>{{ 'general.members.details.ageGroup' | translate}}</td>
+        <td>{{ member.dfbData.ageGroup }}</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="col-xl-6" *ngIf="member.dfbData && member.dfbData.guestPlayer">
+    <table class="table table-bordered table-hovered table-striped">
+      <tr>
+        <td>{{ 'general.members.list.typeOfMatchRights' | translate}}</td>
+        <td>{{member.dfbData.guestPlayer.type}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.details.guestPlayerSeason' | translate}}</td>
+        <td>{{member.dfbData.guestPlayer.season}}</td>
+      </tr>
+      <tr>
+        <td>{{ 'general.members.list.allowedSince' | translate}}</td>
+        <td>{{member.dfbData.guestPlayer.guestRight | date: 'dd.MM.y'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<ng-template #noDFBTemplate>
+  <tr>
+    <td colspan="2">{{ 'general.members.details.noDfbData' | translate}}</td>
+  </tr>
+</ng-template>

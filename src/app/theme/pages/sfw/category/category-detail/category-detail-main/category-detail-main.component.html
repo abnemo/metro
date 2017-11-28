@@ -1,0 +1,26 @@
+<table class="table table-bordered table-hover table-striped" *ngIf="category && categoryTypes; else loadingTemplate">
+  <tr>
+    <td>{{'general.categories.list.colTitles.name' | translate}}</td>
+    <td>{{category.title}}</td>
+  </tr>
+  <tr>
+    <td>{{'general.tables.colTitles.description' | translate}}</td>
+    <td>{{category.description}}</td>
+  </tr>
+  <tr>
+    <td>{{'general.categories.list.colTitles.type' | translate}}</td>
+    <td><span>{{(categoryTypes | filterBy: ['id'] : category.assignedCategoryType)[0].title}}</span></td>
+  </tr>
+  <tr>
+    <td>{{'general.tables.colTitles.creation' | translate}}</td>
+    <td>
+      <user-avatar *ngIf="category.creation.from !== 'system'" [authorId]="category.creation.from"></user-avatar>
+      <span *ngIf="category.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+      <creation-date [creation]="category.creation.at"></creation-date>
+    </td>
+  </tr>
+</table>
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

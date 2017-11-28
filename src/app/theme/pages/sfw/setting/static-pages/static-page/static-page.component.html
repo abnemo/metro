@@ -1,0 +1,34 @@
+<form class="form-horizontal" novalidate (ngSubmit)="saveStaticPage()">
+  <div class="m-portlet">
+    <div class="m-portlet__body">
+      <div class="row" [formGroup]="form">
+        <div class="col-xl-4">
+          <label>{{'general.settings.staticPages.title' | translate}}</label>
+          <input class="form-control" formControlName="title"/>
+        </div>
+        <div class="col-xl-4">
+          <label>{{'general.settings.staticPages.sectionTitle' | translate}}</label>
+          <select class="form-control" formControlName="sectionTitle">
+            <option value="Hauptseite">Hauptseite</option>
+            <option value="Dorfturnier">Dorfturnier</option>
+          </select>
+        </div>
+        <div class="col-xl-4">
+          <label>{{'general.settings.staticPages.isEnabled' | translate}}</label>
+          <input class="form-control" type="checkbox" formControlName="isEnabled"/>
+        </div>
+
+        <div class="col-xl-12">
+          <label>{{'general.settings.staticPages.text' | translate}}</label>
+          <ckeditor formControlName="text"></ckeditor>
+        </div>
+      </div>
+    </div>
+    <div class="m-portlet__foot text-right">
+      <button type="submit" [disabled]="!form.valid" class="btn btn-success">
+        {{'general.settings.staticPages.saveStaticPage' | translate}}
+      </button>
+      <button class="btn btn-danger" (click)="cancel()">{{'general.cancel' | translate}}</button>
+    </div>
+  </div>
+</form>

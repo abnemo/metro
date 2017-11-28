@@ -1,0 +1,56 @@
+<td>{{ member.mainData.gender === 'male' ? 'Herr' : 'Frau' }}</td>
+<td><a [routerLink]="['edit', member.id]">{{member.mainData.lastName}}</a></td>
+<td><a [routerLink]="['detail', member.id]">{{member.mainData.firstName}}</a></td>
+
+<td *ngIf="member.clubData.status; else noMemberTemplate">
+  <span
+    *ngFor="let status of clubMemberStates | filterBy: ['value'] : member.clubData.status">
+    {{status.title | translate}}
+  </span>
+</td>
+
+<td *ngIf="member.ahData && member.ahData.status; else noMemberTemplate">
+  <span
+    *ngFor="let status of ahMemberStates | filterBy: ['value'] : member.ahData.status">
+    {{status.title | translate}}
+  </span>
+</td>
+
+<td> {{ moment(member.mainData.birthday).format('L') }}</td>
+
+<!--<td>
+  <span *ngIf="!member.clubData.assignedClub; else getClubTemplate">
+    {{'general.members.list.noAssignedClub' | translate}}
+  </span>
+</td>-->
+
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="members" [object]="member"></detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
+             [showText]="false" type="members" [object]="member"></edit-link>
+
+  <button class="btn btn-circle btn-icon-only btn-success btn-raised" [routerLink]="['interview', member.id]"
+          title="{{'general.members.interview.title' | translate}}">
+    <i class="fa fa-microphone"></i>
+  </button>
+
+  <button class="btn btn-circle btn-icon-only btn-primary btn-raised" [routerLink]="['member-profile', member.id]"
+          title="{{'general.members.profile.title' | translate}}">
+    <i class="fa fa-user-secret"></i>
+  </button>
+
+
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="members" [object]="member"></remove-link>
+</td>
+
+<ng-template #getClubTemplate>
+  <span *ngFor="let club of clubs | filterBy: ['id'] : member.clubData.assignedClub">
+    {{club.title}}
+  </span>
+</ng-template>
+
+<ng-template #noMemberTemplate>
+  <td></td>
+</ng-template>

@@ -1,0 +1,68 @@
+<div class="m-subheader">
+  <div class="d-flex align-items-center">
+    <div class="mr-auto">
+      <h3 class="m-subheader__title">{{'general.menu.member.main' | translate}}</h3>
+      <ul class="m-subheader__breadcrumbs m-nav m-nav--inline">
+        <li class="m-nav__item m-nav__item--home">
+          <a class="m-nav__link m-nav__link--icon" [routerLink]="['/']"><i class="m-nav__link-icon la la-home"></i></a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">
+          <a class="m-nav__link" [routerLink]="['/members']">
+            <span class="m-nav__link-text">{{'general.menu.member.main' | translate}}</span>
+          </a>
+        </li>
+        <li class="m-nav__separator">-</li>
+        <li class="m-nav__item">{{'general.list' | translate}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="m-content">
+  <div class="row">
+    <div class="col-md-9">
+      <member-list
+        [clubMemberStates]="memberStateService.getMemberStates()"
+        [ahMemberStates]="memberStateService.getAHStates()"
+        [clubs]="clubService.getClubs() | async"
+        [members]="memberService.getMembers() | async"
+        (remove)="memberService.removeMember($event)"
+        (update)="memberService.updateMember($event.member.id, $event.member)">
+      </member-list>
+    </div>
+
+    <div class="col-xl-3">
+      <tasks type="member"></tasks>
+    </div>
+
+    <!--<div class="col-xl-9" *ngFor="let club of clubService.getClubs() | async | filterBy: ['isMainClub'] : true">
+      <div class="row">
+        <div class="col-xl-6">
+          <member-short-statistics
+            [members]="memberService.getMembers() | async"
+            [club]="club">
+          </member-short-statistics>
+        </div>
+
+        <div class="col-xl-6">
+          <member-ah-short-statistics
+            [members]="memberService.getMembers() | async"
+            [club]="club">
+          </member-ah-short-statistics>
+        </div>
+      </div>
+    </div>-->
+
+    <!-- ToDo
+    <ul>
+      <li>Details, Profile: Spielerstatistik</li>
+      <li>Edit Page</li>
+      <li>Publication</li>
+    </ul>
+    <div class="col-xl-3">
+      <upcoming-birthdays [limit]="75"></upcoming-birthdays>
+    </div>-->
+
+  </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{'general.sponsors.list.randomSponsorTitle' | translate}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="m-portlet__body" *ngIf="sponsors; else loadingTemplate">
+
+    <div class="card card-inverse card-info" *ngIf="sponsors.length > 0; else noSponsorsTemplate">
+      {{sponsors | sample  | json}}
+      <!--<img class="card-img-top" [src]="(sponsors | sample).imageUrl" title="{{sponsors[0].title}}">
+      <div class="card-block">
+        <span class="badge badge-warning" *ngFor="let category of sponsors[0].assignedCategories">
+          {{(categories | filterBy: ['id'] : category)[0].title}}
+        </span>
+        <h4 class="card-title">{{sponsors[0].title}}</h4>
+        <div class="card-text">{{sponsors[0].description}}</div>
+      </div>-->
+    </div>
+
+  </div>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="m-portlet__body">
+    <app-loading-indicator></app-loading-indicator>
+  </div>
+</ng-template>
+
+<ng-template #noSponsorsTemplate>
+  <div class="alert alert-info">
+    <strong>{{ 'general.info' | translate }}</strong> {{'general.sponsors.list.noRandomSponsorFound' | translate }}
+  </div>
+</ng-template>

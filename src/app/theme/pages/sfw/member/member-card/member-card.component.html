@@ -1,0 +1,27 @@
+<div class="row member-card" *ngIf="member">
+  <div class="col-md-12" [ngClass]="bgColor">
+
+    <div class="caption">
+      <h2>{{member.mainData.firstName}} <span>{{member.mainData.lastName}}</span></h2>
+      <p>
+        {{member.mainData.birthday | date: 'dd.MM.yy' }}<br />
+        {{member.address.streetName}} {{member.address.houseNumber}}<br/>
+        {{member.address.city}}
+      </p>
+      <div class="icons" *ngIf="showIcons">
+        <a [routerLink]="['/pages/members/detail', member.id]"><i class="fa fa-info"></i></a>
+        <a [routerLink]="['/pages/members/edit', member.id]"><i class="fa fa-edit"></i></a>
+      </div>
+    </div>
+
+    <div class="image">
+      <img [src]="member.profileImageUrl ?
+                    member.profileImageUrl :
+                    'https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/sq-sample4.jpg'"
+           alt="{{member.mainData.firstName}} {{member.mainData.lastName}}"/>
+    </div>
+
+    <!--<div class="position">Illustrator</div>-->
+
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<td class="text-left">
+  <a [routerLink]="['edit', article.id]" title="{{article.title}}" [innerHTML]="article.title | shorten: 50: '...'"></a>
+</td>
+<td>{{article.articleDate | date: 'dd.MM.yy H:mm'}}</td>
+<!--<td>
+  <a [routerLink]="['/pages/locations/detail', article.assignedLocation]">
+    {{ (locations | filterBy: ['id'] : article.assignedLocation)[0].title}}
+  </a>
+</td>
+<td>
+  <span *ngFor="let teamKey of  article.assignedTeams; let isLast=last">
+      <a [routerLink]="['/pages/teams/detail', teamKey]">
+        {{ (teams | filterBy: ['id'] : teamKey)[0].title}}
+      </a>{{isLast ? ' ' : ', '}}
+  </span>
+</td>-->
+
+<td>
+  <!--<span *ngFor="let categoryKey of  article.assignedCategories; let isLast=last">
+    <a [routerLink]="['/pages/categories/detail', categoryKey]">
+      {{ (categories | filterBy: ['id'] : categoryKey)[0].title}}
+    </a>{{isLast ? ' ' : ', '}}
+  </span>-->
+</td>
+
+<td>
+  <!--<user-avatar *ngIf="article.creation.from !== 'system'" [authorId]="article.creation.from"></user-avatar>
+  <span *ngIf="article.creation.from === 'system'" translate>{{'general.tables.importedViaScript'}}</span>
+  <!--<creation-date *ngIf="article.creation.at" [creation]="article.creation.at"></creation-date>-->
+</td>
+
+<td><i class="fa fa-check" *ngIf="article.text || article.previewText; else unpublishedIcon"></i></td>
+
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="articles" [object]="article"></detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'" [showIcon]="true"
+             [showText]="false" type="articles" [object]="article"></edit-link>
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="articles" [object]="article"></remove-link>
+</td>
+
+<ng-template #unpublishedIcon>
+  <span class="fa-stack">
+    <i class="fa fa-check fa-stack-1x text-success"></i>
+    <i class="fa fa-ban fa-stack-2x text-danger"></i>
+  </span>
+</ng-template>

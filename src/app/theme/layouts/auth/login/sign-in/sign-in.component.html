@@ -1,0 +1,46 @@
+<div class="m-login__signin" [@signInAnimation]="showSignInForm">
+  <div class="m-login__head">
+    <h3 class="m-login__title">{{ 'siteTitle' | translate }}</h3>
+
+    <div *ngIf="!showVerification && showDemoLoginMessage"
+         class="m--margin-top-40 m-alert m-alert--outline m-alert--outline-2x alert alert-success fade show"
+         role="alert" [innerHtml]="sanitizer.bypassSecurityTrustHtml('Global.Login.defaultLoginMessage' | translate)">
+    </div>
+
+    <div *ngIf="showVerification"
+         class="m--margin-top-40 m-alert m-alert--outline m-alert--outline-2x alert alert-success fade show"
+         role="alert">
+      {{'Global.Login.resendVerificationMailMessage' | translate}}
+      <a (click)="resendVerificationMail()" tabindex="3" class="m-link pull-right" href="javascript:;">
+        {{'Global.Login.resendButtonText' | translate}}?
+      </a><br style="clear: both" />
+    </div>
+
+  </div>
+
+  <form [formGroup]="form" class="m-login__form m-form" action="" (submit)="signIn()">
+
+    <ng-template #signInAlertContainer></ng-template>
+
+    <div class="form-group m-form__group">
+      <input class="form-control m-input" placeholder="{{'Global.Login.Email' | translate}}" formControlName="email">
+    </div>
+    <div class="form-group m-form__group">
+      <input class="form-control m-input m-login__form-input--las" type="password"
+             placeholder="{{'Global.Login.Password' | translate}}" formControlName="password">
+    </div>
+    <div class="row m-login__form-sub">
+      <div class="col m--align-right">
+        <a href="javascript:;" (click)="togglePasswordForm()" tabindex="2" class="m-link">
+          {{'Global.Login.forgotPasswordButton' | translate}}?
+        </a>
+      </div>
+    </div>
+    <div class="m-login__form-action">
+      <button [disabled]="loading || !form.valid" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+              id="m_login_signin_submit" class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+        {{ 'Global.Login.loginButton' | translate }}
+      </button>
+    </div>
+  </form>
+</div>

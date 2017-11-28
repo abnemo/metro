@@ -1,0 +1,95 @@
+<div class="row">
+
+  <div class="col-xl-12 text-right">
+    <button class="btn btn-raised btn-warning" *ngIf="!showUploader" (click)="toggleUploader()"
+            title="{{ 'general.uploader.showUploader' | translate}}"><i class="fa fa-upload"></i></button>
+    <button class="btn btn-raised btn-primary" *ngIf="!showLinkUploader" (click)="toggleLinkUploader()"
+            title="{{ 'general.uploader.showLinkInput' | translate}}"><i class="fa fa-link"></i></button>
+  </div>
+
+  <div class="col-xl-12">
+    <div class="alert alert-danger" role="alert" *ngIf="uploader?.error">
+      <strong>{{'general.gotError' | translate }}</strong>
+      {{uploader?.error | json}}
+      <span *ngIf="uploader?.error.name === 'fileType'">{{'general.uploader.wrongFileType' | translate}}</span>
+    </div>
+
+    <div class="alert alert-success" role="alert" *ngIf="uploader?.success && uploader?.queue?.length === 0">
+      <strong>{{'general.gotSuccess' | translate }}</strong> {{ 'general.uploader.successfulUpload' | translate}}
+    </div>
+  </div>
+
+  <div class="col-xl-12" *ngIf="showUploader">
+    <span style="font-weight: bold">{{'general.uploader.uploaderTitle' | translate}}</span><br />
+    <div *ngIf="uploaderOptions.showDropZone" ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
+         (fileOver)="fileOverBase($event)" [uploader]="uploader" class="well my-drop-zone">
+    </div>
+
+
+    <div class="form-group">
+      <input type="file" *ngIf="uploaderOptions.multipleUpload" ng2FileSelect [uploader]="uploader" multiple/>
+      <input type="file" *ngIf="!uploaderOptions.multipleUpload" ng2FileSelect [uploader]="uploader"/>
+    </div>
+  </div>
+
+  <!-- Link Uploader -->
+  <media-link-uploader class="col-xl-12" *ngIf="showLinkUploader"></media-link-uploader>
+
+  <div class="col-xl-12" *ngIf="uploader.isUploading">
+    <h3>{{ 'general.uploader.overallProgress' | translate}}</h3>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader._getTotalProgress + '%' }"></div>
+    </div>
+  </div>
+
+  <div class="col-xl-12" *ngIf="uploaderOptions.showQueue && uploader?.queue?.length > 0">
+    <h4>{{ uploader?.queue?.length }} {{'general.media.items' | translate}} {{'general.media.inQueue' | translate}}</h4>
+
+    <div *ngFor="let item of uploader?.queue" class="row m--margin-bottom-5">
+      <div class="col-xl-5">
+        <div class="progress" style="margin-bottom: 0;">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+        </div>
+      </div>
+      <div class="col-xl-3">
+        {{item.file.name}} ({{ item.file.size/1024/1024 | number:'.2' }} MB)
+      </div>
+      <div class="col-xl-4 text-right">
+        <span *ngIf="item.isSuccess"><i class="fa fa-check"></i></span>
+        <span *ngIf="item.isCancel"><i class="fa fa-ban"></i></span>
+        <span *ngIf="item.isError"><i class="fa fa-trash-o"></i></span>
+
+        <button class="btn btn-success btn-sm"
+                (click)="item.upload()" [disabled]="item.isReady || item.isUploading">
+          <span [ngClass]="item.isUploading ? 'fa fa-spinner fa-pulse fa-fw' : 'fa fa-upload'"></span>
+        </button>
+        <button class="btn btn-warning btn-sm" (click)="item.cancel()" [disabled]="!item.isUploading">
+          <span class="fa fa-ban"></span>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="item.remove()">
+          <span class="fa fa-trash-o"></span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="row m--margin-top-10" *ngIf="!uploader?.options.autoUpload && uploader?.queue?.length > 1">
+      <div class="col-xl-12 text-right">
+        <hr/>
+        <button class="btn btn-success btn-sm" (click)="uploader.uploadAll()"
+                [disabled]="!uploader?.getNotUploadedItems().length">
+          <span [ngClass]="!uploader.isUploading ? 'fa fa-upload' : 'fa fa-spinner fa-pulse fa-fw'"></span>
+        </button>
+        <button class="btn btn-warning btn-sm" (click)="uploader.cancelAll()" [disabled]="!uploader?.isUploading">
+          <span class="fa fa-ban"></span>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="uploader.clearQueue()" [disabled]="!uploader?.queue.length">
+          <span class="fa fa-trash"></span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+

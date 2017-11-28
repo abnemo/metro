@@ -1,0 +1,60 @@
+<div
+  class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-grid--tablet-and-mobile m-grid--hor-tablet-and-mobile m-login m-login--1"
+  [ngClass]="showPasswordForm ? 'm-login--forget-password' : (showSignInForm ? 'm-login--singin' : 'm-login--signup')"
+  id="m_login">
+  <div class="m-grid__item m-grid__item--order-tablet-and-mobile-2 m-login__aside">
+    <div class="m-stack m-stack--hor m-stack--desktop">
+      <div class="m-stack__item m-stack__item--fluid">
+        <div class="m-login__wrapper">
+          <div class="m-login__logo">
+            <a tabindex="1" href="http://www.sfwinterbach.com" target="_blank">
+              <img src="../../../../../assets/sfw/sfw.png">
+            </a>
+          </div>
+
+          <sign-in
+            [showDemoLoginMessage]="showDemoLoginMessage"
+            [passwordMinLength]="passwordMinLength"
+            [passwordMaxLength]="passwordMaxLength"
+            [showSignInForm]="showSignInForm"
+            [signUpStatus]="signUpStatus"
+            [showVerification]="showVerification"
+            (toggleFormVisibility)="toggleFormVisibility($event)"
+            [loading]="loading">
+          </sign-in>
+
+          <sign-up
+            [nameMinLength]="nameMinLength"
+            [passwordMinLength]="passwordMinLength"
+            [passwordMaxLength]="passwordMaxLength"
+            [showSignUpForm]="showSignUpForm"
+            (signUpComplete)="signUpComplete($event)"
+            (toggleFormVisibility)="toggleFormVisibility($event)">
+          </sign-up>
+
+          <forgot-password
+            [showPasswordForm]="showPasswordForm"
+            (toggleFormVisibility)="toggleFormVisibility($event)">
+          </forgot-password>
+
+        </div>
+      </div>
+      <div class="m-stack__item m-stack__item--center">
+        <div class="m-login__account">
+					<span class="m-login__account-msg">{{'Global.Login.newUserQuestion' | translate}}?</span>
+          <a class="m-link m-link--focus m-login__account-link" tabindex="2" (click)="toggleSignUpForm()"
+             href="javascript:;" id="m_login__signup">
+            {{'Global.Login.CreateNewAccount' | translate}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="grayScale"
+       class="m-grid__item m-grid__item--fluid m-grid m-grid--center m-grid--hor m-grid__item--order-tablet-and-mobile-1	m-login__content">
+    <div class="m-grid__item m-grid__item--middle">
+      <h3 class="m-login__welcome">{{'Global.Login.adminArea.title' | translate}}</h3>
+      <p class="m-login__msg">{{'Global.Login.adminArea.description' | translate}}</p>
+    </div>
+  </div>
+</div>

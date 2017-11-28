@@ -1,0 +1,43 @@
+<div class="m-portlet">
+  <div class="m-portlet__head">
+    <div class="m-portlet__head-caption">
+      <div class="m-portlet__head-title">
+        <h3 class="m-portlet__head-text">{{ 'general.'+ itemType + 's.edit.'+itemType+'TimeLineTitle' | translate}}</h3>
+      </div>
+    </div>
+    <div class="m-portlet__head-tools">
+      <button title="{{ 'general.clubs.timeLine.table' | translate }}" type="button"
+              class="btn btn-primary" (click)="toggleTableView()"><i class="fa fa-table"></i></button>
+
+      <button title="{{ 'general.clubs.timeLine.timeLine' | translate }}" type="button"
+              class="btn btn-primary" (click)="toggleTableView()"><i class="fa fa-line-chart"></i></button>
+
+      <button title="{{ 'general.clubs.timeLine.addEvent' | translate }}" type="button"
+              class="btn btn-brand" (click)="toggleForm()"><i class="fa fa-plus"></i></button>
+    </div>
+  </div>
+  <div class="m-portlet__body">
+
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 15px">
+        <time-line-list
+          *ngIf="!showForm; else formTemplate"
+          [timeLineEvents]="timeLineEvents | orderBy: ['date']"
+          [showTable]="showTable"
+          [showActionLinks]="true"
+          (deleteTimeLineEvent)="removeTimeLineEvent.emit($event)">
+        </time-line-list>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #formTemplate>
+  <time-line-form
+    [item]="item"
+    [itemType]="itemType"
+    [showForm]="showForm"
+    (toggleForm)="toggleForm()">
+  </time-line-form>
+</ng-template>

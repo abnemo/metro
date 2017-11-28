@@ -1,0 +1,204 @@
+<div class="row" [formGroup]="form" *ngIf="clubs; else loadingTemplate">
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="mainData">
+      <h3>{{ 'general.members.details.mainTitle' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.details.title' | translate}}</label>
+        <input class="form-control" formControlName="title"
+               placeholder="{{ 'general.members.details.title' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.edit.salutation' | translate}}</label>
+        <select class="form-control" formControlName="gender">
+          <option value="" disabled>{{ 'general.members.edit.chooseSalutation' | translate}}</option>
+          <option value="male">{{ 'general.members.edit.mister' | translate}}</option>
+          <option value="female">{{ 'general.members.edit.miss' | translate}}</option>
+        </select>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.firstName' | translate}}</label>
+        <input class="form-control" formControlName="firstName"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.lastName' | translate}}</label>
+        <input class="form-control" formControlName="lastName"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.birthday' | translate}}</label>
+        <input class="form-control" formControlName="birthday"/>
+        <!--<dp-date-picker [formControlName]="'birthday'"
+                        [config]="datePickerConfig" [theme]="'dp-material'"></dp-date-picker>-->
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="otherData">
+      <h3>{{ 'general.members.details.otherTitle' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.comment' | translate }}</label>
+        <textarea formControlName="info" class="form-control"
+                  placeholder="{{'general.clubs.edit.description' | translate}}">
+            </textarea>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="address">
+      <h3>{{ 'general.members.edit.addressTitle' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.street' | translate}}</label>
+        <input class="form-control" name="street" formControlName="street"
+               placeholder="{{ 'general.members.list.street' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.houseNumber' | translate}}</label>
+        <input class="form-control" name="houseNumber" formControlName="houseNumber" type="number"
+               placeholder="{{ 'general.members.list.houseNumber' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.zip' | translate}}</label>
+        <input class="form-control" name="zip" formControlName="zip" type="number"
+               placeholder="{{ 'general.members.list.zip' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.city' | translate}}</label>
+        <input class="form-control" name="city" formControlName="city"
+               placeholder="{{ 'general.members.list.city' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.edit.county' | translate}}</label>
+        <input class="form-control" name="country" formControlName="county"
+               placeholder="{{ 'general.members.edit.county' | translate}}"/>
+      </div>
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="contact">
+
+      <h3>{{ 'general.members.edit.contactTitle' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.phoneHome' | translate}}</label>
+        <input class="form-control" formControlName="phoneHome"
+               placeholder="{{ 'general.members.list.phoneHome' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.phoneWork' | translate}}</label>
+        <input class="form-control" formControlName="phoneWork"
+               placeholder="{{ 'general.members.list.phoneWork' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.phoneMobile' | translate}}</label>
+        <input class="form-control" formControlName="phoneMobile"
+               placeholder="{{ 'general.members.list.phoneMobile' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.email' | translate}}</label>
+        <input class="form-control" formControlName="email"
+               placeholder="{{ 'general.members.list.email' | translate}}"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.fax' | translate}}</label>
+        <input class="form-control" formControlName="fax"
+               placeholder="{{ 'general.members.list.fax' | translate}}"/>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="clubData">
+      <h3>{{ 'general.members.details.clubTitle' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.memberStatus' | translate}}</label>
+        <select class="form-control" formControlName="status">
+          <option value="" disabled>{{ 'general.members.edit.chooseMemberStatus' | translate}}</option>
+          <option *ngFor="let status of memberStateService.getMemberStates()" [value]="status.value">
+            {{status.title}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.clubPayment' | translate}}</label>
+        <input class="form-control" formControlName="payment" type="number"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.clubJoined' | translate}}</label>
+        <input class="form-control" formControlName="joined"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.clubLeft' | translate}}</label>
+        <input class="form-control" formControlName="left"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.club' | translate}}</label>
+        <select class="form-control" formControlName="assignedClub">
+          <option value="">{{ 'general.members.edit.chooseClub' | translate}}</option>
+          <option *ngFor="let club of clubs" [value]="club.id">{{club.title}}</option>
+        </select>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.functions' | translate}}</label>
+        <input class="form-control" formControlName="positionsInClub"/>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-xl-6">
+    <div class="form-body" formGroupName="ahData">
+      <h3>{{ 'general.members.details.oldMen' | translate}}</h3>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.memberStatus' | translate}}</label>
+        <select class="form-control" formControlName="status">
+          <option value="" disabled>{{ 'general.members.edit.chooseClubMemberStatus' | translate}}</option>
+          <option *ngFor="let state of memberStateService.getAHStates()" [value]="state.value">
+            {{ 'general.members.edit.ahStates.' + state.value | translate}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.ahJoined' | translate}}</label>
+        <input class="form-control" formControlName="joined"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.ahLeft' | translate}}</label>
+        <input class="form-control" formControlName="left"/>
+      </div>
+
+      <div class="form-group form-md-line-input">
+        <label>{{ 'general.members.list.ahPayment' | translate }}</label>
+        <input class="form-control" formControlName="payment" type="number"
+               placeholder="{{'general.members.list.ahPayment' | translate}}"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loadingTemplate>
+  <app-loading-indicator></app-loading-indicator>
+</ng-template>

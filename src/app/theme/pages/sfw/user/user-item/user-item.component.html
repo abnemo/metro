@@ -1,0 +1,24 @@
+<td><a [routerLink]="['detail', user.id]">{{user.email}}</a></td>
+<td>{{user.lastName || ('general.notSet' | translate) }}</td>
+<td>{{user.firstName || ('general.notSet' | translate) }}</td>
+<td>
+  {{
+  user.assignedRole
+  ? ('general.users.edit.roles.' + user.assignedRole | translate)
+  : 'general.users.edit.roles.noAssignedRole' | translate
+  }}
+</td>
+<td>{{ moment(user.creation.at).fromNow() }}</td>
+<td><user-online-status [onlineStatus]="user.onlineStatus"></user-online-status></td>
+<td>
+  <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"
+               [showText]="false" type="users" [object]="user">
+  </detail-link>
+  <edit-link [cssClass]="'btn btn-circle btn-icon-only btn-warning btn-raised'"
+             [showIcon]="true"
+             [showText]="false" type="users" [object]="user">
+  </edit-link>
+  <remove-link [cssClass]="'btn btn-circle btn-icon-only btn-danger btn-raised'" [showIcon]="true"
+               [showText]="false" type="users" [object]="user">
+  </remove-link>
+</td>

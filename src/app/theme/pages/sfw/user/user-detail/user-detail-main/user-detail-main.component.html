@@ -1,0 +1,50 @@
+<table class="table table-responsive table-striped table-bordered table-hover" *ngIf="user">
+  <tr>
+    <td>{{'general.users.list.colTitles.onlineStatus' | translate}}</td>
+    <td><user-online-status [onlineStatus]="user.onlineStatus"></user-online-status></td>
+  </tr>
+  <tr>
+    <td>
+      {{'general.users.list.colTitles.firstName' | translate}},
+      {{'general.users.list.colTitles.lastName' | translate}}
+    </td>
+    <td>{{user.firstName}} {{user.lastName}}</td>
+  </tr>
+  <tr>
+    <td>{{'Global.Login.Email' | translate}} ({{'general.users.detail.emailVerified' | translate}})</td>
+    <td>
+      <a [href]="'mailto:' + user.email"><i class="fa fa-envelope-o"></i></a>
+      <i class="fa" [ngClass]="user.emailVerified ? 'fa fa-check text-success' : 'fa fa-uncheck text-error'"></i>
+    </td>
+  </tr>
+  <tr>
+    <td>{{'general.users.detail.providerId' | translate}}</td>
+    <td>{{user.providerId}}</td>
+  </tr>
+  <tr>
+    <td>{{'general.users.edit.assignedRole' | translate}}</td>
+    <td>
+      {{
+      user.assignedRole
+      ? ('general.users.edit.roles.' + user.assignedRole | translate)
+      : 'general.users.edit.roles.noAssignedRole' | translate
+      }}
+    </td>
+  </tr>
+</table>
+
+<h3 *ngIf="user.social">{{'general.users.detail.socialLinks' | translate}}</h3>
+<table class="table table-responsive table-striped table-bordered table-hover" *ngIf="user && user.social">
+  <tr *ngIf="user.social.facebook !== ''">
+    <td>Facebook</td>
+    <td><a [href]="user.social.facebook" target="_blank"><i class="fa fa-facebook"></i></a></td>
+  </tr>
+  <tr *ngIf="user.social.instagram !== ''">
+    <td>Instagram</td>
+    <td><a href="{{user.social.instagram}}" target="_blank"><i class="fa fa-instagram"></i></a></td>
+  </tr>
+  <tr *ngIf="user.social.twitter !== ''">
+    <td>Twitter</td>
+    <td><a href="{{user.social.twitter}}" target="_blank"><i class="fa fa-twitter"></i></a></td>
+  </tr>
+</table>
