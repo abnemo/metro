@@ -18,6 +18,7 @@ export class ApplicationsResolver implements Resolve<IApplication> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IApplication> {
     return this.applicationService.getCurrentApplication().take(1).map((application: IApplication) => {
+      console.log('Application loaded: ' + application.id);
       return application;
     });
   }

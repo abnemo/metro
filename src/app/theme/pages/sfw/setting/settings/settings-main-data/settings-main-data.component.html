@@ -3,31 +3,31 @@
 
     <div class="m-form__section m-form__section--first" formGroupName="page">
       <div class="m-form__heading">
-        <h3 class="m-form__heading-title">{{'general.settings.page.settings' | translate}}</h3>
+        <h3 class="m-form__heading-title">{{'general.applications.page.settings' | translate}}</h3>
       </div>
 
       <div class="form-group m-form__group">
-        <label>{{'general.settings.page.title' | translate}}</label>
+        <label>{{'general.applications.page.title' | translate}}</label>
         <input class="form-control m-input" formControlName="title"
-               placeholder="{{'general.settings.page.title' | translate}}">
-        <span class="m-form__help">{{'general.settings.page.titleDescription' | translate}}</span>
+               placeholder="{{'general.applications.page.title' | translate}}">
+        <span class="m-form__help">{{'general.applications.page.titleDescription' | translate}}</span>
       </div>
 
       <div class="form-group m-form__group">
-        <label>{{'general.settings.page.descriptionTitle' | translate}}</label>
+        <label>{{'general.applications.page.descriptionTitle' | translate}}</label>
         <input class="form-control m-input" formControlName="description"
-               placeholder="{{'general.settings.page.descriptionTitle' | translate}}">
-        <span class="m-form__help">{{'general.settings.page.descriptionDescription' | translate}}</span>
+               placeholder="{{'general.applications.page.descriptionTitle' | translate}}">
+        <span class="m-form__help">{{'general.applications.page.descriptionDescription' | translate}}</span>
       </div>
 
       <div class="form-group m-form__group">
-        <label>{{'general.settings.page.emailTitle' | translate}}</label>
+        <label>{{'general.applications.page.emailTitle' | translate}}</label>
         <div class="m-input-icon m-input-icon--left">
           <input class="form-control m-input" formControlName="email"
-                 placeholder="{{'general.settings.page.emailTitle' | translate}}">
+                 placeholder="{{'general.applications.page.emailTitle' | translate}}">
           <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="fa fa-envelope-o"></i></span></span>
         </div>
-        <span class="m-form__help">{{'general.settings.page.emailDescription' | translate}}</span>
+        <span class="m-form__help">{{'general.applications.page.emailDescription' | translate}}</span>
       </div>
     </div>
 
@@ -35,22 +35,26 @@
 
     <div class="m-form__section" formGroupName="urlShortening">
       <div class="m-form__heading">
-        <h3 class="m-form__heading-title">{{'general.settings.urlShorteningTitle' | translate}}</h3>
+        <h3 class="m-form__heading-title">{{'general.applications.urlShorteningTitle' | translate}}</h3>
       </div>
 
       <div class="m-form__group form-group">
         <div class="m-checkbox-list">
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="isEnabled">{{'general.settings.urlShortening' | translate}}
+            <input type="checkbox" formControlName="isEnabled">{{'general.applications.urlShortening' | translate}}
             <span></span>
           </label>
         </div>
       </div>
 
       <div class="form-group m-form__group">
-        <label>{{'general.settings.urlShorteningService' | translate}}:</label>
+        <label>{{'general.applications.urlShorteningService' | translate}}:</label>
         <select class="form-control" formControlName="provider">
-          <option value="" disabled>{{'general.settings.urlShorteningService' | translate}}</option>
+          <option value="" disabled>{{'general.applications.urlShorteningService' | translate}}</option>
+          <option *ngFor="let shorteningProvider of applicationService.getShorteningProviders() | orderBy: ['title']"
+                  [value]="shorteningProvider.value">
+            {{shorteningProvider.title}}
+          </option>
         </select>
       </div>
     </div>
@@ -59,23 +63,25 @@
   <div class="col-xl-6">
     <div class="m-form__section" formGroupName="registration">
       <div class="m-form__heading">
-        <h3 class="m-form__heading-title">{{'general.settings.registration.title' | translate}}</h3>
+        <h3 class="m-form__heading-title">{{'general.applications.registration.title' | translate}}</h3>
       </div>
 
       <div class="m-form__group form-group">
-        <!--<label>{{'general.settings.registration.statusLabel' | translate}}</label>-->
         <div class="m-checkbox-list">
           <label class="m-checkbox">
-            <input type="checkbox" formControlName="isEnabled">{{'general.settings.registration.isEnabled' | translate}}
+            <input type="checkbox" formControlName="isAllowed">{{'general.applications.registration.isEnabled' | translate}}
             <span></span>
           </label>
         </div>
       </div>
 
       <div class="form-group m-form__group">
-        <label>{{'general.settings.registration.newUserLabel' | translate}}:</label>
+        <label>{{'general.applications.registration.newUserLabel' | translate}}:</label>
         <select class="form-control" formControlName="defaultRole">
-          <option value="" disabled>{{'general.settings.registration.newUserLabel' | translate}}</option>
+          <option value="" disabled>{{'general.applications.registration.newUserLabel' | translate}}</option>
+          <option *ngFor="let role of rolesService.getRoles() | keys" [value]="role">
+            {{'general.users.edit.roles.' + role | translate}}
+          </option>
         </select>
       </div>
     </div>
@@ -85,26 +91,26 @@
     <div class="m-form__section" formGroupName="downtime">
 
       <div class="m-form__heading">
-        <h3 class="m-form__heading-title">{{'general.settings.downtime.title' | translate}}</h3>
-      </div>
-
-      <div class="form-group m-form__group">
-        <label>{{'general.settings.downtime.message' | translate}}</label>
-        <div class="m-input-icon m-input-icon--left">
-          <input class="form-control m-input" formControlName="message"
-                 placeholder="{{'general.settings.downtime.message' | translate}}">
-          <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="fa fa-comment-o"></i></span></span>
-        </div>
-        <span class="m-form__help">{{'general.settings.downtime.messageDescription' | translate}}</span>
+        <h3 class="m-form__heading-title">{{'general.applications.downtime.title' | translate}}</h3>
       </div>
 
       <div class="m-form__group form-group">
         <div class="m-checkbox-list">
           <label class="m-checkbox">
             <input type="checkbox" formControlName="isEnabled">
-            {{'general.settings.downtime.isActive' | translate}}<span></span>
+            {{'general.applications.downtime.isActive' | translate}}<span></span>
           </label>
         </div>
+      </div>
+
+      <div class="form-group m-form__group">
+        <label>{{'general.applications.downtime.message' | translate}}</label>
+        <div class="m-input-icon m-input-icon--left">
+          <input class="form-control m-input" formControlName="message"
+                 placeholder="{{'general.applications.downtime.message' | translate}}">
+          <span class="m-input-icon__icon m-input-icon__icon--left"><span><i class="fa fa-comment-o"></i></span></span>
+        </div>
+        <span class="m-form__help">{{'general.applications.downtime.messageDescription' | translate}}</span>
       </div>
 
     </div>

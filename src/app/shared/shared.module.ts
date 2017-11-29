@@ -62,6 +62,9 @@ import { UserDetailMainComponent }
 import { UserOnlineStatusComponent } from '../theme/pages/sfw/user/user-online-status/user-online-status.component';
 import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
 import { weatherConfig } from '../config/weather.config';
+import { FirestoreService } from './services/firestore/firestore.service';
+import { ApplicationsResolver } from '../theme/pages/sfw/setting/applications.resolver';
+import { UserAvatarComponent } from '../theme/pages/sfw/user/user-avatar/user-avatar.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -110,6 +113,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ProxyRouteComponent,
     SearchPipe,
     UpcomingBirthdaysComponent,
+    UserAvatarComponent,
     UserDetailMainComponent,
     UserOnlineStatusComponent
   ],
@@ -120,6 +124,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     NotByFilterPipe,
     SearchPipe,
     UpcomingBirthdaysComponent,
+    UserAvatarComponent,
     UserDetailMainComponent,
     UserOnlineStatusComponent,
     // Module
@@ -158,6 +163,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
+    ApplicationsResolver,
     ApplicationService,
     ArticleService,
     CategoryService,
@@ -165,6 +171,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ClubService,
     ClubHonoraryService,
     ClubManagementService,
+    FirestoreService,
     LocationService,
     MapsService,
     MediaGalleryService,

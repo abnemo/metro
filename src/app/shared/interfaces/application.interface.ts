@@ -18,7 +18,7 @@ export interface IApplication {
   };
 
   registration: {
-    isEnabled: boolean;
+    isAllowed: boolean;
     defaultRole?: string | IRole;
   };
 

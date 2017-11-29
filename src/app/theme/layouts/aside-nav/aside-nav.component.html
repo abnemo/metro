@@ -170,30 +170,10 @@
 
       <li class="m-menu__item" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
           aria-haspopup="true">
-        <a href="#" class="m-menu__link m-menu__toggle">
-          <i class="m-menu__link-icon fa fa-map"></i>
-          <span class="m-menu__link-text">{{'general.menu.setting.main' | translate}}</span>
-          <i class="m-menu__ver-arrow la la-angle-right"></i>
+        <a [routerLink]="['/settings']" class="m-menu__link">
+          <i class="m-menu__link-icon fa fa-wrench"></i>
+          <span class="m-menu__link-text">{{'general.menu.application.main' | translate}}</span>
         </a>
-        <div class="m-menu__submenu">
-          <span class="m-menu__arrow"></span>
-          <ul class="m-menu__subnav">
-            <li class="m-menu__item" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
-                aria-haspopup="true">
-              <a [routerLink]="['/settings']" class="m-menu__link">
-                <i class="m-menu__link-icon fa fa-align-left"></i>
-                <span class="m-menu__link-text">{{'general.menu.setting.list' | translate}}</span>
-              </a>
-            </li>
-            <li class="m-menu__item" routerLinkActive="m-menu__item--active" routerLinkActiveOptions="{ exact: true }"
-                aria-haspopup="true">
-              <a [routerLink]="['/settings/pages']" class="m-menu__link">
-                <i class="m-menu__link-icon fa fa-map"></i>
-                <span class="m-menu__link-text">{{'general.menu.setting.pages' | translate}}</span>
-              </a>
-            </li>
-          </ul>
-        </div>
       </li>
 
       <li class="m-menu__item  m-menu__item--submenu" aria-haspopup="true" data-menu-submenu-toggle="hover">

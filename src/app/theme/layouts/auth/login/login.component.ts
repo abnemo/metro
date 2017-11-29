@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { ApplicationService } from '../../../../shared/services/application/application.service';
 
 @Component({
   selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
@@ -24,7 +25,10 @@ export class LoginComponent implements OnInit {
   public showDemoLoginMessage: boolean = false;
   public signUpStatus;
 
-  constructor(private route: ActivatedRoute) {
+  private isRegistrationAllowed: boolean = false;
+
+  constructor(private route: ActivatedRoute,
+              private applicationService: ApplicationService) {
   }
 
   ngOnInit() {

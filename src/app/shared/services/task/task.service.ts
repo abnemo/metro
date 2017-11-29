@@ -17,6 +17,7 @@ export class TaskService {
   private path = `tasks`;
 
   private taskTypes$ = [
+    { title: 'application' },
     { title: 'category' },
     { title: 'club' },
     { title: 'dashboard' },

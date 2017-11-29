@@ -8,7 +8,7 @@
   : 'general.users.edit.roles.noAssignedRole' | translate
   }}
 </td>
-<td>{{ moment(user.creation.at).fromNow() }}</td>
+<td>{{ user.creation ? moment(user.creation.at).fromNow() : '' }}</td>
 <td><user-online-status [onlineStatus]="user.onlineStatus"></user-online-status></td>
 <td>
   <detail-link [cssClass]="'btn btn-circle btn-icon-only btn-info btn-raised'" [showIcon]="true"

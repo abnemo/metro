@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     private title: Title) {
 
     this.applicationService.getCurrentApplication().subscribe((application: IApplication) => {
-      title.setTitle(application.page.title + ' | Administration');
+      title.setTitle(application.page.title);
     });
 
     // Permissions

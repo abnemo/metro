@@ -3,6 +3,8 @@ import { ApplicationService } from '../../../../../shared/services/application/a
 import { UserService } from '../../../../../shared/services/user/user.service';
 import { MemberService } from '../../../../../shared/services/member/member.service';
 import { WeatherSettings, TemperatureScale, ForecastMode, WeatherLayout } from 'angular-weather-widget';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
@@ -11,6 +13,7 @@ import { WeatherSettings, TemperatureScale, ForecastMode, WeatherLayout } from '
 export class StatisticsComponent implements OnInit, AfterViewInit {
 
   public angularVersion: string;
+  public env: any;
 
   public weatherSettings: WeatherSettings = {
     location: {
@@ -24,15 +27,17 @@ export class StatisticsComponent implements OnInit, AfterViewInit {
     scale: TemperatureScale.CELCIUS,
     forecastMode: ForecastMode.DETAILED,
     showDetails: false,
-    showForecast: true,
+    showForecast: false,
     layout: WeatherLayout.WIDE,
-    language: 'en'
+    language: this.translateService.currentLang
   };
 
   constructor(public applicationService: ApplicationService,
+    public translateService: TranslateService,
     public userService: UserService,
     public memberService: MemberService) {
     this.angularVersion = VERSION.full;
+    this.env = environment;
   }
 
   ngOnInit() {

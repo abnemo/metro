@@ -1,7 +1,9 @@
 export interface ISocial {
-  providerTitle: string;
+  link: string;
+  title: string;
+  /* providerTitle: string;
   publicKey?: string;
   privateKey?: string;
   accessToken?: string;
-  accessSecret?: string;
+  accessSecret?: string; */
 }

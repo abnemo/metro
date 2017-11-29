@@ -678,6 +678,10 @@
       }
     },
     "menu": {
+      "application": {
+        "updateApplication": "Änderungen speichern",
+        "main": "Einstellungen"
+      },
       "article": {
         "createArticle": "Artikel erstellen",
         "main": "Artikel",
@@ -726,11 +730,6 @@
         "detail": "Spielzeit-Details",
         "edit": "Spielzeit editieren",
         "list": "Alle Spielzeiten"
-      },
-      "setting": {
-        "list": "Übersicht",
-        "main": "Einstellungen",
-        "pages": "Statische Seiten"
       },
       "sponsor": {
         "main": "Sponsoren",
@@ -840,7 +839,7 @@
       },
       "noSeasons": "Es wurden noch keine Saisons erstellt oder importiert."
     },
-    "settings": {
+    "applications": {
       "downtime": {
         "checkbox": "Status der Hauptseite",
         "isActive": "Wartungsmodus aktiv",
@@ -865,18 +864,28 @@
         "statusLabel": "Registrieren neuer Benutzer",
         "title": "Benutzeranmeldung"
       },
-      "saveSettings": "Einstellungen speichern",
+      "social": {
+        "addProvider": "Seite hinzufügen",
+        "chooseProvider": "Wähle das Netzwerk aus der Liste",
+        "isRequiredLink": "Es muss ein Link angegeben werden!",
+        "isRequiredProvider": "Es muss ein Anbieter ausgewählt werden!",
+        "setLink": "Link zur Detailseite"
+      },
       "socialTitle": "Soziale Netzwerke",
-      "staticPages": {
+      "staticTitle": "Statische Seiten",
+      "static": {
+        "addStaticPage": "Neue Seite erstellen",
+        "currentStaticPages": "Vorhandene Seiten",
         "chooseStaticPage": "Du musst erst eine Seite aus der Liste wählen oder eine neue erstellen",
         "createStaticPage": "Neue Seite erstellen",
         "isEnabled": "Öffentlich sichtbar?",
         "noStaticPagesFound": "Es wurden noch keine Seiten erstellt.",
         "saveStaticPage": "Seite speichern",
-        "sectionTitle": "Seite unter dem Menüpunkt",
+        "sectionTitle": "Kategorie",
         "text": "Seiteninhalt",
         "title": "Titel der Seite"
       },
+      "updateApplication": "Einstellungen speichern",
       "urlShortening": "Kurze Links erstellen?",
       "urlShorteningService": "Anbieter",
       "urlShorteningTitle": "Links"

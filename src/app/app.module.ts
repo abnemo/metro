@@ -19,6 +19,8 @@ import { NgxPermissionsModule } from 'ngx-permissions';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { GlobalErrorHandler } from './shared/services/error/error-handler.service';
 import { HttpErrorInterceptor } from './shared/services/error/http-error-interceptor.service';
+import { ApplicationsResolver } from './theme/pages/sfw/setting/applications.resolver';
+import { ApplicationService } from './shared/services/application/application.service';
 
 export const firebaseConfig = environment.firebaseConfig;
 

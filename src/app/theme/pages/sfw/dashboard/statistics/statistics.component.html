@@ -35,8 +35,21 @@
                 </div>
               </div>
             </div>
+
             <div class="m-portlet__body">
               <ul class="list-group">
+                <li class="list-group-item justify-content-between">
+                  Environment <span class="badge badge-success pull-right"> {{env.envName}} </span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                  Firebase <span class="badge badge-success pull-right">{{env.firebaseConfig.projectId}}</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                  Angular-Version: <span class="badge badge-success pull-right">{{angularVersion}}</span>
+                </li>
+              </ul>
+
+              <ul class="list-group m--margin-top-25">
                 <li class="list-group-item justify-content-between">
                   Build Status
                   <a class="pull-right" href="https://travis-ci.org/Meistercoach83/metro" target="_blank">
@@ -58,10 +71,6 @@
                   <a class="pull-right" href="https://badge.fury.io/gh/Meistercoach83%2F-metro" target="_blank">
                     <img src="https://badge.fury.io/gh/Meistercoach83%2Fmetro.svg"/>
                   </a>
-                </li>
-                <li class="list-group-item justify-content-between">
-                  Angular-Version:
-                  <span class="badge badge-success pull-right">{{angularVersion}}</span>
                 </li>
               </ul>
             </div>
