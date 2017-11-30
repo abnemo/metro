@@ -65,14 +65,16 @@
               <div class="m-portlet__body">
                 <static-pages [form]="form"
                               [currentStaticPage]="currentStaticPage"
+                              (cancel)="cancel($event)"
+                              (setCurrentStaticPage)="setCurrentStaticPage($event)"
+                              (saveStaticPage)="saveStaticPage($event)"
                               (removeStaticPage)="removeStaticPage($event)"
-                              (addStaticPage)="addStaticPage()">
-                </static-pages>
+                              (addStaticPage)="addStaticPage()"></static-pages>
               </div>
             </div>
           </div>
 
-          <div class="m-portlet__foot">
+          <div class="m-portlet__foot" *ngIf="showFooterOptions">
             <div class="m-form__actions text-right">
               <button class="btn btn-accent m-btn m-btn--air m-btn--custom" [disabled]="!form.valid || isSubmitting">
                 <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw" *ngIf="isSubmitting"></i>

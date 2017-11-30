@@ -879,6 +879,7 @@
         "chooseStaticPage": "Du musst erst eine Seite aus der Liste wählen oder eine neue erstellen",
         "createStaticPage": "Neue Seite erstellen",
         "isEnabled": "Öffentlich sichtbar?",
+        "newPageTitle": "Unbenannt",
         "noStaticPagesFound": "Es wurden noch keine Seiten erstellt.",
         "saveStaticPage": "Seite speichern",
         "sectionTitle": "Kategorie",

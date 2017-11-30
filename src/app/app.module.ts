@@ -58,7 +58,7 @@ const translationOptions = {
   providers: [
     ScriptLoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    // { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [
     AppComponent,

@@ -1,8 +1,9 @@
 import {
   Component,
+  EventEmitter,
   Input,
-  OnChanges,
-  OnInit
+  OnInit,
+  Output
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
@@ -10,19 +11,18 @@ import { FormGroup } from '@angular/forms';
   selector: 'static-page',
   templateUrl: './static-page.component.html'
 })
-export class StaticPageComponent implements OnChanges {
+export class StaticPageComponent implements OnInit {
 
   @Input() form: FormGroup;
   @Input() currentStaticPage: number;
 
+  @Output() saveStaticPage: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() cancel: EventEmitter<number> = new EventEmitter(false);
+
   constructor() {
   }
 
-  ngOnChanges() {
-    console.log(this.currentStaticPage);
-    if (this.currentStaticPage) {
-      console.log(this.form.controls['staticPages']['controls'][this.currentStaticPage].controls);
-    }
+  ngOnInit() {
   }
 
 }

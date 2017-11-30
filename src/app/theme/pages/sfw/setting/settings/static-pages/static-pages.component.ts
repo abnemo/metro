@@ -6,7 +6,6 @@ import {
   Output
 } from '@angular/core';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-import { ActivatedRoute } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -16,14 +15,18 @@ import { FormGroup } from '@angular/forms';
 export class StaticPagesComponent implements OnInit {
 
   @Input() form: FormGroup;
+
   @Input() currentStaticPage: number;
 
   @Output() addStaticPage: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() setCurrentStaticPage: EventEmitter<number> = new EventEmitter(false);
+  @Output() saveStaticPage: EventEmitter<boolean> = new EventEmitter(false);
+  @Output() cancel: EventEmitter<boolean> = new EventEmitter(false);
   @Output() removeStaticPage: EventEmitter<number> = new EventEmitter(false);
 
   public config: PerfectScrollbarConfigInterface = {};
 
-  constructor(private route: ActivatedRoute) {
+  constructor() {
   }
 
   ngOnInit() {

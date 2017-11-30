@@ -14,6 +14,7 @@ import {
 import { Title } from '@angular/platform-browser';
 import { ISocial } from '../../../../../shared/interfaces/social.interface';
 import { IStaticPage } from '../../../../../shared/interfaces/static-page.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
@@ -24,11 +25,20 @@ export class SettingsComponent implements OnInit {
   public application: IApplication;
   public form: FormGroup;
   public isSubmitting: boolean = false;
-  public currentStaticPage: number;
+  public currentStaticPage: number = -1;
+  public newPageTitle: string = 'Title';
+  public showFooterOptions: boolean = true;
+  private notEditedPage: IStaticPage = {
+    sectionTitle: '',
+    title: '',
+    text: '',
+    isEnabled: false
+  };
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private title: Title,
+              private translateService: TranslateService,
               private applicationService: ApplicationService) {
   }
 
@@ -48,7 +58,7 @@ export class SettingsComponent implements OnInit {
       this.form.get('downtime.message').disable();
     }
 
-    this.form.valueChanges.subscribe((changes: IApplication) => {
+    this.form.valueChanges.subscribe((changes: IApplication): void => {
       this.application.page = changes.page;
       this.application.urlShortening = changes.urlShortening;
       this.application.registration = changes.registration;
@@ -56,9 +66,13 @@ export class SettingsComponent implements OnInit {
       this.application.social = changes.social;
       this.application.staticPages = changes.staticPages;
     });
+
+    this.translateService.get('general.applications.static.newPageTitle').subscribe((res: string) => {
+      this.newPageTitle = res;
+    });
   }
 
-  initPage() {
+  initPage(): FormGroup {
     return this.fb.group({
       title: [this.application.page.title, [Validators.required, Validators.minLength(10), Validators.maxLength(40)]],
       description: this.application.page.description,
@@ -66,38 +80,41 @@ export class SettingsComponent implements OnInit {
     });
   }
 
-  initUrlShortening() {
+  initUrlShortening(): FormGroup {
     return this.fb.group({
       isEnabled: this.application.urlShortening.isEnabled,
       provider: this.application.urlShortening.provider
     });
   }
 
-  initRegistration() {
+  initRegistration(): FormGroup {
     return this.fb.group({
       isAllowed: this.application.registration.isAllowed,
       defaultRole: this.application.registration.defaultRole
     });
   }
 
-  initDowntime() {
+  initDowntime(): FormGroup {
     return this.fb.group({
       isEnabled: this.application.downtime.isEnabled,
       message: this.application.downtime.message
     });
   }
 
-  initStaticPage(staticPage?: IStaticPage) {
+  /**
+   * Static Pages
+   */
+  initStaticPage(staticPage?: IStaticPage): FormGroup {
     return this.fb.group({
       isEnabled: [staticPage ? staticPage.isEnabled : false],
       sectionTitle: [staticPage ? staticPage.sectionTitle : '', [Validators.required]],
       text: [staticPage ? staticPage.text : '', [Validators.required]],
-      title: [staticPage ? staticPage.title : '', [Validators.required]]
+      title: [staticPage ? staticPage.title : this.newPageTitle, [Validators.required]]
     });
   }
 
-  initStaticPages() {
-    if (!this.application.staticPages || this.application.staticPages.length === 0) {
+  initStaticPages(): FormArray {
+    if (this.application.staticPages.length === 0) {
       return this.fb.array([]);
     }
     const pages = [];
@@ -108,25 +125,48 @@ export class SettingsComponent implements OnInit {
     return this.fb.array(pages);
   }
 
-  addStaticPage() {
-    const control = <FormArray>this.form.controls['staticPages'];
+  addStaticPage(): void {
+    const control = this.form.get('staticPages') as FormArray;
     control.push(this.initStaticPage());
     this.currentStaticPage = this.form.controls['staticPages']['controls'].length - 1;
+    this.showFooterOptions = false;
   }
 
-  removeStaticPage(i: number) {
-    const control = <FormArray>this.form.controls['staticPages'];
+  removeStaticPage(i: number): void {
+    const control = this.form.get('staticPages') as FormArray;
     control.removeAt(i);
   }
 
-  initSocialProvider(social?: ISocial) {
+  setCurrentStaticPage(i: number): void {
+    for (const key in this.form.controls['staticPages']['controls'][i].controls) {
+      this.notEditedPage[key] = this.form.controls['staticPages']['controls'][i].controls[key].value;
+    }
+    console.log(this.notEditedPage);
+    this.currentStaticPage = i;
+    this.showFooterOptions = false;
+  }
+
+  saveStaticPage(): void {
+    this.currentStaticPage = -1;
+  }
+
+  cancel(i: number): void {
+    this.form.controls['staticPages']['controls'][i].controls = this.notEditedPage;
+    this.currentStaticPage = -1;
+    this.showFooterOptions = true;
+  }
+
+  /**
+   * Social-Links
+   */
+  initSocialProvider(social?: ISocial): FormGroup {
     return this.fb.group({
       link: [social ? social.link : '', [Validators.required]],
       title: [social ? social.title : '', [Validators.required]]
     });
   }
 
-  initSocialProviders() {
+  initSocialProviders(): FormArray {
     if (!this.application.social || this.application.social.length === 0) {
       return this.fb.array([this.initSocialProvider(null)]);
     }
@@ -138,17 +178,17 @@ export class SettingsComponent implements OnInit {
     return this.fb.array(groups);
   }
 
-  addSocialProvider() {
-    const control = <FormArray>this.form.controls['social'];
+  addSocialProvider(): void {
+    const control = this.form.get('social') as FormArray;
     control.push(this.initSocialProvider());
   }
 
-  removeSocialProvider(i: number) {
-    const control = <FormArray>this.form.controls['social'];
+  removeSocialProvider(i: number): void {
+    const control = this.form.get('social') as FormArray;
     control.removeAt(i);
   }
 
-  saveSettings() {
+  saveSettings(): void {
     // set Page Title
     if (this.title.getTitle() !== this.application.page.title) {
       this.title.setTitle(this.application.page.title);
