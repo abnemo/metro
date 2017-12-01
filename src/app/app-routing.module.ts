@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LogoutComponent } from './theme/layouts/auth/logout/logout.component';
 import { ApplicationsResolver } from './theme/pages/sfw/setting/applications.resolver';
 import { SharedModule } from './shared/shared.module';
+import { UnAuthGuard } from './shared/services/auth/unauth.guard';
+import { AuthGuard } from './shared/services/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -10,11 +12,13 @@ const routes: Routes = [
     loadChildren: './theme/layouts/auth/auth.module#AuthModule',
     resolve: {
       application: ApplicationsResolver
-    }
+    },
+    canActivate: [UnAuthGuard]
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: LogoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '',
@@ -25,7 +29,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes, {
+      enableTracing: true
+    }),
     SharedModule
   ],
   exports: [RouterModule]

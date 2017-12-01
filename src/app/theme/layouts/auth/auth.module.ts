@@ -32,11 +32,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     AlertService,
-    AuthGuard,
-    AuthService,
     UserService
   ],
-  entryComponents: [AlertComponent]
+  entryComponents: [
+    AlertComponent
+  ]
 })
 
 export class AuthModule {

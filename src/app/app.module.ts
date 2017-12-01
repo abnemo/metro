@@ -1,5 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
+import {
+  ErrorHandler,
+  NgModule
+} from '@angular/core';
 import { ThemeComponent } from './theme/theme.component';
 import { LayoutModule } from './theme/layouts/layout.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,17 +13,26 @@ import { ThemeRoutingModule } from './theme/theme-routing.module';
 import { AuthModule } from './theme/layouts/auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import {
+  TranslateLoader,
+  TranslateModule
+} from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpInterceptor } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  HttpClientModule
+} from '@angular/common/http';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment.prod';
 import { NgxPermissionsModule } from 'ngx-permissions';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { GlobalErrorHandler } from './shared/services/error/error-handler.service';
 import { HttpErrorInterceptor } from './shared/services/error/http-error-interceptor.service';
-import { ApplicationsResolver } from './theme/pages/sfw/setting/applications.resolver';
-import { ApplicationService } from './shared/services/application/application.service';
+import { AuthGuard } from './shared/services/auth/auth.guard';
+import { UnAuthGuard } from './shared/services/auth/unauth.guard';
+import { AuthService } from './shared/services/auth/auth.service';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 export const firebaseConfig = environment.firebaseConfig;
 
@@ -46,6 +58,7 @@ const translationOptions = {
     AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
     AuthModule,
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     BrowserModule,
     BrowserAnimationsModule,
     LayoutModule,
@@ -58,7 +71,10 @@ const translationOptions = {
   providers: [
     ScriptLoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-    // { provide: ErrorHandler, useClass: GlobalErrorHandler }
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    AuthGuard,
+    AuthService,
+    UnAuthGuard
   ],
   bootstrap: [
     AppComponent,

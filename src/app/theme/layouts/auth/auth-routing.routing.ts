@@ -4,7 +4,6 @@ import {
   Routes
 } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { ApplicationsResolver } from '../../pages/sfw/setting/applications.resolver';
 import { SharedModule } from '../../../shared/shared.module';
 
 const routes: Routes = [

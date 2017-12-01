@@ -141,7 +141,6 @@ export class SettingsComponent implements OnInit {
     for (const key in this.form.controls['staticPages']['controls'][i].controls) {
       this.notEditedPage[key] = this.form.controls['staticPages']['controls'][i].controls[key].value;
     }
-    console.log(this.notEditedPage);
     this.currentStaticPage = i;
     this.showFooterOptions = false;
   }
