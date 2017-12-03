@@ -1,16 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { ScriptLoaderService } from '../../../../shared/services/script-loader/script-loader.service';
-
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  selector: 'index',
   templateUrl: './index.component.html',
   encapsulation: ViewEncapsulation.None,
 })
 export class IndexComponent implements OnInit, AfterViewInit {
 
 
-  constructor(private _script: ScriptLoaderService) {
+  constructor() {
   }
 
   ngOnInit() {

@@ -1,19 +1,15 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Helpers } from '../../../helpers';
-
+import { Component, HostBinding } from '@angular/core';
 
 @Component({
-  selector: "app-footer",
-  templateUrl: "./footer.component.html",
-  encapsulation: ViewEncapsulation.None,
+  selector: 'app-footer',
+  templateUrl: './footer.component.html'
 })
-export class FooterComponent implements OnInit {
+export class FooterComponent {
 
+  pageClass = 'm-grid__item m-footer';
+  @HostBinding('attr.class') class = this.pageClass;
 
   constructor() {
-
-  }
-  ngOnInit() {
 
   }
 

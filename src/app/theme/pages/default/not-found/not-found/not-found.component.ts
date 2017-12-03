@@ -1,14 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  selector: 'not-found',
   templateUrl: './not-found.component.html'
 })
-export class NotFoundComponent implements OnInit {
+export class NotFoundComponent {
 
   constructor() {
-  }
-
-  ngOnInit() {
   }
 }

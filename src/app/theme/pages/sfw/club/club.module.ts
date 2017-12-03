@@ -5,7 +5,7 @@ import { ClubsComponent } from './clubs/clubs.component';
 import { ClubItemComponent } from './club-item/club-item.component';
 import { ClubService } from '../../../../shared/services/club/club.service';
 import { UserService } from '../../../../shared/services/user/user.service';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { SharedModule } from '../../../../shared/shared.module';
 import { ClubResolver } from './club.resolver';
 import { ClubEditComponent } from './club-edit/club-edit.component';
@@ -19,7 +19,6 @@ import { ClubAssignedTeamsComponent } from './club-detail/club-assigned-teams/cl
 @NgModule({
   imports: [
     clubRoutingModule,
-    LayoutModule,
     SharedModule
   ],
   declarations: [

@@ -1,54 +1,65 @@
-import {
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewEncapsulation
-} from '@angular/core';
+import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Helpers } from '../helpers';
-import { ScriptLoaderService } from '../shared/services/script-loader/script-loader.service';
-import { ISubscription } from 'rxjs/Subscription';
+import { Location, PopStateEvent } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
-declare let mApp: any;
+// declare let mApp: any;
 
 @Component({
-  selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
+  selector: 'app-theme',
   templateUrl: './theme.component.html',
   encapsulation: ViewEncapsulation.None,
+  styleUrls: [
+    '../../assets/vendors/base/vendors.bundle.css',
+    '../../assets/demo/default/base/style.bundle.css',
+  ]
 })
-export class ThemeComponent implements OnInit, OnDestroy {
+export class ThemeComponent implements OnInit {
 
-  private eventSubscription: ISubscription;
+  @HostBinding('attr.class') class = 'm-grid m-grid--hor m-grid--root m-page';
 
-  constructor(private _script: ScriptLoaderService, private _router: Router) {
+  private lastPoppedUrl: string;
+  private yScrollStack: number[] = [];
 
+  constructor(private translate: TranslateService, private location: Location, private router: Router) {
+    translate.addLangs(['en', 'de', 'fr']);
+    translate.setDefaultLang('de');
+    const browserLanguage = translate.getBrowserLang();
+    translate.use(browserLanguage.match(/en|fr/) ? browserLanguage : 'de');
   }
 
   ngOnInit() {
-    this._script.load('body',
-      'assets/vendors/base/vendors.bundle.js',
-      'assets/demo/default/base/scripts.bundle.js')
-      .then(() => {
-        Helpers.setLoading(false);
-      });
 
-    this.eventSubscription = this._router.events.subscribe((route) => {
-      if (route instanceof NavigationStart) {
-        (<any>mApp).scrollTop();
-        Helpers.setLoading(true);
+    this.location.subscribe((ev: PopStateEvent) => this.lastPoppedUrl = ev.url);
+
+    this.router.events.subscribe((ev: any) => {
+      if (ev instanceof NavigationStart) {
+        if (ev.url != this.lastPoppedUrl) {
+          this.yScrollStack.push(window.scrollY);
+        }
+      } else {
+        if (ev instanceof NavigationEnd) {
+          if (ev.url == this.lastPoppedUrl) {
+            this.lastPoppedUrl = undefined;
+            window.scrollTo(0, this.yScrollStack.pop());
+          } else {
+            window.scrollTo(0, 0);
+          }
+        }
       }
+    });
+
+    /* this._script.load('body',
+      'assets/vendors/base/vendors.bundle.js',
+      'assets/demo/default/base/scripts.bundle.js');
+
       if (route instanceof NavigationEnd) {
-        Helpers.setLoading(false);
         const animation = 'm-animate-fade-in-up';
         $('.m-wrapper').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
           $('.m-wrapper').removeClass(animation);
         }).removeClass(animation).addClass(animation);
       }
-    });
-  }
-
-  ngOnDestroy() {
-    this.eventSubscription.unsubscribe();
+    }); */
   }
 
 }

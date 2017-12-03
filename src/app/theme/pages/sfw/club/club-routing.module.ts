@@ -1,10 +1,6 @@
-import {
-  RouterModule,
-  Routes
-} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ClubsComponent } from './clubs/clubs.component';
 import { ModuleWithProviders } from '@angular/core';
-import { DefaultComponent } from '../../default/default.component';
 import { ClubResolver } from './club.resolver';
 import { ClubEditComponent } from './club-edit/club-edit.component';
 import { ClubDetailComponent } from './club-detail/club-detail.component';
@@ -12,41 +8,37 @@ import { ClubDetailComponent } from './club-detail/club-detail.component';
 export const routes: Routes = [
   {
     path: '',
-    component: DefaultComponent,
+    component: ClubsComponent
+  },
+  {
+    path: 'edit/:clubId',
+    component: ClubEditComponent,
+    resolve: {
+      club: ClubResolver
+    }
+  },
+  {
+    path: 'detail/:clubId',
+    component: ClubDetailComponent,
+    resolve: {
+      club: ClubResolver
+    },
     children: [
       {
+        path: 'honorary',
+        // outlet: 'honorary',
+        loadChildren: './honorary/honorary.module#HonoraryModule'
+      },
+      {
         path: '',
-        component: ClubsComponent
-      },
-      {
-        path: 'edit/:clubId',
-        component: ClubEditComponent,
-        resolve: {
-          club: ClubResolver
-        }
-      },
-      {
-        path: 'detail/:clubId',
-        component: ClubDetailComponent,
-        resolve: {
-          club: ClubResolver
-        },
-        children: [
-          {
-            path: 'honorary',
-            // outlet: 'honorary',
-            loadChildren: './honorary/honorary.module#HonoraryModule'
-          },
-          {
-            path: '',
-            redirectTo: 'honorary'
-          }
-        ]
-      },
-      {
-        path: 'positions',
-        loadChildren: './club-management/club-management.module#ClubManagementModule'
-      }/*,
+        redirectTo: 'honorary'
+      }
+    ]
+  },
+  {
+    path: 'positions',
+    loadChildren: './club-management/club-management.module#ClubManagementModule'
+  }/*,
 
       {
         path: 'positions',
@@ -66,12 +58,10 @@ export const routes: Routes = [
           club: ClubResolver
         }
       }*/,
-      {
-        path: '**',
-        redirectTo: '',
-        pathMatch: 'full'
-      }
-    ]
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }
 ];
 

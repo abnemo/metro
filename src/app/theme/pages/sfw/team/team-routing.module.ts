@@ -1,18 +1,12 @@
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeamsComponent } from './teams/teams.component';
-import { TeamResolver } from './team.resolver';
-import { DefaultComponent } from '../../default/default.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: DefaultComponent,
-    children: [
-      {
-        path: '',
-        component: TeamsComponent
-      }, /*
+    component: TeamsComponent
+  }, /*
       {
         path: 'edit/:teamId',
         component: TeamEditComponent,
@@ -38,11 +32,9 @@ export const routes: Routes = [
         path: 'club-management-statistics',
         component: TeamStatisticsComponent
       }, */
-      {
-        path: '**',
-        redirectTo: ''
-      }
-    ]
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

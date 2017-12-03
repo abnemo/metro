@@ -3,12 +3,12 @@ import { todoRoutingModule } from './todo-routing.module';
 import { TodosComponent } from './todos/todos.component';
 import { SharedModule } from '../../../../shared/shared.module';
 import { TaskService } from '../../../../shared/services/task/task.service';
-import { LayoutModule } from '../../../layouts/layout.module';
 import { TaskModule } from '../../shared/task/task.module';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
-    LayoutModule,
+    CommonModule,
     SharedModule,
     TaskModule,
     todoRoutingModule

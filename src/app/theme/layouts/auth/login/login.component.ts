@@ -1,17 +1,21 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApplicationService } from '../../../../shared/services/application/application.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: '.m-grid.m-grid--hor.m-grid--root.m-page',
   templateUrl: './login.component.html',
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
+    '../../../../../assets/vendors/base/vendors.bundle.css',
+    '../../../../../assets/demo/default/base/style.bundle.css',
     'login.component.css'
   ]
 })
 
 export class LoginComponent implements OnInit {
+
+  pageClass = 'm-grid m-grid--hor m-grid--root m-page';
+  @HostBinding('attr.class') class = this.pageClass;
 
   public loading: boolean = false;
   public nameMinLength: number = 3;
@@ -27,8 +31,11 @@ export class LoginComponent implements OnInit {
 
   private isRegistrationAllowed: boolean = false;
 
-  constructor(private route: ActivatedRoute,
-              private applicationService: ApplicationService) {
+  constructor(private route: ActivatedRoute, private translate: TranslateService) {
+    translate.addLangs(['en', 'de', 'fr']);
+    translate.setDefaultLang('de');
+    const browserLanguage = translate.getBrowserLang();
+    translate.use(browserLanguage.match(/en|fr/) ? browserLanguage : 'de');
   }
 
   ngOnInit() {

@@ -16,7 +16,7 @@ export class SettingsMainDataComponent implements OnInit {
   @Input() form: FormGroup;
 
   constructor(public applicationService: ApplicationService,
-              public rolesService: NgxRolesService) { }
+    public rolesService: NgxRolesService) { }
 
   ngOnInit() {
   }

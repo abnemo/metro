@@ -5,7 +5,6 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
-import { UserService } from '../user/user.service';
 import { ISubscription } from 'rxjs/Subscription';
 import * as firebase from 'firebase/app';
 
@@ -15,12 +14,11 @@ export class AuthGuard implements CanActivate, OnDestroy {
   private userSubscription: ISubscription;
 
   constructor(private router: Router,
-    private authService: AuthService,
-    private userService: UserService) {
+              private authService: AuthService) {
   }
 
   canActivate(route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     return this.authService.authState
       .take(1)

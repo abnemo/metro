@@ -9,13 +9,12 @@ import { UserService } from '../../../../shared/services/user/user.service';
 import { CategoryService } from '../../../../shared/services/category/category.service';
 import { CompetitionService } from '../../../../shared/services/competition/competition.service';
 import { SharedModule } from '../../../../shared/shared.module';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { TeamListComponent } from './team-list/team-list.component';
 import { TeamItemComponent } from './team-item/team-item.component';
 
 @NgModule({
   imports: [
-    LayoutModule,
     SharedModule,
     teamRoutingModule
   ],

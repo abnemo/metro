@@ -27,9 +27,9 @@ export class SettingsComponent implements OnInit {
   public currentStaticPage: number;
 
   constructor(private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private title: Title,
-              private applicationService: ApplicationService) {
+    private route: ActivatedRoute,
+    private title: Title,
+    private applicationService: ApplicationService) {
   }
 
   ngOnInit() {

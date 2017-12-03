@@ -20,13 +20,12 @@ import { MemberShortStatisticsComponent } from './member-short-statistics/member
 import { MemberAhShortStatisticsComponent } from './member-ah-short-statistics/member-ah-short-statistics.component';
 import { MemberAhStatisticsComponent } from './member-ah-statistics/member-ah-statistics.component';
 import { SharedModule } from '../../../../shared/shared.module';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { MemberLinkComponent } from './member-link/member-link.component';
 import { ProfileFormComponent } from './member-edit/profile-form/profile-form.component';
 
 @NgModule({
   imports: [
-    LayoutModule,
     memberRoutingModule,
     SharedModule
   ],

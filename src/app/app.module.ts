@@ -1,34 +1,24 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { ThemeComponent } from './theme/theme.component';
-import { LayoutModule } from './theme/layouts/layout.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScriptLoaderService } from './shared/services/script-loader/script-loader.service';
-import { ThemeRoutingModule } from './theme/theme-routing.module';
-import { AuthModule } from './theme/layouts/auth/auth.module';
-import { SharedModule } from './shared/shared.module';
-
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpErrorInterceptor } from './shared/services/error/http-error-interceptor.service';
+import { GlobalErrorHandler } from './shared/services/error/error-handler.service';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireModule } from 'angularfire2';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule, HttpInterceptor } from '@angular/common/http';
-import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment.prod';
-import { NgxPermissionsModule } from 'ngx-permissions';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { GlobalErrorHandler } from './shared/services/error/error-handler.service';
-import { HttpErrorInterceptor } from './shared/services/error/http-error-interceptor.service';
-import { ApplicationsResolver } from './theme/pages/sfw/setting/applications.resolver';
-import { ApplicationService } from './shared/services/application/application.service';
-
-export const firebaseConfig = environment.firebaseConfig;
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new TranslateHttpLoader(httpClient, './assets/i18n/', '.json');
 }
 
-const translationOptions = {
+export const translationOptions = {
   loader: {
     provide: TranslateLoader,
     useFactory: HttpLoaderFactory,
@@ -38,30 +28,27 @@ const translationOptions = {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ThemeComponent
+    AppComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule.enablePersistence(),
     AppRoutingModule,
-    AuthModule,
     BrowserModule,
-    BrowserAnimationsModule,
-    LayoutModule,
-    NgxPermissionsModule.forRoot(),
-    SharedModule,
-    ThemeRoutingModule,
+    // BrowserAnimationsModule,
+    environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     HttpClientModule,
+    RouterModule,
     TranslateModule.forRoot(translationOptions)
   ],
   providers: [
-    ScriptLoaderService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
+  exports: [
+  ],
   bootstrap: [
-    AppComponent,
+    AppComponent
   ]
 })
 export class AppModule {

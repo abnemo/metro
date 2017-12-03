@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+/* import * as $ from 'jquery';
 
 export class Helpers {
   static loadStyles(tag, src) {
@@ -21,18 +21,10 @@ export class Helpers {
     // $(element).removeAttr('appunwraptag').unwrap();
   }
 
-  /**
-   * Set title markup
-   * @param title
-   */
   static setTitle(title) {
     $('.m-subheader__title').text(title);
   }
 
-  /**
-   * Breadcrumbs markup
-   * @param breadcrumbs
-   */
   static setBreadcrumbs(breadcrumbs) {
     if (breadcrumbs) {
       $('.m-subheader__title').addClass('m-subheader__title--separator');
@@ -69,4 +61,4 @@ export class Helpers {
   static bodyClass(strClass) {
     $('body').attr('class', strClass);
   }
-}
+}*/

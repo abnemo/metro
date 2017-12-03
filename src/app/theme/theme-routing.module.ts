@@ -2,24 +2,18 @@ import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/services/auth/auth.guard';
-import { NgxPermissionsGuard } from 'ngx-permissions';
+// import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
     path: '',
     component: ThemeComponent,
-    canActivate: [AuthGuard, NgxPermissionsGuard],
-    /* data: {
-      permissions: {
-        only: 'EDITORS',
-        redirectTo: '403'
-      }
-    }, */
-    'children': [
+    canActivate: [AuthGuard /*, NgxPermissionsGuard*/],
+    children: [
       {
         path: 'dashboard',
         loadChildren: './pages/sfw/dashboard/dashboard.module#DashboardModule'
-      },
+      }/*,
       {
         path: 'todos',
         loadChildren: './pages/sfw/todo/todo.module#TodoModule'
@@ -61,42 +55,43 @@ const routes: Routes = [
         loadChildren: './pages/sfw/user/user.module#UserModule'
       },
       {
-        path: 'index',
-        loadChildren: './pages/default/index/index.module#IndexModule'
-      },
-      {
         path: '404',
         loadChildren: './pages/default/not-found/not-found/not-found.module#NotFoundModule'
-      },
+      }*/,
       {
-        path: '',
-        redirectTo: 'index',
+        path: '**',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
       }
     ]
-  },
-  {
-    path: '403',
-    component: ThemeComponent,
-    canActivate: [AuthGuard],
-    'children': [
-      {
-        path: '',
-        loadChildren: './pages/sfw/permission/permission.module#PermissionModule'
-      }
-    ]
   }
-  /*,
+  /*
+ } ,
+ {
+   path: '403',
+   component: ThemeComponent,
+   canActivate: [AuthGuard],
+   'children': [
+     {
+       path: '',
+       loadChildren: './pages/sfw/permission/permission.module#PermissionModule'
+     }
+   ]
+ }*/,
   {
     path: '**',
     redirectTo: '404',
     pathMatch: 'full'
-  }*/
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class ThemeRoutingModule {
 }

@@ -5,7 +5,7 @@ import { LocationsComponent } from './locations/locations.component';
 import { locationRoutingModule } from './location-routing.module';
 import { LocationResolver } from './location.resolver';
 import { AgmCoreModule } from '@agm/core';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { SharedModule } from '../../../../shared/shared.module';
 import { LocationDetailComponent } from './location-detail/location-detail.component';
 import { LocationDetailMainComponent } from './location-detail/location-detail-main/location-detail-main.component';
@@ -25,7 +25,6 @@ import { LocationContactListComponent } from './location-contact-list/location-c
   imports: [
     AgmCoreModule,
     locationRoutingModule,
-    LayoutModule,
     SharedModule
   ],
   declarations: [

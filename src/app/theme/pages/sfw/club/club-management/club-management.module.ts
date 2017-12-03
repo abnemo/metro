@@ -5,12 +5,10 @@ import { ClubManagementFormComponent } from './club-management-form/club-managem
 import { clubManagementRoutingModule } from './club-management-routing';
 import { ClubManagementResolver } from './club-management.resolver';
 import { SharedModule } from '../../../../../shared/shared.module';
-import { LayoutModule } from '../../../../layouts/layout.module';
 
 @NgModule({
   imports: [
     clubManagementRoutingModule,
-    LayoutModule,
     SharedModule
   ],
   declarations: [

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { categoryRoutingModule } from './category-routing.module';
 import { SharedModule } from '../../../../shared/shared.module';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { CategoryResolver } from './category.resolver';
 import { CategoriesComponent } from './categories/categories.component';
 import { CategoryListComponent } from './category-list/category-list.component';
@@ -20,7 +20,6 @@ import { CategoryDetailMainComponent } from './category-detail/category-detail-m
 @NgModule({
   imports: [
     categoryRoutingModule,
-    LayoutModule,
     SharedModule
   ],
   declarations: [

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { articleRoutingModule } from './articles-routing.module';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleResolver } from './article.resolver';
-import { LayoutModule } from '../../../layouts/layout.module';
+
 import { SharedModule } from '../../../../shared/shared.module';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleListComponent } from './article-list/article-list.component';
@@ -10,7 +10,6 @@ import { ArticleListComponent } from './article-list/article-list.component';
 @NgModule({
   imports: [
     articleRoutingModule,
-    LayoutModule,
     SharedModule,
     // MarkdownModule,
     // TabsModule,

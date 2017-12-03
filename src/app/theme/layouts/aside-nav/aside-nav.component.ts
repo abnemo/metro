@@ -1,22 +1,25 @@
-import { Component, OnInit, ViewEncapsulation, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
 
-declare let mLayout: any;
 @Component({
   selector: 'app-aside-nav',
-  templateUrl: './aside-nav.component.html',
-  encapsulation: ViewEncapsulation.None,
+  templateUrl: './aside-nav.component.html'
 })
 export class AsideNavComponent implements OnInit, AfterViewInit {
 
+  // m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark
+  @HostBinding('attr.class') class = 'm-grid__item m-aside-left m-aside-left--skin-dark';
+  @HostBinding('attr.id') id = 'm_aside_left';
 
   constructor() {
 
   }
+
   ngOnInit() {
 
   }
-  ngAfterViewInit() {
 
+  ngAfterViewInit() {
+    /*
     mLayout.initAside();
     const menu = (<any>$('#m_aside_left')).mMenu();
     const item = $(menu)
@@ -26,6 +29,7 @@ export class AsideNavComponent implements OnInit, AfterViewInit {
     (<any>$(menu)
       .data('menu'))
       .setActiveItem(item);
+      */
   }
 
 }

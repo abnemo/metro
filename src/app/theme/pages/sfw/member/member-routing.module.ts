@@ -1,6 +1,5 @@
 import { RouterModule, Routes } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { DefaultComponent } from '../../default/default.component';
 import { MemberStatisticsComponent } from './member-statistics/member-statistics.component';
 import { MemberResolver } from './member.resolver';
 import { InterviewEditComponent } from './interview/interview-edit/interview-edit.component';
@@ -12,45 +11,39 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 export const routes: Routes = [
   {
     path: '',
-    component: DefaultComponent,
-    children: [
-      {
-        path: '',
-        component: MembersComponent
-      },
-      {
-        path: 'edit/:id',
-        component: MemberEditComponent,
-        resolve: {
-          member: MemberResolver
-        }
-      },
-      {
-        path: 'detail/:id',
-        component: MemberDetailComponent,
-        resolve: {
-          member: MemberResolver
-        }
-      },
-      {
-        path: 'interview/:id',
-        component: InterviewComponent,
-        resolve: {
-          member: MemberResolver
-        }
-      },
-      {
-        path: 'interview/:id/create/:interviewId',
-        component: InterviewEditComponent,
-        resolve: {
-          member: MemberResolver
-        }
-      },
-      {
-        path: 'statistics',
-        component: MemberStatisticsComponent
-      }
-    ]
+    component: MembersComponent
+  },
+  {
+    path: 'edit/:id',
+    component: MemberEditComponent,
+    resolve: {
+      member: MemberResolver
+    }
+  },
+  {
+    path: 'detail/:id',
+    component: MemberDetailComponent,
+    resolve: {
+      member: MemberResolver
+    }
+  },
+  {
+    path: 'interview/:id',
+    component: InterviewComponent,
+    resolve: {
+      member: MemberResolver
+    }
+  },
+  {
+    path: 'interview/:id/create/:interviewId',
+    component: InterviewEditComponent,
+    resolve: {
+      member: MemberResolver
+    }
+  },
+  {
+    path: 'statistics',
+    component: MemberStatisticsComponent
   }
 ];
 

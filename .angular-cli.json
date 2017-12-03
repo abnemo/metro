@@ -19,16 +19,19 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "styles": [
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
         "../node_modules/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css",
         "../node_modules/nouislider/distribute/nouislider.min.css",
         "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
-        "styles.scss",
         "../node_modules/chartist/dist/chartist.css",
         "../node_modules/primeng/resources/primeng.css",
         "../node_modules/primeng/resources/themes/bootstrap/theme.css",
         "../node_modules/prismjs/themes/prism-okaidia.css"
       ],
       "scripts": [
+        "../node_modules/jquery/dist/jquery.min.js",
+        "../node_modules/bootstrap/dist/js/bootstrap.min.js",
         "../node_modules/popper.js/dist/umd/popper.min.js",
         "../node_modules/moment/min/moment.min.js"
       ],

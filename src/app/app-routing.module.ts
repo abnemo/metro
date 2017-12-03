@@ -1,33 +1,34 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LogoutComponent } from './theme/layouts/auth/logout/logout.component';
-import { ApplicationsResolver } from './theme/pages/sfw/setting/applications.resolver';
-import { SharedModule } from './shared/shared.module';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    loadChildren: './theme/theme.module#ThemeModule'
+  },
+  {
     path: 'login',
     loadChildren: './theme/layouts/auth/auth.module#AuthModule',
-    resolve: {
+    /* resolve: {
       application: ApplicationsResolver
-    }
+    }*/
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    loadChildren: './theme/layouts/auth/auth.module#AuthModule',
   },
   {
-    path: '',
-    redirectTo: 'index',
+    path: '**',
+    redirectTo: '',
     pathMatch: 'full'
-  },
+  }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes),
-    SharedModule
+    RouterModule.forRoot(routes, /* { enableTracing: true } */)
   ],
-  exports: [RouterModule]
+  exports: []
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../../../environments/environment';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: 'statistics',
   templateUrl: './statistics.component.html'
 })
 export class StatisticsComponent implements OnInit, AfterViewInit {
