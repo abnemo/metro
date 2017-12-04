@@ -63,11 +63,11 @@ const routes: Routes = [
       {
         path: 'index',
         loadChildren: './pages/sfw/todo/todo.module#TodoModule'
-      },
+      },*/
       {
         path: '',
         redirectTo: 'dashboard'
-      },
+      }/*,
       {
         path: '**',
         redirectTo: '404'

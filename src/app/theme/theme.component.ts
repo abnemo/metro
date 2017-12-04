@@ -14,7 +14,6 @@ import {
   PopStateEvent
 } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
-import { NgxRolesService } from 'ngx-permissions';
 import { rolesConfig } from '../config/roles.config';
 
 // declare let mApp: any;
@@ -37,14 +36,13 @@ export class ThemeComponent implements OnInit {
 
   constructor(private translate: TranslateService,
               private location: Location,
-              private rolesService: NgxRolesService,
               private router: Router) {
 
-    for (const key in rolesConfig) {
+    /* for (const key in rolesConfig) {
       for (const roleName in rolesConfig[key]) {
         this.rolesService.addRole(roleName, rolesConfig[key][roleName]);
       }
-    }
+    } */
 
     translate.addLangs(['en', 'de', 'fr']);
     translate.setDefaultLang('de');
