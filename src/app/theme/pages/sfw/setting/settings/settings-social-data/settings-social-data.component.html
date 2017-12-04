@@ -2,7 +2,7 @@
   <div class="col-xl-12">
     <div class="m-form__section" formArrayName="social">
 
-      <div *ngFor="let provider of form.controls.social.controls; let i=index">
+      <div *ngFor="let provider of form.controls['social']['controls']; let i=index">
         <div class="row" [formGroupName]="i">
 
           <div class="col-xl-4">
@@ -16,8 +16,8 @@
                 </option>
               </select>
               <small
-                *ngIf="!form.controls.social.controls[i].controls.title.valid
-                && form.controls.social.controls[i].controls.title.touched" class="text-danger">
+                *ngIf="!form.controls['social']['controls'][i]['controls'].title.valid
+                && form.controls['social']['controls'][i]['controls'].title.touched" class="text-danger">
                 {{'general.applications.social.isRequiredProvider' | translate}}
               </small>
             </div>

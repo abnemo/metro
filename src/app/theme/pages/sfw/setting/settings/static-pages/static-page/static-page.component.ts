@@ -24,4 +24,8 @@ export class StaticPageComponent implements OnChanges {
     }
   }
 
+  saveStaticPage() {
+    console.log('save');
+  }
+
 }

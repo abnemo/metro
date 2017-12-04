@@ -33,6 +33,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { TaskModule } from './pages/shared/task/task.module';
 import { SharedPagesModule } from './pages/shared/shared-pages.module';
 import { NgxPermissionsModule } from 'ngx-permissions';
+import { QuickSidebarComponent } from './layouts/quick-sidebar/quick-sidebar.component';
+import { TooltipsComponent } from './layouts/tooltips/tooltips.component';
+import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
 
 @NgModule({
   imports: [
@@ -52,7 +55,6 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     InputModule,
     MarkdownToHtmlModule.forRoot(),
     MediaModule,
-    PositionModule,
     SidebarModule.forRoot(),
     TimeLineModule, */
   ],
@@ -61,13 +63,10 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     FooterComponent,
     HeaderNavComponent,
     MainPageComponent,
-    ThemeComponent
-    /*
-    ArticleMatchplanFilterPipe,
-    MemberCardComponent,
-    NotByFilterPipe,
-    ProxyRouteComponent,
-    SearchPipe */
+    QuickSidebarComponent,
+    ScrollTopComponent,
+    ThemeComponent,
+    TooltipsComponent
   ],
   exports: [
     CommonModule,

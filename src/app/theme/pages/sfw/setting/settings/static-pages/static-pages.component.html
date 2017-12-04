@@ -3,12 +3,12 @@
     <h3>{{'general.applications.static.currentStaticPages' | translate}}</h3>
     <perfect-scrollbar style="max-height: 400px;" [config]="config">
 
-      <div class="alert alert-info" *ngIf="form.get('staticPages').controls.length === 0">
+      <div class="alert alert-info" *ngIf="form.get('staticPages')['controls'].length === 0">
         {{'general.applications.static.noStaticPagesFound' | translate}}
       </div>
 
       <ul>
-        <li *ngFor="let item of form.get('staticPages').controls; let i = index;">
+        <li *ngFor="let item of form.get('staticPages')['controls']; let i = index;">
           {{form.get('staticPages').controls[i].value.title | json}}
         </li>
       </ul>

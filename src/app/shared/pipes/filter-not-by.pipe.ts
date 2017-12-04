@@ -1,9 +1,9 @@
-import { Pipe, PipeTransform } from '@angular/core';
-/* import {
+/*import { Pipe, PipeTransform } from '@angular/core';
+ import {
   extractDeepPropertyByMapKey, isBoolean, isNumberFinite, isString,
   isUndefined
 } from 'ngx-pipes/src/pipes/helpers/helpers';
-*/
+
 @Pipe({
   name: 'filterNotBy',
   pure: false
@@ -36,7 +36,7 @@ export class NotByFilterPipe implements PipeTransform {
           : !~strValue.indexOf(term);
       });
     });
-  */
+
   }
 
-}
+}*/

@@ -13,7 +13,6 @@ import { FormGroup } from '@angular/forms';
 export class SettingsSocialDataComponent {
 
   @Input() form: FormGroup;
-
   @Output() removeSocialProvider: EventEmitter<number> = new EventEmitter(false);
   @Output() addSocialProvider: EventEmitter<boolean> = new EventEmitter(false);
 
