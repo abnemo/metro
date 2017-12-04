@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { AuthRoutingModule } from './login-routing.routing';
 import { AlertComponent } from '../../../../shared/_directives/alert/alert.component';
-import { LogoutComponent } from '../logout/logout.component';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
 import { LoginComponent } from './login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -18,7 +17,6 @@ import { SharedAuthModule } from '../shared-auth.module';
   declarations: [
     ForgotPasswordComponent,
     LoginComponent,
-    LogoutComponent,
     SignInComponent,
     SignUpComponent
   ],
