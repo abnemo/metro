@@ -34,9 +34,7 @@ npm-debug.log
 testem.log
 /typings
 
-src/app/config/facebook.config.ts
-src/app/config/google-maps.config.ts
-src/app/config/weather.config.ts
+src/app/config
 package-lock.json
 functions/package-lock.json
 functions/node_modules
