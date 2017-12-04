@@ -12,27 +12,14 @@ import {
   AngularFireAuth,
   AngularFireAuthModule
 } from 'angularfire2/auth';
-import {
-  PERFECT_SCROLLBAR_CONFIG,
-  PerfectScrollbarConfigInterface,
-  PerfectScrollbarModule
-} from 'ngx-perfect-scrollbar';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationService } from '../shared/services/application/application.service';
 import { UnAuthGuard } from '../shared/services/auth/unauth.guard';
 import { ApplicationsResolver } from './pages/sfw/setting/applications.resolver';
 import { AuthGuard } from '../shared/services/auth/auth.guard';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { UserService } from '../shared/services/user/user.service';
-import { SharedModule } from '../shared/shared.module';
 import { MainPageComponent } from './layouts/main-page/main-page.component';
-import { CreationModule } from './pages/shared/creation/creation.module';
-import { LinkActionModule } from './pages/shared/actions/link-action.module';
-import { TableModule } from './pages/shared/table/table.module';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { TaskModule } from './pages/shared/task/task.module';
 import { SharedPagesModule } from './pages/shared/shared-pages.module';
-import { NgxPermissionsModule } from 'ngx-permissions';
 import { QuickSidebarComponent } from './layouts/quick-sidebar/quick-sidebar.component';
 import { TooltipsComponent } from './layouts/tooltips/tooltips.component';
 import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
@@ -42,9 +29,8 @@ import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     CommonModule,
-    NgxPermissionsModule.forRoot(),
+    // NgxPermissionsModule.forRoot(),
     RouterModule,
-    SharedModule,
     SharedPagesModule,
     ThemeRoutingModule
     /*
@@ -68,15 +54,7 @@ import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
     ThemeComponent,
     TooltipsComponent
   ],
-  exports: [
-    CommonModule,
-    CreationModule,
-    LinkActionModule,
-    NgxPaginationModule,
-    ReactiveFormsModule,
-    TableModule,
-    TaskModule
-  ],
+  exports: [],
   providers: [
     AngularFireAuth,
     ApplicationsResolver,

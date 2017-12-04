@@ -66,17 +66,17 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   exports: [
     CommonModule,
-    CreationModule,
-    LinkActionModule,
+    /* CreationModule,
+    LinkActionModule, */
     LoadingIndicatorComponent,
-    MediaModule,
+    // MediaModule,
     NgPipesModule,
-    NgxPaginationModule,
+    /* NgxPaginationModule,
     NgxPermissionsModule,
     PerfectScrollbarModule,
-    PublicationModule,
+    PublicationModule, */
     ReactiveFormsModule,
-    TableModule,
+    // TableModule,
     TaskModule,
     UserAvatarComponent,
     UserDetailMainComponent,
@@ -84,11 +84,11 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TranslateModule
   ],
   providers: [
-    {
+    /*{
       provide: PERFECT_SCROLLBAR_CONFIG,
       useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
     },
-    ArticleService,
+     ArticleService,
     CategoryService,
     CategoryTypeService,
     ClubService,
@@ -105,7 +105,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     SeasonService,
     SponsorService,
     TeamService,
-    TrainingService
+    TrainingService */
   ]
 })
 export class SharedPagesModule {
