@@ -4,23 +4,18 @@ import { AlertComponent } from '../../../../shared/_directives/alert/alert.compo
 import { LogoutComponent } from '../logout/logout.component';
 import { AlertService } from '../../../../shared/services/alert/alert.service';
 import { UnAuthGuard } from '../../../../shared/services/auth/unauth.guard';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { AngularFireAuthProvider } from 'angularfire2/auth';
 import { UserService } from '../../../../shared/services/user/user.service';
+import { SharedAuthModule } from '../shared-auth.module';
 
 @NgModule({
   declarations: [
-    AlertComponent,
     LogoutComponent
   ],
   imports: [
     AuthRoutingModule,
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule
+    SharedAuthModule
   ],
   providers: [
     AngularFireAuthProvider,

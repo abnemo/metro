@@ -8,18 +8,14 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { SignInComponent } from './sign-in/sign-in.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UnAuthGuard } from '../../../../shared/services/auth/unauth.guard';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../../../shared/services/auth/auth.service';
 import { AngularFireAuthProvider } from 'angularfire2/auth';
 import { UserService } from '../../../../shared/services/user/user.service';
-import { TranslateModule } from '@ngx-translate/core';
 import { ApplicationService } from '../../../../shared/services/application/application.service';
-
+import { SharedAuthModule } from '../shared-auth.module';
 
 @NgModule({
   declarations: [
-    AlertComponent,
     ForgotPasswordComponent,
     LoginComponent,
     LogoutComponent,
@@ -28,9 +24,7 @@ import { ApplicationService } from '../../../../shared/services/application/appl
   ],
   imports: [
     AuthRoutingModule,
-    CommonModule,
-    ReactiveFormsModule,
-    TranslateModule
+    SharedAuthModule
   ],
   providers: [
     AngularFireAuthProvider,
