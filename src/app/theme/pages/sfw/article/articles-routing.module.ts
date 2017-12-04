@@ -6,7 +6,8 @@ export const routes: Routes = [
 
   {
     path: '',
-    component: ArticlesComponent
+    component: ArticlesComponent,
+    pathMatch: 'full'
   }, /*
       {
         path: 'dashboard',

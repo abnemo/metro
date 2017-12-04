@@ -6061,16 +6061,7 @@ var mLayout = function() {
     // handle vertical menu
     var initLeftAside = function() {
         // init aside left offcanvas
-        var asideOffcanvasClass = ($('#m_aside_left').hasClass('m-aside-left--offcanvas-default') ? 'm-aside-left--offcanvas-default' : 'm-aside-left');
 
-        $('#m_aside_left').mOffcanvas({
-            class: asideOffcanvasClass,
-            overlay: true,
-            toggle: {
-                target: '#m_aside_left_offcanvas_toggle',
-                state: 'm-brand__toggler--active'
-            }
-        });
     }
 
     // handle sidebar toggle

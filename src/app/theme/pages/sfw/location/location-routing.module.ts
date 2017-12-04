@@ -9,38 +9,42 @@ import { LocationMapComponent } from './location-map/location-map.component';
 
 export const routes: Routes = [
   {
-    path: 'list',
-    component: LocationsComponent
+    path: '',
+    component: LocationsComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:id',
     component: LocationEditComponent,
     resolve: {
       location: LocationResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'detail/:id',
     component: LocationDetailComponent,
     resolve: {
       location: LocationResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'media/:id',
     component: LocationMediaComponent,
     resolve: {
       location: LocationResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'map',
-    component: LocationMapComponent
+    component: LocationMapComponent,
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'list',
-    pathMatch: 'full'
+    redirectTo: ''
   }
 ];
 

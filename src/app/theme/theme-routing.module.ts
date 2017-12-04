@@ -1,23 +1,17 @@
 import { NgModule } from '@angular/core';
 import { ThemeComponent } from './theme.component';
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 import { AuthGuard } from '../shared/services/auth/auth.guard';
-// import { NgxPermissionsGuard } from 'ngx-permissions';
 
 const routes: Routes = [
   {
     path: '',
     component: ThemeComponent,
-    canActivate: [AuthGuard /*, NgxPermissionsGuard*/],
+    canActivate: [AuthGuard],
     children: [
-      {
-        path: 'dashboard',
-        loadChildren: './pages/sfw/dashboard/dashboard.module#DashboardModule'
-      }/*,
-      {
-        path: 'todos',
-        loadChildren: './pages/sfw/todo/todo.module#TodoModule'
-      },
       {
         path: 'articles',
         loadChildren: './pages/sfw/article/article.module#ArticleModule'
@@ -29,6 +23,10 @@ const routes: Routes = [
       {
         path: 'clubs',
         loadChildren: './pages/sfw/club/club.module#ClubModule'
+      },
+      {
+        path: 'dashboard',
+        loadChildren: './pages/sfw/dashboard/dashboard.module#DashboardModule'
       },
       {
         path: 'locations',
@@ -51,19 +49,34 @@ const routes: Routes = [
         loadChildren: './pages/sfw/team/team.module#TeamModule'
       },
       {
+        path: 'todos',
+        loadChildren: './pages/sfw/todo/todo.module#TodoModule'
+      },
+      {
         path: 'users',
         loadChildren: './pages/sfw/user/user.module#UserModule'
       },
       {
         path: '404',
         loadChildren: './pages/default/not-found/not-found/not-found.module#NotFoundModule'
-      }*/,
+      },
+      {
+        path: 'index',
+        loadChildren: './pages/sfw/todo/todo.module#TodoModule'
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard'
+      },
       {
         path: '**',
-        redirectTo: 'dashboard',
-        pathMatch: 'full'
+        redirectTo: '404'
       }
     ]
+  }/*,
+  {
+    path: '404',
+    loadChildren: './pages/default/not-found/not-found/not-found.module#NotFoundModule'
   }
   /*
  } ,
@@ -77,21 +90,12 @@ const routes: Routes = [
        loadChildren: './pages/sfw/permission/permission.module#PermissionModule'
      }
    ]
- }*/,
-  {
-    path: '**',
-    redirectTo: '404',
-    pathMatch: 'full'
-  }
+ }*/
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports: [
-    RouterModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class ThemeRoutingModule {
 }

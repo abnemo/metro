@@ -2,15 +2,14 @@ import { NgModule } from '@angular/core';
 import { articleRoutingModule } from './articles-routing.module';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleResolver } from './article.resolver';
-
-import { SharedModule } from '../../../../shared/shared.module';
 import { ArticleItemComponent } from './article-item/article-item.component';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { SharedPagesModule } from '../../shared/shared-pages.module';
 
 @NgModule({
   imports: [
     articleRoutingModule,
-    SharedModule,
+    SharedPagesModule
     // MarkdownModule,
     // TabsModule,
     // TagInputModule

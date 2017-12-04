@@ -2,6 +2,7 @@ import {
   Component,
   ComponentFactoryResolver,
   EventEmitter,
+  HostBinding,
   Input,
   OnInit,
   Output,
@@ -19,16 +20,10 @@ import { AlertComponent } from '../../../../../shared/_directives/alert/alert.co
 @Component({
   selector: 'sign-up',
   templateUrl: './sign-up.component.html',
-  animations: [
-    trigger('signUpAnimation', [
-      state('1', style({ opacity: 1, transform: 'scale(1.0)' })),
-      state('0', style({ opacity: 0, transform: 'scale(0.0)' })),
-      transition('1 => 0', useAnimation(zoomOut)),
-      transition('0 => 1', useAnimation(zoomIn)),
-    ])
-  ]
 })
 export class SignUpComponent implements OnInit {
+
+  @HostBinding('attr.class') class = 'm-login__signup';
 
   @Input() showSignUpForm: boolean;
   @Input() loading: boolean;

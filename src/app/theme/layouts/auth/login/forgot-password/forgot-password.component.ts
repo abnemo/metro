@@ -1,25 +1,27 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { state, style, transition, trigger, useAnimation } from '@angular/animations';
-import { zoomIn, zoomOut } from 'ng-animate/lib';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { AuthService } from '../../../../../shared/services/auth/auth.service';
 import { AlertService } from '../../../../../shared/services/alert/alert.service';
 
 @Component({
   selector: 'forgot-password',
-  templateUrl: './forgot-password.component.html',
-  animations: [
-    trigger('forgotPasswordAnimation', [
-      state('1', style({ opacity: 1, transform: 'scale(1.0)' })),
-      state('0', style({ opacity: 0, transform: 'scale(0.0)' })),
-      transition('1 => 0', useAnimation(zoomOut)),
-      transition('0 => 1', useAnimation(zoomIn)),
-    ])
-  ]
+  templateUrl: './forgot-password.component.html'
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  @Input() showPasswordForm: boolean;
+  @HostBinding('attr.class') class = 'm-login__forget-password';
+
   @Input() loading: boolean;
 
   @Output() toggleFormVisibility: EventEmitter<any> = new EventEmitter(false);

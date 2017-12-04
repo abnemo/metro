@@ -6,16 +6,17 @@ import { IndexComponent } from './index/index.component';
 export const routes: Routes = [
   {
     path: '',
-    component: StatisticsComponent
+    component: StatisticsComponent,
+    pathMatch: 'full'
   },
   {
     path: 'index',
-    component: IndexComponent
+    component: IndexComponent,
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
+    redirectTo: ''
   }
 ];
 

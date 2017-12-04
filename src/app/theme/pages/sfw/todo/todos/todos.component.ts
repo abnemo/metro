@@ -4,7 +4,6 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: './todos.component.html'
 })
 export class TodosComponent implements OnInit {

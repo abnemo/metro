@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 import { ArticleService } from '../../../../../shared/services/article/article.service';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: 'user-edit.component.html'
 })
 export class UserEditComponent implements OnInit {

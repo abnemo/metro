@@ -147,12 +147,12 @@
                     | paginate: config ">
                 </tr>
                 <tr *ngIf="!members || members.length === 0">
-                  <td colspan="5"><p>{{'general.members.list.noResult' | translate }}</p></td>
+                  <td colspan="7"><p>{{'general.members.list.noResult' | translate }}</p></td>
                 </tr>
                 <tr *ngIf="members && members.length > 0 && ( members
                     | filterBy: filterFields : searchString
                     | filterBy: [currentFilterField] : currentFilterValue).length === 0">
-                  <td colspan="5">{{'general.members.list.noMatchingResult' | translate }}</td>
+                  <td colspan="7">{{'general.members.list.noMatchingResult' | translate }}</td>
                 </tr>
                 </tbody>
               </table>

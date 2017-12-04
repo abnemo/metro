@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { dashboardRoutingModule } from './dashboard-routing.module';
-import { AngularWeatherWidgetModule, WeatherApiName } from 'angular-weather-widget';
+import {
+  AngularWeatherWidgetModule,
+  WeatherApiName
+} from 'angular-weather-widget';
 import { weatherConfig } from '../../../../config/weather.config';
 import { UpcomingBirthdaysComponent } from '../../shared/birthday/upcoming-birthdays/upcoming-birthdays.component';
-import { ThemeModule } from '../../../theme.module';
-import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '../../../../shared/shared.module';
 import { IndexComponent } from './index/index.component';
+import { SharedPagesModule } from '../../shared/shared-pages.module';
 
 @NgModule({
   imports: [
@@ -18,15 +19,14 @@ import { IndexComponent } from './index/index.component';
       baseUrl: 'http://api.openweathermap.org/data/2.5'
     }),
     dashboardRoutingModule,
-    TranslateModule
+    SharedPagesModule
   ],
   declarations: [
     IndexComponent,
     StatisticsComponent,
-    // UpcomingBirthdaysComponent
+    UpcomingBirthdaysComponent
   ],
-  providers: [
-  ]
+  providers: []
 })
 export class DashboardModule {
 }

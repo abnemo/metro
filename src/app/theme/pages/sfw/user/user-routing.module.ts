@@ -1,21 +1,25 @@
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 import { UsersComponent } from './users/users.component';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-import { UserEditComponent } from './user-edit/user-edit.component';
 import { ModuleWithProviders } from '@angular/core';
 import { UserResolver } from './user.resolver';
-import { UserEditMainProfileComponent } from './user-edit/user-edit-main-profile/user-edit-main-profile.component';
-import { UserEditAssignedArticlesComponent }
-from './user-edit/user-edit-assigned-articles/user-edit-assigned-articles.component';
-import { UserEditAssignedTodosComponent }
-from './user-edit/user-edit-assigned-todos/user-edit-assigned-todos.component';
+import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserEditAssignedUploadsComponent }
 from './user-edit/user-edit-assigned-uploads/user-edit-assigned-uploads.component';
+import { UserEditAssignedTodosComponent }
+from './user-edit/user-edit-assigned-todos/user-edit-assigned-todos.component';
+import { UserEditAssignedArticlesComponent }
+from './user-edit/user-edit-assigned-articles/user-edit-assigned-articles.component';
+import { UserEditMainProfileComponent } from './user-edit/user-edit-main-profile/user-edit-main-profile.component';
+import { UserEditComponent } from './user-edit/user-edit.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: UsersComponent
+    component: UsersComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:userId',
@@ -23,6 +27,7 @@ export const routes: Routes = [
     resolve: {
       user: UserResolver
     },
+    pathMatch: 'full',
     children: [
       {
         path: '',
@@ -42,7 +47,8 @@ export const routes: Routes = [
       },
       {
         path: '**',
-        redirectTo: ''
+        redirectTo: '',
+        pathMatch: 'full'
       }
     ]
   },
@@ -51,7 +57,8 @@ export const routes: Routes = [
     component: UserDetailComponent,
     resolve: {
       user: UserResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: '**',

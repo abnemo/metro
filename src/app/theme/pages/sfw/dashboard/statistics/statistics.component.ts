@@ -7,7 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { environment } from '../../../../../../environments/environment';
 
 @Component({
-  // selector: 'statistics',
   templateUrl: './statistics.component.html'
 })
 export class StatisticsComponent implements OnInit, AfterViewInit {

@@ -1,7 +1,21 @@
-import { Component, HostBinding, OnInit, ViewEncapsulation } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
-import { Location, PopStateEvent } from '@angular/common';
+import {
+  Component,
+  HostBinding,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
+import {
+  NavigationEnd,
+  NavigationStart,
+  Router
+} from '@angular/router';
+import {
+  Location,
+  PopStateEvent
+} from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { NgxRolesService } from 'ngx-permissions';
+import { rolesConfig } from '../config/roles.config';
 
 // declare let mApp: any;
 
@@ -11,7 +25,7 @@ import { TranslateService } from '@ngx-translate/core';
   encapsulation: ViewEncapsulation.None,
   styleUrls: [
     '../../assets/vendors/base/vendors.bundle.css',
-    '../../assets/demo/default/base/style.bundle.css',
+    '../../assets/demo/default/base/style.bundle.css'
   ]
 })
 export class ThemeComponent implements OnInit {
@@ -21,7 +35,17 @@ export class ThemeComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
-  constructor(private translate: TranslateService, private location: Location, private router: Router) {
+  constructor(private translate: TranslateService,
+              private location: Location,
+              private rolesService: NgxRolesService,
+              private router: Router) {
+
+    for (const key in rolesConfig) {
+      for (const roleName in rolesConfig[key]) {
+        this.rolesService.addRole(roleName, rolesConfig[key][roleName]);
+      }
+    }
+
     translate.addLangs(['en', 'de', 'fr']);
     translate.setDefaultLang('de');
     const browserLanguage = translate.getBrowserLang();

@@ -16,7 +16,6 @@ import { ISocial } from '../../../../../shared/interfaces/social.interface';
 import { IStaticPage } from '../../../../../shared/interfaces/static-page.interface';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: './settings.component.html'
 })
 export class SettingsComponent implements OnInit {

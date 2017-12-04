@@ -11,39 +11,45 @@ import { MemberDetailComponent } from './member-detail/member-detail.component';
 export const routes: Routes = [
   {
     path: '',
-    component: MembersComponent
+    component: MembersComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:id',
     component: MemberEditComponent,
     resolve: {
       member: MemberResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'detail/:id',
     component: MemberDetailComponent,
     resolve: {
       member: MemberResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'interview/:id',
     component: InterviewComponent,
     resolve: {
       member: MemberResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'interview/:id/create/:interviewId',
     component: InterviewEditComponent,
     resolve: {
       member: MemberResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'statistics',
-    component: MemberStatisticsComponent
+    component: MemberStatisticsComponent,
+    pathMatch: 'full'
   }
 ];
 

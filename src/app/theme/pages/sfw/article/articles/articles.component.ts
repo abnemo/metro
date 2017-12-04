@@ -4,7 +4,7 @@ import { CategoryService } from '../../../../../shared/services/category/categor
 import { SeasonService } from '../../../../../shared/services/season/season.service';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: './articles.component.html'
 })
 

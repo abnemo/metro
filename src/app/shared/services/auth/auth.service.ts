@@ -111,13 +111,13 @@ export class AuthService implements OnDestroy {
     return this.afAuth.auth.sendPasswordResetEmail(email);
   }
 
-  signOut(): void {
-    this.updateStatus('offline');
-    this.mouseEvents.unsubscribe();
-    this.timer.unsubscribe();
-    this.afAuth.auth.signOut().then(
-      () => this.router.navigate(['login']).then(),
-      (error: any) => console.log(error)
+  signOut(): Promise<any> {
+    return this.updateStatus('offline').then(
+      () => {
+        this.mouseEvents.unsubscribe();
+        this.timer.unsubscribe();
+        return this.afAuth.auth.signOut();
+      }
     );
   }
 

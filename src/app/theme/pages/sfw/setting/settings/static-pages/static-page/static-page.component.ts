@@ -19,7 +19,6 @@ export class StaticPageComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    console.log(this.currentStaticPage);
     if (this.currentStaticPage) {
       console.log(this.form.controls['staticPages']['controls'][this.currentStaticPage].controls);
     }

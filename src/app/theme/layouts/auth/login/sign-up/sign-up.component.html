@@ -1,69 +1,67 @@
-<div class="m-login__signup" [@signUpAnimation]="showSignUpForm">
-  <div class="m-login__head">
-    <h3 class="m-login__title">{{'Global.Login.CreateNewAccount' | translate}}</h3>
-    <div class="m-login__desc">{{'Global.Register.Hint' | translate}}</div>
-  </div>
-  <form (submit)="signUp()" [formGroup]="form" class="m-login__form m-form">
-
-    <ng-template #signUpAlertContainer></ng-template>
-
-    <div class="row">
-      <div class="col-xl-6">
-        <div class="form-group m-form__group">
-          <input class="form-control m-input" placeholder="{{'Global.Register.FirstName' | translate}}"
-                 formControlName="firstName">
-        </div>
-      </div>
-      <div class="col-xl-6">
-        <div class="form-group m-form__group">
-          <input class="form-control m-input" placeholder="{{'Global.Register.LastName' | translate}}"
-                 formControlName="lastName">
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group m-form__group">
-      <input class="form-control m-input"  placeholder="{{'Global.Login.Email' | translate}}"
-             formControlName="email">
-    </div>
-
-    <div class="row" formGroupName="passwords">
-      <div class="col-xl-12">
-        <div class="form-group m-form__group">
-          <input class="form-control m-input" type="password" placeholder="{{'Global.Login.Password' | translate}}"
-                 formControlName="password">
-        </div>
-      </div>
-      <div class="col-xl-12">
-        <div class="form-group m-form__group">
-          <input class="form-control m-input m-login__form-input--last" type="password"
-                 placeholder="{{'Global.Register.RepeatPassword' | translate}}" formControlName="confirmPassword">
-        </div>
-      </div>
-    </div>
-
-    <div class="row form-group m-form__group m-login__form-sub">
-      <div class="col m--align-left">
-        <label class="m-checkbox m-checkbox--focus">
-          <input type="checkbox" formControlName="agree"> {{'Global.Register.iAgree' | translate}}
-          <a href="#" target="_blank" class="m-link m-link--focus">
-            {{'Global.Register.termsAndConditions' | translate}}
-          </a>.
-          <span></span>
-        </label>
-        <span class="m-form__help"></span>
-      </div>
-    </div>
-
-    <div class="m-login__form-action">
-      <button [disabled]="loading || !form.valid" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
-              class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
-        {{'Global.Register.RegisterLinkText' | translate}}
-      </button>
-      <button type="button" [disabled]="loading" (click)="toggleSignUpForm()"
-              class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom">
-        {{'general.cancel' | translate}}
-      </button>
-    </div>
-  </form>
+<div class="m-login__head">
+  <h3 class="m-login__title">{{'Global.Login.CreateNewAccount' | translate}}</h3>
+  <div class="m-login__desc">{{'Global.Register.Hint' | translate}}</div>
 </div>
+<form (submit)="signUp()" [formGroup]="form" class="m-login__form m-form">
+
+  <ng-template #signUpAlertContainer></ng-template>
+
+  <div class="row">
+    <div class="col-xl-6">
+      <div class="form-group m-form__group">
+        <input class="form-control m-input" placeholder="{{'Global.Register.FirstName' | translate}}"
+               formControlName="firstName">
+      </div>
+    </div>
+    <div class="col-xl-6">
+      <div class="form-group m-form__group">
+        <input class="form-control m-input" placeholder="{{'Global.Register.LastName' | translate}}"
+               formControlName="lastName">
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group m-form__group">
+    <input class="form-control m-input" placeholder="{{'Global.Login.Email' | translate}}"
+           formControlName="email">
+  </div>
+
+  <div class="row" formGroupName="passwords">
+    <div class="col-xl-12">
+      <div class="form-group m-form__group">
+        <input class="form-control m-input" type="password" placeholder="{{'Global.Login.Password' | translate}}"
+               formControlName="password">
+      </div>
+    </div>
+    <div class="col-xl-12">
+      <div class="form-group m-form__group">
+        <input class="form-control m-input m-login__form-input--last" type="password"
+               placeholder="{{'Global.Register.RepeatPassword' | translate}}" formControlName="confirmPassword">
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-group m-form__group m-login__form-sub">
+    <div class="col m--align-left">
+      <label class="m-checkbox m-checkbox--focus">
+        <input type="checkbox" formControlName="agree"> {{'Global.Register.iAgree' | translate}}
+        <a rel="noopener" target="_blank" class="m-link m-link--focus">
+          {{'Global.Register.termsAndConditions' | translate}}
+        </a>.
+        <span></span>
+      </label>
+      <span class="m-form__help"></span>
+    </div>
+  </div>
+
+  <div class="m-login__form-action">
+    <button [disabled]="loading || !form.valid" [ngClass]="{'m-loader m-loader--right m-loader--light': loading}"
+            class="btn btn-focus m-btn m-btn--pill m-btn--custom m-btn--air">
+      {{'Global.Register.RegisterLinkText' | translate}}
+    </button>
+    <button type="button" [disabled]="loading" (click)="toggleSignUpForm()"
+            class="btn btn-outline-focus  m-btn m-btn--pill m-btn--custom">
+      {{'general.cancel' | translate}}
+    </button>
+  </div>
+</form>

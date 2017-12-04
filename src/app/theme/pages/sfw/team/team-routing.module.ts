@@ -5,7 +5,8 @@ import { TeamsComponent } from './teams/teams.component';
 export const routes: Routes = [
   {
     path: '',
-    component: TeamsComponent
+    component: TeamsComponent,
+    pathMatch: 'full'
   }, /*
       {
         path: 'edit/:teamId',

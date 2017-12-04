@@ -1,6 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output
+} from '@angular/core';
 import { IUser } from '../../../../../shared/interfaces/user.interface';
-import { Observable } from 'rxjs/Observable';
 import { IFilterOption } from '../../../../../shared/interfaces/pagination/filter-option.interface';
 import { IPagination } from '../../../../../shared/interfaces/pagination/pagination.interface';
 
@@ -26,8 +30,10 @@ export class UserListComponent {
   public searchString: string = '';
   public currentFilterValue: string = '';
   public currentFilter: IFilterOption;
-  public filterFields = ['firstName', 'lastName', 'email', 'onlineStatus',
-    'address.street', 'address.zip', 'address.city', 'address.county'];
+  public filterFields = [
+    'firstName', 'lastName', 'email', 'onlineStatus',
+    'address.street', 'address.zip', 'address.city', 'address.county'
+  ];
 
   constructor() {
   }

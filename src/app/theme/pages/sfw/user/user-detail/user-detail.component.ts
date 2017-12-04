@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { IUser } from '../../../../../shared/interfaces/user.interface';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: 'user-detail.component.html',
   // styleUrls: ['../user-profile/user-profile.component.css']
 })

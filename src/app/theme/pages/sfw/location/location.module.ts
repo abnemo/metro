@@ -20,12 +20,15 @@ import { LocationDetailContactComponent } from
 import { LocationMediaComponent } from './location-media/location-media.component';
 import { LocationMapComponent } from './location-map/location-map.component';
 import { LocationContactListComponent } from './location-contact-list/location-contact-list.component';
+import { SharedPagesModule } from '../../shared/shared-pages.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     AgmCoreModule,
+    HttpClientModule,
     locationRoutingModule,
-    SharedModule
+    SharedPagesModule
   ],
   declarations: [
     LocationDetailComponent,

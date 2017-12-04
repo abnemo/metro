@@ -10,13 +10,36 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#f48c5b">
     <link rel="shortcut icon" href="assets/sfw/favicon/favicon.ico" />
+    <style>
+      .splash {
+        opacity: 0;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        color: #272c33;
+        padding-top: 25vh;
+        text-align: center;
+        z-index: -1;
+        font-family: monospace;
+      }
+      app-root:empty + .splash {
+        opacity: 1;
+        z-index: 100;
+      }
+      .splash h1 {
+        margin-bottom: 50px;
+      }
+    </style>
 	</head>
   <body>
 
-  Laden ...
+  <div class="splash"  id="content">
+    <img src="/assets/sfw/sfw.webp" alt="SF Winterbach e.V.">
+    <h1>SF Winterbach e.V.</h1>
+  </div>
 
   <noscript><p>Sorry, JavaScript must be enabled to use this app</p></noscript>
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
   <script>
     WebFont.load({
       google: {"families":["Poppins:300,400,500,600,700","Roboto:300,400,500,600,700"]},

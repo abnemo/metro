@@ -14,22 +14,22 @@ export class AuthGuard implements CanActivate, OnDestroy {
   private userSubscription: ISubscription;
 
   constructor(private router: Router,
-              private authService: AuthService) {
+    private authService: AuthService) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot,
-              state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
 
-    return this.authService.authState
-      .take(1)
-      .map(authState => !!authState)
-      .do(isLoggedIn => {
+    return this.authService.authState.take(1).map(authState => !!authState).do(isLoggedIn => {
         if (!isLoggedIn) {
-          this.router.navigate(['login']).then();
+          console.log('not logged in');
+          this.router.navigate(['/login']).then();
         } else {
           // Redirect, if user hasn´t verified his email
           if (!this.authService.authUser.emailVerified && this.authService.authUser.providerId === 'firebase') {
-            this.router.navigate(['login'], { queryParams: { 'verify-email': true } }).then();
+            console.log('not verified');
+            this.router.navigate(['/login'], { queryParams: { 'verify-email': true } }).then();
+          } else {
+            return true;
           }
         }
       });

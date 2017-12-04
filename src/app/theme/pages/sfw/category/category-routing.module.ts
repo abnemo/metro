@@ -9,26 +9,28 @@ export const routes: Routes = [
 
   {
     path: '',
-    component: CategoriesComponent
+    component: CategoriesComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:categoryId',
     component: CategoryEditComponent,
     resolve: {
       category: CategoryResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'detail/:categoryId',
     component: CategoryDetailComponent,
     resolve: {
       category: CategoryResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
+    redirectTo: ''
   }
 ];
 

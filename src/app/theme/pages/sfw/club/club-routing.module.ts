@@ -1,4 +1,7 @@
-import { RouterModule, Routes } from '@angular/router';
+import {
+  RouterModule,
+  Routes
+} from '@angular/router';
 import { ClubsComponent } from './clubs/clubs.component';
 import { ModuleWithProviders } from '@angular/core';
 import { ClubResolver } from './club.resolver';
@@ -8,14 +11,16 @@ import { ClubDetailComponent } from './club-detail/club-detail.component';
 export const routes: Routes = [
   {
     path: '',
-    component: ClubsComponent
+    component: ClubsComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:clubId',
     component: ClubEditComponent,
     resolve: {
       club: ClubResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: 'detail/:clubId',
@@ -23,6 +28,7 @@ export const routes: Routes = [
     resolve: {
       club: ClubResolver
     },
+    pathMatch: 'full',
     children: [
       {
         path: 'honorary',
@@ -60,8 +66,7 @@ export const routes: Routes = [
       }*/,
   {
     path: '**',
-    redirectTo: '',
-    pathMatch: 'full'
+    redirectTo: ''
   }
 ];
 

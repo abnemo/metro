@@ -13,7 +13,7 @@ import { IClub } from '../../../../../shared/interfaces/club.interface';
 import { ClubService } from '../../../../../shared/services/club/club.service';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: 'club-detail.component.html'
 })
 

@@ -4,12 +4,12 @@ import { ClubManagementsComponent } from './club-managements/club-managements.co
 import { ClubManagementFormComponent } from './club-management-form/club-management-form.component';
 import { clubManagementRoutingModule } from './club-management-routing';
 import { ClubManagementResolver } from './club-management.resolver';
-import { SharedModule } from '../../../../../shared/shared.module';
+import { SharedPagesModule } from '../../../shared/shared-pages.module';
 
 @NgModule({
   imports: [
     clubManagementRoutingModule,
-    SharedModule
+    SharedPagesModule
   ],
   declarations: [
     ClubManagementListComponent,
@@ -18,7 +18,6 @@ import { SharedModule } from '../../../../../shared/shared.module';
   ],
   providers: [
     ClubManagementResolver
-    // ClubManagementService
   ]
 })
 export class ClubManagementModule {

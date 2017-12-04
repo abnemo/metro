@@ -6,12 +6,17 @@ import { CommonModule } from '@angular/common';
 import { ThemeRoutingModule } from './theme-routing.module';
 import { HeaderNavComponent } from './layouts/header-nav/header-nav.component';
 import { AsideNavComponent } from './layouts/aside-nav/aside-nav.component';
-import { DefaultComponent } from './pages/sfw/default/default.component';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-import { AngularFireAuth, AngularFireAuthModule } from 'angularfire2/auth';
-import { TranslateModule } from '@ngx-translate/core';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  AngularFireAuth,
+  AngularFireAuthModule
+} from 'angularfire2/auth';
+import {
+  PERFECT_SCROLLBAR_CONFIG,
+  PerfectScrollbarConfigInterface,
+  PerfectScrollbarModule
+} from 'ngx-perfect-scrollbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ApplicationService } from '../shared/services/application/application.service';
 import { UnAuthGuard } from '../shared/services/auth/unauth.guard';
@@ -20,77 +25,58 @@ import { AuthGuard } from '../shared/services/auth/auth.guard';
 import { AuthService } from '../shared/services/auth/auth.service';
 import { UserService } from '../shared/services/user/user.service';
 import { SharedModule } from '../shared/shared.module';
-
-/*
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-}; */
-
+import { MainPageComponent } from './layouts/main-page/main-page.component';
+import { CreationModule } from './pages/shared/creation/creation.module';
+import { LinkActionModule } from './pages/shared/actions/link-action.module';
+import { TableModule } from './pages/shared/table/table.module';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { TaskModule } from './pages/shared/task/task.module';
+import { SharedPagesModule } from './pages/shared/shared-pages.module';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   imports: [
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     CommonModule,
-    ReactiveFormsModule,
+    NgxPermissionsModule.forRoot(),
     RouterModule,
     SharedModule,
+    SharedPagesModule,
     ThemeRoutingModule
     /*
-    AgmCoreModule.forRoot({
-      apiKey: googleMapsConfig.apiKey
-    }),
      BsDatepickerModule.forRoot(),
     ChartistModule,
-    CreationModule,
     EditorModule,
     FormsModule,
     InputModule,
-    LinkActionModule,
     MarkdownToHtmlModule.forRoot(),
     MediaModule,
-    PerfectScrollbarModule,
     PositionModule,
-    PublicationModule,
-    SharedModule,
     SidebarModule.forRoot(),
-    TableModule,
-    TaskModule,
     TimeLineModule, */
   ],
   declarations: [
     AsideNavComponent,
-    DefaultComponent,
     FooterComponent,
     HeaderNavComponent,
+    MainPageComponent,
     ThemeComponent
-    /* AsideNavComponent,
-    DefaultComponent,
-    FooterComponent,
-    LoadingIndicatorComponent,
-    ThemeComponent,
-    LoadingIndicatorComponent,
-    AsideNavComponent,
-    DefaultComponent,
-    FooterComponent,
+    /*
     ArticleMatchplanFilterPipe,
-    LoadingIndicatorComponent,
     MemberCardComponent,
     NotByFilterPipe,
     ProxyRouteComponent,
-    SearchPipe,
-    UserAvatarComponent,
-    UserDetailMainComponent,
-    UserOnlineStatusComponent */
+    SearchPipe */
   ],
   exports: [
     CommonModule,
-    ReactiveFormsModule
-    /* LoadingIndicatorComponent,
-    NgPipesModule,
-    UserAvatarComponent,
-    UserDetailMainComponent,
-    UserOnlineStatusComponent */
+    CreationModule,
+    LinkActionModule,
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    TableModule,
+    TaskModule
   ],
   providers: [
     AngularFireAuth,
@@ -101,28 +87,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MemberService,
     UnAuthGuard,
     UserService
-    /* {
-      provide: PERFECT_SCROLLBAR_CONFIG,
-      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
-    },
-    ArticleService,
-    CategoryService,
-    CategoryTypeService,
-    ClubService,
-    ClubHonoraryService,
-    ClubManagementService,
-    FirestoreService,
-    LocationService,
-    MapsService,
-    MediaGalleryService,
-    MediaItemService,
-    MemberService,
-    MemberStateService,
-    SeasonService,
-    SponsorService,
-    TeamService,
-    TrainingService
-    */
   ]
 })
 export class ThemeModule {

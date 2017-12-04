@@ -13,7 +13,7 @@
 
       <div class="m-portlet__body">
 
-        <div class="m-section">
+        <div class="m-section" *ngIf="locations">
           <div class="m-section__content" *ngIf="categories && categoryTypes; else loadingTemplate">
 
             <!-- BEGIN -->

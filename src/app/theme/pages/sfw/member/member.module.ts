@@ -19,15 +19,15 @@ import { MemberStatisticsComponent } from './member-statistics/member-statistics
 import { MemberShortStatisticsComponent } from './member-short-statistics/member-short-statistics.component';
 import { MemberAhShortStatisticsComponent } from './member-ah-short-statistics/member-ah-short-statistics.component';
 import { MemberAhStatisticsComponent } from './member-ah-statistics/member-ah-statistics.component';
-import { SharedModule } from '../../../../shared/shared.module';
-
 import { MemberLinkComponent } from './member-link/member-link.component';
 import { ProfileFormComponent } from './member-edit/profile-form/profile-form.component';
+import { SharedPagesModule } from '../../shared/shared-pages.module';
+import { MemberCardComponent } from './member-card/member-card.component';
 
 @NgModule({
   imports: [
     memberRoutingModule,
-    SharedModule
+    SharedPagesModule
   ],
   declarations: [
     DfbFormComponent,
@@ -38,6 +38,7 @@ import { ProfileFormComponent } from './member-edit/profile-form/profile-form.co
     MainFormComponent,
     MemberAhShortStatisticsComponent,
     MemberAhStatisticsComponent,
+    MemberCardComponent,
     MemberDetailComponent,
     MemberDetailsDFBComponent,
     MemberDetailsDriveComponent,
@@ -52,7 +53,7 @@ import { ProfileFormComponent } from './member-edit/profile-form/profile-form.co
     ProfileFormComponent
   ],
   providers: [
-    MemberResolver,
+    MemberResolver
   ]
 })
 

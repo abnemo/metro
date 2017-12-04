@@ -6,7 +6,7 @@ import { SeasonService } from '../../../../../shared/services/season/season.serv
 import { CategoryService } from '../../../../../shared/services/category/category.service';
 
 @Component({
-  selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
+  // selector: '.m-grid__item.m-grid__item--fluid.m-wrapper',
   templateUrl: 'teams.component.html'
 })
 

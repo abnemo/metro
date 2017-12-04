@@ -1,24 +1,41 @@
 import { AfterViewInit, Component, HostBinding, OnInit } from '@angular/core';
+import { AuthService } from '../../../shared/services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aside-nav',
   templateUrl: './aside-nav.component.html'
 })
-export class AsideNavComponent implements OnInit, AfterViewInit {
+export class AsideNavComponent implements AfterViewInit {
 
-  // m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark
   @HostBinding('attr.class') class = 'm-grid__item m-aside-left m-aside-left--skin-dark';
   @HostBinding('attr.id') id = 'm_aside_left';
 
-  constructor() {
+  constructor(private authService: AuthService, private router: Router) {
 
   }
 
-  ngOnInit() {
-
+  signOut() {
+    this.authService.signOut().then(
+      () => this.router.navigate(['/logout']),
+      (error: any) => console.log(error)
+    );
   }
 
   ngAfterViewInit() {
+    /*
+    const asideOffcanvasClass = ($('#m_aside_left').hasClass('m-aside-left--offcanvas-default')
+    ? 'm-aside-left--offcanvas-default' : 'm-aside-left');
+
+    $('#m_aside_left').mOffcanvas({
+      class: asideOffcanvasClass,
+      overlay: true,
+      toggle: {
+        target: '#m_aside_left_offcanvas_toggle',
+        state: 'm-brand__toggler--active'
+      }
+    });
+
     /*
     mLayout.initAside();
     const menu = (<any>$('#m_aside_left')).mMenu();

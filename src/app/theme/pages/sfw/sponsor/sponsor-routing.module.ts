@@ -6,20 +6,21 @@ import { SponsorResolver } from './sponsor.resolver';
 
 export const routes: Routes = [
   {
-    path: 'list',
-    component: SponsorsComponent
+    path: '',
+    component: SponsorsComponent,
+    pathMatch: 'full'
   },
   {
     path: 'edit/:id',
     component: SponsorEditComponent,
     resolve: {
       sponsor: SponsorResolver
-    }
+    },
+    pathMatch: 'full'
   },
   {
     path: '**',
-    redirectTo: 'list',
-    pathMatch: 'full'
+    redirectTo: ''
   }
 ];
 
