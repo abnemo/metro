@@ -23,6 +23,7 @@ export class AsideNavComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
+
     /*
     const asideOffcanvasClass = ($('#m_aside_left').hasClass('m-aside-left--offcanvas-default')
     ? 'm-aside-left--offcanvas-default' : 'm-aside-left');

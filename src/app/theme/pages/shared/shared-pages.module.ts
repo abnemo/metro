@@ -43,6 +43,7 @@ import { CreationModule } from './creation/creation.module';
 import { PublicationModule } from './publication/publication.module';
 import { AgmCoreModule } from '@agm/core';
 import { googleMapsConfig } from '../../../config/google-maps.config';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -70,6 +71,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LinkActionModule, */
     LoadingIndicatorComponent,
     // MediaModule,
+    NgbModule,
     NgPipesModule,
     /* NgxPaginationModule,
     NgxPermissionsModule,

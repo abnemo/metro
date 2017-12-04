@@ -23,6 +23,7 @@ import { SharedPagesModule } from './pages/shared/shared-pages.module';
 import { QuickSidebarComponent } from './layouts/quick-sidebar/quick-sidebar.component';
 import { TooltipsComponent } from './layouts/tooltips/tooltips.component';
 import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { ScrollTopComponent } from './layouts/scroll-top/scroll-top.component';
     AngularFireDatabaseModule,
     CommonModule,
     // NgxPermissionsModule.forRoot(),
+    NgbModule.forRoot(),
     RouterModule,
     SharedPagesModule,
     ThemeRoutingModule
