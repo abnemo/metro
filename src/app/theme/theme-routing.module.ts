@@ -12,7 +12,7 @@ const routes: Routes = [
     component: ThemeComponent,
     canActivate: [AuthGuard],
     children: [
-      {
+      /*{
         path: 'articles',
         loadChildren: './pages/sfw/article/article.module#ArticleModule'
       },
@@ -23,12 +23,12 @@ const routes: Routes = [
       {
         path: 'clubs',
         loadChildren: './pages/sfw/club/club.module#ClubModule'
-      },
+      },*/
       {
         path: 'dashboard',
         loadChildren: './pages/sfw/dashboard/dashboard.module#DashboardModule'
       },
-      {
+      /*{
         path: 'locations',
         loadChildren: './pages/sfw/location/location.module#LocationModule'
       },
@@ -47,12 +47,12 @@ const routes: Routes = [
       {
         path: 'teams',
         loadChildren: './pages/sfw/team/team.module#TeamModule'
-      },
+      },*/
       {
         path: 'todos',
         loadChildren: './pages/sfw/todo/todo.module#TodoModule'
       },
-      {
+      /*{
         path: 'users',
         loadChildren: './pages/sfw/user/user.module#UserModule'
       },
@@ -71,7 +71,7 @@ const routes: Routes = [
       {
         path: '**',
         redirectTo: '404'
-      }
+      }*/
     ]
   }/*,
   {
